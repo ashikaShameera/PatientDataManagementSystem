@@ -1,8 +1,7 @@
-const mongoose =require('mongoose');
+const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-const patientSchema=new Schema({
-    //attribues
+const doctorSchema=new Schema({
     firstName: {
         type: String,
         required: true
@@ -11,6 +10,10 @@ const patientSchema=new Schema({
         type: String,
         required: true
     },
+    nic:{
+        type:String,
+        required:true
+    },
     dateOfBirth: {
         type: Date,
         required: true
@@ -18,10 +21,6 @@ const patientSchema=new Schema({
     gender: {
         type: String,
         enum: ['Male', 'Female', 'Other']
-    },
-    nic:{
-        type:String,
-        required:true
     },
     contactNumber: {
         type: String,
@@ -38,19 +37,12 @@ const patientSchema=new Schema({
         state: String,
         postalCode: Number,
     },
-    medicalHistory: {
-        allergies: [String],
-        conditions: [String],
-        medications: [String]
-    },
-    emergencyContact:{
-        EmgName:String,
-        EmgRelationship:String,
-        EmgContactNumber:String
+   
+    medicalLicenseNumber:{
+        type: String,
+        required:true
     }
-
+    //There are more dateils to get 
 })
 
-
-
-module.exports=mongoose.model('Patient',patientSchema);
+module.exports=mongoose.model('Doctor',doctorSchema);

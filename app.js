@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, 'public'))) //this used for get css 
 
 
 const patientRoute=require('./routes/patientRoute');
-const doctorRoute=require('./routes/doctorRoute')
+const doctorRoute=require('./routes/doctorRoute');
 
 mongoose.connect('mongodb://localhost:27017/PatientDataManagementSystem', {
      useNewUrlParser: true,
