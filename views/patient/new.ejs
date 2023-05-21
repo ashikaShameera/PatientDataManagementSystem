@@ -1,0 +1,69 @@
+<% layout('layouts/boilerplate')%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Patient Registration</title>
+</head>
+<body>
+  <h1>Register Patient</h1>
+  <form action="/patient" method="POST">
+
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="patient[firstName]" required><br><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="patient[lastName]" required><br><br>
+
+    <label for="email">email:</label>
+    <input type="email" id="email" name="patient[email]" required><br><br>
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" name="patient[dateOfBirth]" required><br><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="patient[gender]">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select><br><br>
+
+    <label for="contactNumber">Contact Number:</label>
+    <input type="tel" id="contactNumber" name="patient[contactNumber]" required><br><br>
+
+    <label for="addressNumber">Address Number:</label>
+    <input type="number" id="addressNumber" name="patient[address.number]" required><br><br>
+
+    <label for="street">Street:</label>
+    <input type="text" id="street" name="patient[address.street]" required><br><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="patient[address.city]" required><br><br>
+
+    <label for="state">State:</label>
+    <input type="text" id="state" name="patient[address.state]" required><br><br>
+
+    <label for="postalCode">Postal Code:</label>
+    <input type="number" id="postalCode" name="patient[address.postalCode]" required><br><br>
+
+    <label for="allergies">Allergies:</label>
+    <input type="text" id="allergies" name="patient[medicalHistory.allergies]"><br><br>
+
+    <label for="conditions">Conditions:</label>
+    <input type="text" id="conditions" name="patient[medicalHistory.conditions]"><br><br>
+
+    <label for="medications">Medications:</label>
+    <input type="text" id="medications" name="patient[medicalHistory.medications]"><br><br>
+
+    <label for="emergencyName">Emergency Contact Name:</label>
+    <input type="text" id="emergencyName" name="patient[emergencyContact.EmgName]"><br><br>
+
+    <label for="emergencyRelationship">Emergency Contact Relationship:</label>
+    <input type="text" id="emergencyRelationship" name="patient[emergencyContact.EmgRelationship]"><br><br>
+
+    <label for="emergencyContactNumber">Emergency Contact Number:</label>
+    <input type="tel" id="emergencyContactNumber" name="patient[emergencyContact.EmgContactNumber]"><br><br>
+
+    <input type="submit" value="Register"> 
+  </form>
+</body>
+</html>
