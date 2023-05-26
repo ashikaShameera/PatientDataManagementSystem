@@ -13,7 +13,6 @@ module.exports.createPatient=async (req,res)=>{
     //creating newPatinet
     const patient=new Patient(req.body.patient);
     await patient.save();
-    console.log(patient);
     res.redirect(`/patient/${patient._id}`)
 }
 

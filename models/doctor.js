@@ -41,6 +41,30 @@ const doctorSchema=new Schema({
     medicalLicenseNumber:{
         type: String,
         required:true
+    },
+    specialization:{
+        type:String,
+        enum:[
+            'Internal Medicine',
+            'Family Medicine',
+            'Pediatrics',
+            'Obstetrics and Gynecology',
+            'General Surgery',
+            'Anesthesiology',
+            'Psychiatry',
+            'Orthopedic Surgery',
+            'Cardiology',
+            'Dermatology'
+          ],
+        required:true
+    },
+    degree:{
+        type:String,
+        required:true
+    },
+    university:{
+        type:String,
+        required:true
     }
     //There are more dateils to get 
 })

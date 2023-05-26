@@ -2,10 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const doctorControl=require('../controllers/doctorControl');
-//const catchAsync=require('../utils/catchAsync');
+const catchAsync=require('../utils/catchAsync');
 
 router.route('/register')
-    .get(doctorControl.renderRegister)          //To render registation form
-    .post(doctorControl.registerDoctor)         //To send registation post request
+    .get(doctorControl.renderRegisterForm)                  //To render registation form
+    .post(catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
+router.route('/:id')
+    .get(catchAsync(doctorControl.showDoctor))   
+    .put(catchAsync(doctorControl.updateDoctor))
+    .delete(doctorControl.deleteDoctor);
+
+router.route('/:id/edit')   
+    .get(doctorControl.renderEditForm) 
+    
 module.exports=router;
