@@ -15,6 +15,7 @@ app.use(methodOverride('_method'))                      //This use for method-ov
 
 const patientRoute=require('./routes/patientRoute');
 const doctorRoute=require('./routes/doctorRoute');
+const adminRoute=require('./routes/adminRoute');
 
 mongoose.connect('mongodb://localhost:27017/PatientDataManagementSystem', {
      useNewUrlParser: true,
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/patient',patientRoute);   //Going to patient route
 app.use('/doctor',doctorRoute);     //going to doctor route
+app.use('/admin',adminRoute);       //going to admin route
 
 app.get('/',(req,res)=>{
     res.render('home')
