@@ -1,16 +1,20 @@
 <% layout('layouts/boilerplate')%>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Patient Registration</title>
-</head>
-<body>
-  <h1>Register Patient</h1>
-  <form action="/patient" method="POST">
 
-    <label for="firstName">First Name:</label>
-    <input type="text" id="firstName" name="patient[firstName]" required><br><br>
+<div class="row">
+  <h1 class="text-center">Register Patient</h1>
+  
+<div class="col-6 offset-4">
+  <form action="/patient" method="POST" novalidate class="validated-form">
 
+    <div class="md-3">
+      <label for="firstName" class="form-label" >First Name:</label>
+      <input type="text" id="firstName" class="form-control" name="patient[firstName]" required>
+      <div class="valid-feedback">
+        Looks Good!
+      </div>
+    </div>
+
+    <!-- Need to add boostrap & refactor -->
     <label for="lastName">Last Name:</label>
     <input type="text" id="lastName" name="patient[lastName]" required><br><br>
 
@@ -68,5 +72,6 @@
 
     <input type="submit" value="Register"> 
   </form>
-</body>
-</html>
+</div>
+
+</div>

@@ -41,7 +41,9 @@ app.get('/',(req,res)=>{
 })
 
 app.use((err,req,res,next)=>{
-    res.send("dead end");   //this will change in the future
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+    res.status(statusCode).render('error', { err })
 })
 
 app.listen(8080,()=>{
