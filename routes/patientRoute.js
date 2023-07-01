@@ -8,12 +8,18 @@ const {isValidatePatient}=require('../middleware');
 
 router.route('/')
     .get(patientControl.index)
-    .post(isValidatePatient,catchAsync(patientControl.createPatient)); //For creating patient in database
+    .post(catchAsync(patientControl.createPatient)); //For creating patient in database
     //need to add joi validation here
-router.route('/new').get(patientControl.renderNewForm)      //rendering create patient form
+
+router.route('/new')
+    .get(patientControl.renderNewForm)      //rendering create patient form
 
 router.route('/:id')
     .get(catchAsync(patientControl.showPatient))
+
+
+router.route('/:id/doctors')
+    .post(catchAsync(patientControl.getDoctorDetails))
 
 
 

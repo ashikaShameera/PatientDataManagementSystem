@@ -17,6 +17,7 @@ const patientRoute=require('./routes/patientRoute');
 const doctorRoute=require('./routes/doctorRoute');
 const adminRoute=require('./routes/adminRoute');
 
+//MongoDb connction code
 mongoose.connect('mongodb://localhost:27017/PatientDataManagementSystem', {
      useNewUrlParser: true,
      useUnifiedTopology: true,

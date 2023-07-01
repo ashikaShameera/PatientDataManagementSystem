@@ -1,4 +1,5 @@
-const Patient = require("../models/patient")
+const Patient = require("../models/patient");
+const Doctor =require("../models/doctor");
 
 module.exports.index=(req,res)=>{
     //This will use for search patient by doctor/reciption or admin
@@ -17,10 +18,69 @@ module.exports.createPatient=async (req,res)=>{
 }
 
 module.exports.showPatient=async(req,res)=>{
-    const id=req.params.id;
-    const patient=await Patient.findById(id);
-    res.render('patient/show',{patient});
+    const id=req.params.id;                     //Getting the patient id
+    const patient=await Patient.findById(id);   //Get patient from database
+    const encodedDoctor = req.query.doctor;     //Geting Doctor details from query parser
+
+    if(encodedDoctor){
+        const doctor = JSON.parse(decodeURIComponent(encodedDoctor));   //Put doctor to JSON object
+        res.render('patient/show',{patient,doctor});//In here parse the whole doctor object to front it can reduce it
+    }
+    else{
+        let doctor;         //To send null object of doctor if not it gives ejs error
+        res.render('patient/show',{patient,doctor});  //Internal Medicine
+    }
+                 
 }
+
+//Use for to get doctor data by patient for make an appointmenet
+module.exports.getDoctorDetails=async(req,res)=>{
+    const id=req.params.id;
+    const {selectType,DoctorSearchInput}=req.body;
+
+    const doctors=await searchDoctors(selectType,DoctorSearchInput);       //calling the searchDoctors
+
+    if(doctors){
+        const encodedDoctor = encodeURIComponent(JSON.stringify(doctors));   //Encoding doctor for parse in url
+        res.redirect(`/patient/${id}?doctor=${encodedDoctor}`);
+    }else{
+        res.redirect(`/patient/${id}`);
+    }
+
+
+ }
+
+ //searchDoctors funtion this can go into another file in the future
+ async function searchDoctors(selectType,DoctorSearchInput){
+
+    let doctors ;
+
+    if(selectType=="Specialization"){
+        doctors=await Doctor.find({specialization:DoctorSearchInput});
+    }
+    else{
+        const doctorName=DoctorSearchInput.trim()           // Remove leading/trailing whitespaces
+        const firstName = doctorName.substr(0, doctorName.indexOf(' '));
+        const lastName = doctorName.substr(doctorName.indexOf(' ') + 1);
+
+        const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
+        const lastNameRegex = new RegExp(`${lastName}$`, 'i'); // Regular expression to match names ending with lastName
+
+        //In here there is serious bug when user submit empty one or one name
+        //it give all the data pf the doctors
+
+        //Query of getting doctors using name
+        doctors =await Doctor.find({
+            $or: [
+              { firstName: { $regex: firstNameRegex } },
+              { lastName: { $regex: lastNameRegex } }
+            ]
+          });
+
+    }
+    return doctors;
+ }
+
 
 
 

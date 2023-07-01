@@ -28,29 +28,4 @@ module.exports.patientSchema = Joi.object({
   }).required(),
 });
 
-// module.exports.patientSchema = Joi.object({
-//   firstName: Joi.string().required(),
-//   lastName: Joi.string().required(),
-//   dateOfBirth: Joi.date().required(),
-//   gender: Joi.string().valid('Male', 'Female', 'Other').required(),
-//   nic: Joi.string().required(),
-//   contactNumber: Joi.string().required(),
-//   email: Joi.string().email().required(),
-//   address: Joi.object({
-//     number: Joi.number().required(),
-//     street: Joi.string().required(),
-//     city: Joi.string().required(),
-//     state: Joi.string().required(),
-//     postalCode: Joi.number().required()
-//   }).required(),
-//   medicalHistory: Joi.object({
-//     allergies: Joi.array().items(Joi.string()),
-//     conditions: Joi.array().items(Joi.string()),
-//     medications: Joi.array().items(Joi.string())
-//   }),
-//   emergencyContact: Joi.object({
-//     EmgName: Joi.string().required(),
-//     EmgRelationship: Joi.string().required(),
-//     EmgContactNumber: Joi.string().required()
-//   }).required()
-// });
+

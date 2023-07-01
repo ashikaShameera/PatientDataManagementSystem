@@ -21,7 +21,7 @@ module.exports.renderEditForm=async(req,res)=>{
    const {id}=req.params;
    const doctor=await Doctor.findById(id);
    if(!doctor){
-      return res.send("This mus send to the doctor searching"); //Todo
+      return res.send("This must send to the doctor searching"); //Todo
    }
    res.render('doctor/edit',{doctor});
 }

@@ -4,7 +4,7 @@ const ExpressError=require('./utils/ExpressError.js');
 
 //This is validated patient data using joi
 module.exports.isValidatePatient=(req,res,next)=>{
-    console.log(req.body.patient)
+    console.log(req.body.patient)   //This will print patient obkect on the console
     const { error } = patientSchema.validate(req.body.patient);
     
     if(error){
