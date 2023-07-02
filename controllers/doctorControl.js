@@ -39,3 +39,7 @@ module.exports.deleteDoctor=async(req,res)=>{
    await Doctor.findByIdAndDelete(id);
    res.send(`doctor Id=${id} is deleted`)//this must redirect relevent page
 }
+
+module.exports.getPatientDetails= async(req,res)=>{
+   const id=req.params.id;
+}

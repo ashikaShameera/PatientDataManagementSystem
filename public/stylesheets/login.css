@@ -1,0 +1,97 @@
+
+body {
+    background-color: white;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label{
+    font-weight: bold;
+  }
+  
+  .form-control{
+    border-radius: 3px;
+  } 
+  
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .class1{
+    background-color:rgb(24, 85, 197,0.8);
+    height:100vh;
+    border-end-end-radius: 25%;
+    background: linear-gradient(rgba(24, 85, 197, 0), rgba(24, 85, 197, 0)), url(/images/login.jpg) no-repeat;
+    background-color: #000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+  }
+  
+  .class1div1 a{
+     color: rgb(24, 85, 197,1);
+  }
+  
+  .class1div1{
+      max-width: 80%;
+      margin: 100px auto;  
+  }
+  
+  .class1 div h2{
+     color: rgb(24, 85, 197,0.8);
+  }
+  
+  .class1div2{
+    max-width: 80%;
+    margin: 150px auto;
+    align-items: center;
+  }
+  
+  .class2{
+    max-width: 35%;
+    margin: 150px auto;
+    padding: 20px;
+    align-items: center;
+  } 
+  
+  .class2div1{
+    font-weight:bold;
+    color: rgb(24, 85, 197,1);
+  }
+  
+  .class2 div h1{
+    font-size:3em;
+  }
+  
+  
+  @media (max-width:500px) { 
+  body{
+   font-size:0.8rem;
+  } 
+  .class1{
+     height:40vh;
+  }
+  .class1div1{
+    margin: 10px auto;
+  }
+  .class1div2{
+    margin: 10px auto;
+  }
+  .class1div2 h2{
+    font-size: 1.3rem;
+  }
+  .class2{
+    margin:10px auto;
+  }
+  .class2 h1 span{
+    font-size: 2rem; 
+  }
+  }
+  
+  
+  
+  

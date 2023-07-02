@@ -13,6 +13,7 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, 'public'))) //this used for get css work
 app.use(methodOverride('_method'))                      //This use for method-overide 
 
+const userRoutes=require('./routes/userRoute');
 const patientRoute=require('./routes/patientRoute');
 const doctorRoute=require('./routes/doctorRoute');
 const adminRoute=require('./routes/adminRoute');
@@ -33,6 +34,7 @@ db.once("open", () => {
 app.use(express.json())     //for parsing url encorded
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/', userRoutes);
 app.use('/patient',patientRoute);   //Going to patient route
 app.use('/doctor',doctorRoute);     //going to doctor route
 app.use('/admin',adminRoute);       //going to admin route

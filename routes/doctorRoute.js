@@ -9,11 +9,14 @@ router.route('/register')
     .post(catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
 router.route('/:id')
-    .get(catchAsync(doctorControl.showDoctor))   
+    .get(catchAsync(doctorControl.showDoctor))          //load when doctor login to system
     .put(catchAsync(doctorControl.updateDoctor))
     .delete(doctorControl.deleteDoctor);
 
 router.route('/:id/edit')   
     .get(doctorControl.renderEditForm) 
-    
+
+router.route('/:id/patients')
+    .post(catchAsync(doctorControl.getPatientDetails))
+
 module.exports=router;
