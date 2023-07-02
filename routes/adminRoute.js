@@ -4,10 +4,10 @@ const router = express.Router();
 const adminControl=require('../controllers/adminControl');
 const catchAsync=require('../utils/catchAsync');
 
-router.route('/:id')
+router.route('/')
     .get(adminControl.renderAdminHomePage)  //must handle async error handler
 
-router.route('/:id/doctor')
+router.route('/doctor')
     .get(adminControl.renderAdminDoctorPage);
 
 module.exports=router;

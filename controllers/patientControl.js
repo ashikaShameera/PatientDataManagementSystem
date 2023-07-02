@@ -59,24 +59,40 @@ module.exports.getDoctorDetails=async(req,res)=>{
         doctors=await Doctor.find({specialization:DoctorSearchInput});
     }
     else{
+
+        //In here ignores the 3rd name if user input it
         const doctorName=DoctorSearchInput.trim()           // Remove leading/trailing whitespaces
-        const firstName = doctorName.substr(0, doctorName.indexOf(' '));
-        const lastName = doctorName.substr(doctorName.indexOf(' ') + 1);
+        const nameParts=doctorName.split(' ');
+        const firstName = nameParts[0];
+        const lastName = nameParts[1];
 
-        const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
-        const lastNameRegex = new RegExp(`${lastName}$`, 'i'); // Regular expression to match names ending with lastName
+        let query = {};
 
-        //In here there is serious bug when user submit empty one or one name
-        //it give all the data pf the doctors
-
-        //Query of getting doctors using name
-        doctors =await Doctor.find({
-            $or: [
-              { firstName: { $regex: firstNameRegex } },
-              { lastName: { $regex: lastNameRegex } }
-            ]
-          });
-
+        if(firstName && lastName){
+            const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
+            const lastNameRegex = new RegExp(`${lastName}$`, 'i'); // Regular expression to match names ending with lastName    
+        
+            query = {
+                $or: [
+                  { firstName: { $regex: firstNameRegex } },
+                  { lastName: { $regex: lastNameRegex } }
+                ]
+              };
+        }
+        else if(firstName){
+            const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
+            query = {
+                $or: [
+                  { firstName: { $regex: firstNameRegex } },
+                  { lastName: { $regex: firstNameRegex } }
+                ]
+              };
+        }
+        else{
+            
+            query = { _id: null }; // Set a default query that won't match any records
+        }
+        doctors = await Doctor.find(query);
     }
     return doctors;
  }
