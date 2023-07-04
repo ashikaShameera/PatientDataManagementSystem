@@ -68,11 +68,11 @@
          </div>
          <div class="form-group">
             <label for="addressNumber">Address Number:</label>
-            <input type="number" id="addressNumber" class="form-control" name="patient[address.number]" required>
+            <input type="number" id="addressNumber" class="form-control" name="patient[address][number]" required>
          </div>
          <div class="form-group">
              <label for="street">Street:</label>
-             <input type="text" id="street" class="form-control" name="patient[address.street]" required>
+             <input type="text" id="street" class="form-control" name="patient[address][street]" required>
          </div>
     </div>
  </div>
@@ -87,39 +87,39 @@
     <div class="col-md-6  class3">
         <div class="form-group">
             <label for="city">City:</label>
-            <input type="text" id="city" class="form-control" name="patient[address.city]" required>
+            <input type="text" id="city" class="form-control" name="patient[address][city]" required>
         </div>
         <div class="form-group">
             <label for="state">State:</label>
-            <input type="text" id="state" class="form-control" name="patient[address.state]" required>
+            <input type="text" id="state" class="form-control" name="patient[address][state]" required>
         </div>
         <div class="form-group">
             <label for="postalCode">Postal Code:</label>
-            <input type="number" id="postalCode" class="form-control" name="patient[address.postalCode]" required>
+            <input type="number" id="postalCode" class="form-control" name="patient[address][postalCode]" required>
         </div>
         <div class="form-group">
             <label for="allergies">Allergies:</label>
-            <input type="text" id="allergies" class="form-control" name="patient[medicalHistory.allergies]">
+            <input type="text" id="allergies" class="form-control" name="patient[medicalHistory][allergies]">
         </div>
         <div class="form-group">
             <label for="conditions">Conditions:</label>
-            <input type="text" id="conditions" class="form-control" name="patient[medicalHistory.conditions]">
+            <input type="text" id="conditions" class="form-control" name="patient[medicalHistory][conditions]">
         </div>
         <div class="form-group">
             <label for="medications">Medications:</label>
-             <input type="text" id="medications" class="form-control" name="patient[medicalHistory.medications]">
+             <input type="text" id="medications" class="form-control" name="patient[medicalHistory][medications]">
         </div>
         <div class="form-group">
             <label for="emergencyName">Emergency Contact Name:</label>
-           <input type="text" id="emergencyName" class="form-control" name="patient[emergencyContact.EmgName]">
+           <input type="text" id="emergencyName" class="form-control" name="patient[emergencyContact][EmgName]">
         </div>
         <div class="form-group">
             <label for="emergencyRelationship">Emergency Contact Relationship:</label>
-            <input type="text" id="emergencyRelationship" class="form-control" name="patient[emergencyContact.EmgRelationship]">
+            <input type="text" id="emergencyRelationship" class="form-control" name="patient[emergencyContact][EmgRelationship]">
         </div>
         <div class="form-group">
             <label for="emergencyContactNumber">Emergency Contact Number:</label>
-            <input type="tel" id="emergencyContactNumber" class="form-control" name="patient[emergencyContact.EmgContactNumber]">
+            <input type="tel" id="emergencyContactNumber" class="form-control" name="patient[emergencyContact][EmgContactNumber]">
         </div>
         <br>
            <button type="submit" class="btn btn-primary" >Register</button>
