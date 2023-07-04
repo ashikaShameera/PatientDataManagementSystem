@@ -42,4 +42,5 @@ module.exports.deleteDoctor=async(req,res)=>{
 
 module.exports.getPatientDetails= async(req,res)=>{
    const id=req.params.id;
+   //todo
 }
