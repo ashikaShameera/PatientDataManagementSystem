@@ -1,0 +1,157 @@
+
+body {
+    background-color: white;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label{
+    font-weight: bold;
+  }
+  
+  .form-control{
+    border-radius: 3px;
+  } 
+  
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .class1{
+    background-color:rgb(24, 85, 197,0.8);
+    height:100vh;
+    border-end-end-radius: 25%;
+    background: linear-gradient(rgba(24, 85, 197, 0), rgba(24, 85, 197, 0)), url(/images/login.jpg) no-repeat;
+    background-color: #000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+  }
+  .class1div0{
+    max-width: 80%;
+    margin: 10px auto 5px auto;
+    align-items: center;
+    color: rgb(24, 85, 197,1);
+  }
+  .class1div0 h1{
+    font-weight: bold;
+     font-size: 50px;
+  }
+  
+  .class1div1 a{
+     color: rgb(24, 85, 197,1);
+  }
+  
+  .class1div1{
+      max-width: 80%;
+      margin: 80px auto 1px auto;  
+  }
+  
+ .class4div2E{
+    color:  rgb(24, 85, 197,1); 
+    font-size:80px;
+ }
+  
+  .class4div2{
+    max-width: 80%;
+    margin: 10px auto 1px 150px;
+    align-items:center;
+    padding: 1px;
+    color:rgba(0, 0, 0, 0.5) ;  
+  }
+  
+  .class2{
+    max-width: 35%;
+    margin: 50px auto -1px auto;
+    padding: 20px;
+    align-items: center;
+  } 
+  
+  .class2div1{
+    font-weight:bold;
+    color: rgb(24, 85, 197,1);
+  }
+  
+  .class2 div h1{
+    font-size:3em;
+  }
+
+  .class3{
+    max-width: 35%;
+    margin: 1px auto;
+    padding: 20px;
+    align-items: center;
+  }
+  .class4{
+    background-color:rgb(24, 85, 197,0.8);
+    height:100vh;
+    border-end-end-radius: 25%;
+    background: linear-gradient(rgba(24, 85, 197, 0), rgba(24, 85, 197, 0)), url(/images/Register.jpg) no-repeat;
+    background-color: #000;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .class4div1{
+     margin: 1px auto ;
+     color:rgb(24, 85, 197,1);
+  }
+  
+  
+  @media (max-width:500px) { 
+  body{
+   font-size:0.8rem;
+  } 
+  .class1{
+     height:50vh;
+  }
+  .class1div0{
+    margin: 10px auto 1px auto;
+    font-size: 1rem;
+  }
+  .class1div0 h1{
+    font-size:2rem ;
+  }
+  .class1div1{
+    margin: 10px auto 1px auto;
+    font-size: 1rem;
+  }
+  .class4div2{
+    margin: 10px auto 1px auto;
+    font-size: 1rem;
+  }
+  .class4div2E{
+    font-size: 3rem;
+  }
+
+  .class1div2 h2{
+    font-size: 1rem;
+  }
+  
+  .class2{
+    max-width: 100%;
+    margin: 10px auto -1px auto;
+    padding: 20px;
+    align-items: center;
+  }
+  .class2 h1 span{
+    font-size: 2rem; 
+  }
+  .class3{
+    max-width: 100%;
+    margin: -10px auto -1px auto;
+    padding: 20px;
+    align-items: center;
+  }
+  .class4{
+    display: none;
+  }
+  button{
+    margin: 10px;
+  }
+  }
+  
