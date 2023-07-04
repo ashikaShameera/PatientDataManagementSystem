@@ -11,8 +11,8 @@ router.route('/')
     .post(catchAsync(patientControl.createPatient)); //For creating patient in database
     //need to add joi validation here
 
-router.route('/new')
-    .get(patientControl.renderNewForm)      //rendering create patient form
+router.route('/register')
+    .get(patientControl.renderRegisterForm)      //rendering create patient form
 
 router.route('/:id')
     .get(catchAsync(patientControl.showPatient))

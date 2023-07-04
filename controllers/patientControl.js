@@ -6,8 +6,8 @@ module.exports.index=(req,res)=>{
     res.render('patient/search')
 }
 
-module.exports.renderNewForm=(req,res)=>{ 
-    res.render('patient/new')
+module.exports.renderRegisterForm=(req,res)=>{ 
+    res.render('patient/register')
 }
 
 module.exports.createPatient=async (req,res)=>{
