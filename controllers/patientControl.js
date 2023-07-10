@@ -1,6 +1,8 @@
 const Patient = require("../models/patient");
 const Doctor =require("../models/doctor");
 
+const {searchDoctors}=require('./searchController');
+
 module.exports.index=(req,res)=>{
     //This will use for search patient by doctor/reciption or admin
     res.render('patient/search')
@@ -50,53 +52,7 @@ module.exports.getDoctorDetails=async(req,res)=>{
 
  }
 
- //searchDoctors funtion this can go into another file in the future
- async function searchDoctors(selectType,DoctorSearchInput){
-
-    let doctors ;
-
-    if(selectType=="Specialization"){
-        doctors=await Doctor.find({specialization:DoctorSearchInput});
-    }
-    else{
-
-        //In here ignores the 3rd name if user input it
-        const doctorName=DoctorSearchInput.trim()           // Remove leading/trailing whitespaces
-        const nameParts=doctorName.split(' ');
-        const firstName = nameParts[0];
-        const lastName = nameParts[1];
-
-        let query = {};
-
-        if(firstName && lastName){
-            const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
-            const lastNameRegex = new RegExp(`${lastName}$`, 'i'); // Regular expression to match names ending with lastName    
-        
-            query = {
-                $or: [
-                  { firstName: { $regex: firstNameRegex } },
-                  { lastName: { $regex: lastNameRegex } }
-                ]
-              };
-        }
-        else if(firstName){
-            const firstNameRegex = new RegExp(`^${firstName}`, 'i'); // Regular expression to match names starting with firstName
-            query = {
-                $or: [
-                  { firstName: { $regex: firstNameRegex } },
-                  { lastName: { $regex: firstNameRegex } }
-                ]
-              };
-        }
-        else{
-            
-            query = { _id: null }; // Set a default query that won't match any records
-        }
-        doctors = await Doctor.find(query);
-    }
-    return doctors;
- }
-
+ 
 
 
 

@@ -17,6 +17,7 @@ const userRoutes=require('./routes/userRoute');
 const patientRoute=require('./routes/patientRoute');
 const doctorRoute=require('./routes/doctorRoute');
 const adminRoute=require('./routes/adminRoute');
+const appointmentRoute=require('./routes/appointmentRoute');
 
 //MongoDb connction code
 mongoose.connect('mongodb://127.0.0.1:27017/PatientDataManagementSystem', {
@@ -38,6 +39,7 @@ app.use('/', userRoutes);
 app.use('/patient',patientRoute);   //Going to patient route
 app.use('/doctor',doctorRoute);     //going to doctor route
 app.use('/admin',adminRoute);       //going to admin route
+app.use('/admin/appointment',appointmentRoute);      //going to admin/apponitmentRoute
 
 app.get('/',(req,res)=>{
     res.render('home')

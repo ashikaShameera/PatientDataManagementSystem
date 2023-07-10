@@ -3,7 +3,6 @@ const Schema=mongoose.Schema;
 
 const Doctor=require('./doctor');
 const Patient=require('./patient');
-const { string, number } = require('joi');
 
 //there is so mnay to add this 
 const appointmentSchema = new Schema({
@@ -17,18 +16,14 @@ const appointmentSchema = new Schema({
     required: true
   },
   time: {
-    type:string,
-    required
+    type:String,
+    required:true
   },
   roomNumber:{
-    type:number,
-    required
+    type: Number,
+    required:true
   }
   ,
-  reason: {
-    type: String,
-    required: true
-  },
   patients: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient',
