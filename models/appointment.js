@@ -13,7 +13,14 @@ const appointmentSchema = new Schema({
   },
   date: {
     type: Date,
-    required: true
+    required: true,
+    validate: {
+      validator: function (value) {
+        const currentDate = new Date();
+        return value > currentDate;
+      },
+      message: 'Appointment date must be greater than the current date'
+    }
   },
   time: {
     type:String,
@@ -41,6 +48,7 @@ const appointmentSchema = new Schema({
   
 
 });
+
 
 // Compound index for date, time, and roomNumber
 appointmentSchema.index({ date: 1, time: 1, roomNumber: 1 }, { unique: true });

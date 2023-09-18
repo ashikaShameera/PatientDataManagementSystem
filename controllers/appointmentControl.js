@@ -2,6 +2,14 @@ const Appointment=require('../models/appointment');
 
 const {searchDoctorsAdmin,searchDoctorById}=require('./searchController');
 
+//This will get all the appointments
+module.exports.showAllAppointments=async(req,res)=>{
+    //these must be changed to upcomming appointments
+    //toDo
+    const appointmenets=await Appointment.find();
+    res.send(appointmenets)
+}
+
 module.exports.renderAppointmentDoctorSearchForm=(req,res)=>{
     const encodedDoctor = req.query.doctor;     //Geting Doctor details from query parser    
     if(encodedDoctor){
@@ -31,9 +39,11 @@ module.exports.renderNewAppointmentForm=async(req,res)=>{
 }
 
 //use to vreate apponintment
-module.exports.createAppointment=(req,res)=>{
-    //ToDo
-    res.send(req.body)
+module.exports.createAppointment=async(req,res)=>{
+    const appointmenet=new Appointment(req.body.appointment);
+    await appointmenet.save();
+    res.send(appointmenet)
+    //todo
 }
 
 

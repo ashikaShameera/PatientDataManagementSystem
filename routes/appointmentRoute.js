@@ -5,7 +5,8 @@ const appointmentControl=require('../controllers/appointmentControl');
 const catchAsync=require('../utils/catchAsync')
 
 router.route('/')
-    .post(appointmentControl.createAppointment);
+    .get(catchAsync(appointmentControl.showAllAppointments))
+    .post(catchAsync(appointmentControl.createAppointment));
 
 router.route('/new')
     .get(appointmentControl.renderAppointmentDoctorSearchForm)
