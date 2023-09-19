@@ -10,7 +10,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 app.engine('ejs',ejsMate);
 
-// app.use(express.static(path.join(__dirname, 'public'))) //this used for get css work
+app.use(express.static(path.join(__dirname, 'public'))) //this used for get css work
 app.use(methodOverride('_method'))                      //This use for method-overide 
 
 const userRoutes=require('./routes/userRoute');
