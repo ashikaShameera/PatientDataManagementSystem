@@ -9,10 +9,9 @@ const  methodOverride = require('method-override')
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 app.engine('ejs',ejsMate);
-
-// app.use(express.static(path.join(__dirname, 'public'))) //this used for get css work
+ 
+app.use(express.static(path.join(__dirname, 'public'))) //this used for get css work
 app.use(methodOverride('_method'))                      //This use for method-overide 
-app.use(express.static(__dirname + '/public')); //update 
 
 const userRoutes=require('./routes/userRoute');
 const patientRoute=require('./routes/patientRoute');
