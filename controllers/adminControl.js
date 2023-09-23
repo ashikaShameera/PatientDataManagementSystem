@@ -7,3 +7,7 @@ module.exports.renderAdminHomePage=(req,res)=>{
 module.exports.renderAdminDoctorPage=(req,res)=>{
     res.render("admin/doctor")
 }
+
+module.exports.renderAdminPatientPage=(req,res)=>{
+    res.render("admin/patient")
+}
