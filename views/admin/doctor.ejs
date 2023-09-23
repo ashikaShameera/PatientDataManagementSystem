@@ -1,30 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Admin Doctor</title>
-</head>
-<body>
+<%- include('./partials/head') %>
 
-    <head>
-        <h1>Header</h1>
-    </head>
+  <body>
+    <main class="admin-panel">
+      <%- include('./partials/sidebar') %>
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-11">
+              <h1>Welcome, Admin!</h1>
+              <p>This is the admin panel for the patient management system.</p>
+            </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview</button>
+            </div>
+            <div class="col-3">
+              <button id="toggleBtn" type="button" class="btn btn-primary">Doctor Registation</button>
+            </div>
+          </div>
+          <div class="block">
+            <div id="doctorRegistation" class="hidden">
+              <h2>Doctor Registation Form</h2>
+              <br>
+              <form action="/doctor/register" method="POST" novalidate class="validated-form">
 
-    <p>
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          Register New Doctor
-        </button>
-      </p>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            <div class="row">
-                <h1 class="text-center">Doctor Registation</h1>
-                <div class="col-6 offset-4">
-          
-                  <form action="/doctor/register" method="POST" novalidate class="validated-form">
-                    
+                <div class="d-flex justify-content-around">
+
+                  <div class="col-5">
+
                     <div class="mb-3">
                       <label for="firstName" class="form-label">First Name:</label>
                       <input type="text" id="firstName" class="form-control" name="doctor[firstName]" required>
@@ -32,7 +39,7 @@
                         Looks Good!
                       </div>
                     </div>
-          
+
                     <div class="mb-3">
                       <label for="lastName" class="form-label">Last Name:</label>
                       <input type="text" id="lastName" class="form-control" name="doctor[lastName]" required>
@@ -40,64 +47,70 @@
                         Looks Good!
                       </div>
                     </div>
-          
+
                     <div class="mb-3">
                       <label for="nic" class="form-label">NIC:</label>
                       <input type="text" id="nic" name="doctor[nic]" class="form-control" required>
                       <div class="valid-feedback">
                         Looks Good!
                       </div>
-                    </div>  
-                  
+                    </div>
+
                     <div class="mb-3">
                       <label for="dateOfBirth" class="form-label">Date of Birth:</label>
                       <input type="date" id="dateOfBirth" name="doctor[dateOfBirth]" class="form-control" required>
                       <div class="valid-feedback">
                         Looks Good!
                       </div>
-                   </div>
-                  
-                   <div class="md-3">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" name="doctor[gender]" required>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    <div class="valid-feedback">
-                      Looks Good!
                     </div>
-                  </div> 
-                  
-                  <!-- Need to add boostrap & refactor -->
-                  <div class="md-3">
-                    <label for="contactNumber">Contact Number:</label>
-                    <input type="text" id="contactNumber" name="doctor[contactNumber]" required><br>
+
+                    <div class="mb-3">
+                      <label for="gender" class="form-label">Gender:</label>
+                      <select id="gender" name="doctor[gender]" class="form-control" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                      <label for="contactNumber" class="form-label">Contact Number:</label>
+                      <input type="text" id="contactNumber" class="form-control" name="doctor[contactNumber]"
+                        required><br>
+                    </div>
+
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" class="form-control" name="doctor[email]" required><br>
+
+
+                    <label for="number" class="form-label">Number Of Address :</label>
+                    <input type="number" id="number" class="form-control" name="doctor[address.number]"><br>
+
                   </div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="doctor[email]" required><br>
-                  
-                    <label for="address">Address:</label><br>
-                    <label for="number">Number:</label>
-                    <input type="number" id="number" name="doctor[address.number]"><br>
-                  
-                    <label for="street">Street:</label>
-                    <input type="text" id="street" name="doctor[address.street]"><br>
-                  
-                    <label for="city">City:</label>
-                    <input type="text" id="city" name="doctor[address.city]"><br>
-                  
+
+                  <div class="col-5">
+                    <label for="street" class="form-label">Street:</label>
+                    <input type="text" id="street" class="form-control" name="doctor[address.street]"><br>
+
+                    <label for="city" class="form-label">City:</label>
+                    <input type="text" id="city" class="form-control" name="doctor[address.city]"><br>
+
                     <label for="state">State:</label>
-                    <input type="text" id="state" name="doctor[address.state]"><br>
-                  
+                    <input type="text" id="state" class="form-control" name="doctor[address.state]"><br>
+
                     <label for="postalCode">Postal Code:</label>
-                    <input type="number" id="postalCode" name="doctor[address.postalCode]"><br>
-                  
+                    <input type="number" id="postalCode" class="form-control" name="doctor[address.postalCode]"><br>
+
                     <label for="medicalLicenseNumber">Medical License Number:</label>
-                    <input type="text" id="medicalLicenseNumber" name="doctor[medicalLicenseNumber]" required><br>
-                  
+                    <input type="text" id="medicalLicenseNumber" class="form-control"
+                      name="doctor[medicalLicenseNumber]" required><br>
+
                     <label for="specialization">Specialization:</label>
-                    <select id="specialization" name="doctor[specialization]" required>
+                    <select id="specialization" class="form-control" name="doctor[specialization]" required>
                       <option value="Internal Medicine">Internal Medicine</option>
                       <option value="Family Medicine">Family Medicine</option>
                       <option value="Pediatrics">Pediatrics</option>
@@ -109,27 +122,66 @@
                       <option value="Cardiology">Cardiology</option>
                       <option value="Dermatology">Dermatology</option>
                     </select><br>
-                  
+
                     <label for="degree">Degree:</label>
-                    <input type="text" id="degree" name="doctor[degree]" required><br>
-                  
+                    <input type="text" id="degree" class="form-control" name="doctor[degree]" required><br>
+
                     <label for="university">University:</label>
-                    <input type="text" id="university" name="doctor[university]" required><br>
+                    <input type="text" id="university" class="form-control" name="doctor[university]" required>
+
+                    <br>
+                    <br>
+
                     <div class="mb-3">
-                      <button type="submit" class="btn btn-primary form-control">Register Doctor</button> 
+                      <button type="submit" class="btn btn-primary form-control">Register</button>
                     </div>
+                  </div>
+
+                </div>
               </form>
             </div>
+
+            <!-- add some overview Of Doctors -->
+            <div id="doctorOverview" class="hidden">
+              <h1>add some overview Of Doctors Here</h1>
+            </div>
+
           </div>
         </div>
-      </div>
+        </div>
+    </main>
+    <script>
+      var toggleBtn = document.getElementById('toggleBtn');
+      var doctorRegistation = document.getElementById('doctorRegistation');
 
-      <footer>
-        footter
-      </footer>
+      toggleBtn.addEventListener('click', function () {
+        if (doctorRegistation.classList.contains('hidden')) {
+          doctorRegistation.classList.remove('hidden');
+        } else {
+          doctorRegistation.classList.add('hidden');
+        }
+      });
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+      var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+      var doctorOverview = document.getElementById('doctorOverview');
+
+      overviewToggleBtn.addEventListener('click', function () {
+        if (doctorOverview.classList.contains('hidden')) {
+          doctorRegistation.classList.add('hidden');
+          doctorOverview.classList.remove('hidden');
+        } else {
+          doctorOverview.classList.add('hidden');
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"></script>
     <script src="/javascripts/boostrapFormValidation.js"></script>
-</body>
-</html>
+  </body>
+
+  </html>
