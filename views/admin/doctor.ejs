@@ -24,7 +24,7 @@
           </div>
           <div class="block">
             <div id="doctorRegistation" class="hidden">
-              <h2>Doctor Registation Form</h2>
+              <h2 style="text-align: center;">Doctor Registation Form</h2>
               <br>
               <form action="/doctor/register" method="POST" novalidate class="validated-form">
 
@@ -143,9 +143,20 @@
 
             <!-- add some overview Of Doctors -->
             <div id="doctorOverview" class="hidden">
-              <h1>add some overview Of Doctors Here</h1>
+              <div class="d-flex justify-content-around mb-3">
+                <div class="col-5 d-flex justify-content-around" style="margin-top: 50px;">
+                  <label for="nameofDoctor" style="margin: 10px;">
+                    <h3>Name: </h3>
+                  </label>
+                  <input type="text" id="searchDoctor" class="form-control" name="doctor[search]" style="margin: 10px;"
+                    required>
+                  <button type="" class="btn btn-primary form-control" style="margin: 10px;">Search</button>
+                </div>
+                <div class="col-5" style="margin-top: 59px;">
+                  <button type="" class="btn btn-primary form-control">Search All Doctors</button>
+                </div>
+              </div>
             </div>
-
           </div>
         </div>
         </div>
@@ -153,18 +164,18 @@
     <script>
       var toggleBtn = document.getElementById('toggleBtn');
       var doctorRegistation = document.getElementById('doctorRegistation');
+      
+      var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+      var doctorOverview = document.getElementById('doctorOverview');
 
       toggleBtn.addEventListener('click', function () {
         if (doctorRegistation.classList.contains('hidden')) {
+          doctorOverview.classList.add('hidden');
           doctorRegistation.classList.remove('hidden');
         } else {
           doctorRegistation.classList.add('hidden');
         }
       });
-
-
-      var overviewToggleBtn = document.getElementById('overviewToggleBtn');
-      var doctorOverview = document.getElementById('doctorOverview');
 
       overviewToggleBtn.addEventListener('click', function () {
         if (doctorOverview.classList.contains('hidden')) {
