@@ -170,11 +170,23 @@
                     required>
                   <button type="" class="btn btn-primary form-control" style="margin: 10px;">Search</button>
                 </div>
-                <!-- Use for get all the doctors -->
-                  <div class="col-5" style="margin-top: 59px;">
-                    <a href="/admin/doctor/all" class="btn btn-primary form-control" >Search All Doctors</a>
-                  </div>
               </div>
+              <section>
+                <h1>all doctors</h1>
+                <% if(doctors && doctors.length){ %>
+                    <% for(let doctor of doctors) {%>
+                      <div>
+                        <span> <%= doctor.firstName %> </span>
+                        <span> <%= doctor.lastName %> </span>
+                        <span> <%= doctor.degree %> </span>
+                        <span> <%= doctor.specialization %> </span>     
+                        <span> <%= doctor.email %> </span>
+                        <span><button>edit</button></span>
+                      </div>
+                      <br>
+                    <% } %>
+                  <% } %>
+              </section>
             </div>
           </div>
         </div>

@@ -15,9 +15,6 @@ router.route('/doctor')
 router.route('/appointment')
     .get(adminControl.renderAppointmentPage)
 
-router.route('/doctor/all')
-    .get(doctorControl.showAllDoctors)
-
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
 
