@@ -12,6 +12,10 @@ router.route('/')
 router.route('/doctor')
     .get(adminControl.renderAdminDoctorPage)
 
+router.route('/doctor/:id')
+    .get(catchAsync(adminControl.showDoctor))
+    .put(catchAsync(adminControl.updateDoctor))
+
 router.route('/appointment')
     .get(adminControl.renderAppointmentPage)
 

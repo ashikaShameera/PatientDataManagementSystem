@@ -143,36 +143,27 @@
 
             <!-- add some overview Of Doctors -->
             <div id="overview" class="">
+
               <section>
                 <form action="" method="post"> 
-
-                  <label for="selectType">Select Type</label>
-                  <select name="selectType" id="selectType" style="display: inline-block;">
-                    <option value="doctor">Doctors</option>
-                    <option value="Specialization">Specialization</option>
-                    <option value="Specialization">Email</option>
-                    <option value="Specialization">NIC</option>
-                    <option value="Specialization">Phone Number</option>
-
-                  </select>
-            
+                  <span>
+                    <label for="selectType">Select Type</label>
+                    <select name="selectType" id="selectType" style="display: inline-block;" >
+                      <option value="Specialization">Specialization</option>
+                      <option value="Email">Email</option>
+                      <option value="NIC">NIC</option>
+                      <option value="PhoneNumber">Phone Number</option>
+                      <option value="DoctorName">Doctor Name</option>
+                    </select>  
+                  </span>
                   <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
                   <button id="DoctorSearchBtn">Search</button>
-            
                 </form>
               </section>
-              <div class="d-flex justify-content-around mb-3">
-                <div class="col-5 d-flex justify-content-around" style="margin-top: 50px;">
-                  <label for="nameofDoctor" style="margin: 10px;">
-                    <h3>Name: </h3>
-                  </label>
-                  <input type="text" id="searchDoctor" class="form-control" name="doctor[search]" style="margin: 10px;"
-                    required>
-                  <button type="" class="btn btn-primary form-control" style="margin: 10px;">Search</button>
-                </div>
-              </div>
+
+              <!-- use for render doctors -->
               <section>
-                <h1>all doctors</h1>
+                <h1>Doctor Details</h1>
                 <% if(doctors && doctors.length){ %>
                     <% for(let doctor of doctors) {%>
                       <div>
@@ -181,12 +172,13 @@
                         <span> <%= doctor.degree %> </span>
                         <span> <%= doctor.specialization %> </span>     
                         <span> <%= doctor.email %> </span>
-                        <span><button>edit</button></span>
+                        <span><a href="/admin/doctor/<%=doctor._id%>" class="btn btn-primary">Edit</a></span>
                       </div>
                       <br>
                     <% } %>
                   <% } %>
               </section>
+
             </div>
           </div>
         </div>
