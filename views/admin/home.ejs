@@ -1,61 +1,90 @@
 <%- include('./partials/head') %>
-<body>
-     <main class="admin-panel">
+
+  <body>
+    <main class="admin-panel">
       <%- include('./partials/sidebar') %>
         </div>
-         <div class="content">
-            <div class="row">
-                <div class="col-11">
-                  <h1>Welcome, Admin!</h1>
-                  <p>This is the admin panel for the patient management system.</p> 
-                </div>
-                <div class="col-1" > 
-                  <button type="button" class="btn btn-danger logoutB"  href="#">LogOut</button>
-                </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-11">
+              <h1>Welcome, Admin!</h1>
+              <p>This is the admin panel for the patient management system.</p>
             </div>
-            <div class="row">
-                <div class="col-3">
-                    <button type="button" class="btn btn-primary">Overview</button>
-                </div>
-                <div class="col-3">
-                    <button  id="toggleBtn" type="button" class="btn btn-primary">Appoiment</button>
-                </div>
+            <div class="col-1">
+              <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
             </div>
-             <div class="block ">
-                <div id="content" class="hidden" >
-                    <h2>Creating Appointment</h2>
-                    <br>
-                    <form>
-                        <div class="form-group">
-                           <label for="username">Member ID/ Email/ NIC</label>
-                           <input type="text email" class="form-control" id="username" >
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password">
-                         <br>
-                            <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me signed in</label>
-                            <p><a href="#">Forgot Password?</a><p>
-                        </div>
-                        <br>
-                         <button type="submit" class="btn btn-primary">Login</button>
-                      </form>
-                  </div>
+          </div>
+          <div class="row">
+            <div class="col-3">
+              <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview</button>
             </div>
-         </div>
-    </main> 
-<script> 
-var toggleBtn = document.getElementById('toggleBtn');
-var content = document.getElementById('content');
+            <div class="col-3">
+              <button id="toggleBtn" type="button" class="btn btn-primary">Appoiment</button>
+            </div>
+          </div>
+          <div class="block ">
+            <div id="content" class="hidden">
+              <h2>Creating Appointment</h2>
+              <br>
+              <form>
+                <div class="form-group">
+                  <label for="username">Member ID/ Email/ NIC</label>
+                  <input type="text email" class="form-control" id="username">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" id="password">
+                  <br>
+                  <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me
+                    signed in</label>
+                  <p><a href="#">Forgot Password?</a>
+                  <p>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+            <!-- Some overview content -->
+            <div id="overview" class="hidden">
+              <h3>Overview</h3>
+            </div>
+          </div>
+        </div>
+    </main>
+    <script>
+   
+      var toggleBtn = document.getElementById('toggleBtn');
+      var content = document.getElementById('content');
 
-toggleBtn.addEventListener('click', function() {
-  if (content.classList.contains('hidden')) {
-    content.classList.remove('hidden');
-  } else {
-    content.classList.add('hidden');
-  }
-});
-</script>
-</body>
+      var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+      var Overview = document.getElementById('overview');
 
-</html>
+      toggleBtn.addEventListener('click', function () {
+        if (content.classList.contains('hidden')) {
+          Overview.classList.add('hidden');
+          content.classList.remove('hidden');
+        } else {
+          content.classList.add('hidden');
+        }
+      });
+
+      overviewToggleBtn.addEventListener('click', function () {
+        if (Overview.classList.contains('hidden')) {
+          content.classList.add('hidden');
+          Overview.classList.remove('hidden');
+        } else {
+          Overview.classList.add('hidden');
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"></script>
+    <script src="/javascripts/boostrapFormValidation.js"></script>
+    <script src="/javascripts/admin/admin.js"></script>
+  </body>
+
+  </html>
