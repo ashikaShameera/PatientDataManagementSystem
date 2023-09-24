@@ -16,6 +16,7 @@ module.exports.registerDoctor=async(req,res)=>{
    const doctor=new Doctor(req.body.doctor); 
    await doctor.save();                      
    res.redirect(`/admin/doctor`);
+   //need to add flash msg 
 }
 
 module.exports.showDoctor=async(req,res)=>{
