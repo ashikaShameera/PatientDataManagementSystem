@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose =require('mongoose');
 const Schema=mongoose.Schema;
 
@@ -47,6 +48,10 @@ const patientSchema=new Schema({
         EmgName:String,
         EmgRelationship:String,
         EmgContactNumber:String
+    },
+    password:{
+        type: String,
+        required :true
     }
 
 })

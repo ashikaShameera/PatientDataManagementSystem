@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const userControl=require('../controllers/userControl');
-const catchAsync=require('../utils/catchAsync');
-//toDo
+const userControl = require('../controllers/userControl');
+const catchAsync = require('../utils/catchAsync');
 
-router.route('/login')
-    .get(userControl.renderLogin)
+// GET request to render the login page
+router.get('/login', userControl.renderLogin);
 
-module.exports=router
+// POST request to handle login form submission
+router.post('/login', userControl.handleLogin); // Define handleLogin function in your userControl
+
+module.exports = router;

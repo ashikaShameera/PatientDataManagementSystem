@@ -1,5 +1,6 @@
 const Patient = require("../models/patient");
 const Doctor =require("../models/doctor");
+const bcrypt = require('bcrypt')
 
 const {searchDoctors}=require('./searchController');
 
@@ -14,9 +15,31 @@ module.exports.renderRegisterForm=(req,res)=>{
 
 module.exports.createPatient=async (req,res)=>{
     //creating newPatinet
-    const patient=new Patient(req.body.patient);
-    await patient.save();
-    res.redirect(`/patient/${patient._id}`)
+    // const patient=new Patient(req.body.patient);
+    // await patient.save();
+    //res.redirect(`/patient/${patient._id}`)
+    try {
+        const { password, ...patientData} = req.body.patient;
+    
+        // Generate a salt and hash the password
+        const saltRounds = 10; // Number of rounds (adjust as needed)
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+    
+        // Create a new patient with the hashed password
+        const patient = new Patient({
+            ...patientData,
+            password: hashedPassword, // Store the hashed password in the database
+          });
+      
+          // Save the patient to the database
+          await patient.save();
+      
+          // Redirect to the patient's profile or other appropriate page
+          res.redirect(`/patient/${patient._id}`);
+        } catch (error) {
+          console.error('Error during registration:', error);
+          res.status(500).render('error', { error: 'Registration failed' });
+        }
 }
 
 module.exports.showPatient=async(req,res)=>{
