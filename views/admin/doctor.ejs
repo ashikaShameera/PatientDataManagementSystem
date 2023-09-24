@@ -16,16 +16,16 @@
           </div>
           <div class="row">
             <div class="col-3">
-              <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview</button>
+              <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of Doctors</button>
             </div>
             <div class="col-3">
               <button id="toggleBtn" type="button" class="btn btn-primary">Doctor Registation</button>
             </div>
           </div>
           <div class="block">
-            <div id="doctorRegistation" class="hidden">
-              <h2 style="text-align: center;">Doctor Registation Form</h2>
-              <br>
+            <div id="Registation" class="hidden">
+              <h3 style="text-align: center;">Doctor Registation Form</h3>
+
               <form action="/doctor/register" method="POST" novalidate class="validated-form">
 
                 <div class="d-flex justify-content-around">
@@ -130,7 +130,7 @@
                     <input type="text" id="university" class="form-control" name="doctor[university]" required>
 
                     <br>
-                    <br>
+
 
                     <div class="mb-3">
                       <button type="submit" class="btn btn-primary form-control">Register</button>
@@ -142,7 +142,25 @@
             </div>
 
             <!-- add some overview Of Doctors -->
-            <div id="doctorOverview" class="hidden">
+            <div id="overview" class="">
+              <section>
+                <form action="" method="post"> 
+
+                  <label for="selectType">Select Type</label>
+                  <select name="selectType" id="selectType" style="display: inline-block;">
+                    <option value="doctor">Doctors</option>
+                    <option value="Specialization">Specialization</option>
+                    <option value="Specialization">Email</option>
+                    <option value="Specialization">NIC</option>
+                    <option value="Specialization">Phone Number</option>
+
+                  </select>
+            
+                  <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
+                  <button id="DoctorSearchBtn">Search</button>
+            
+                </form>
+              </section>
               <div class="d-flex justify-content-around mb-3">
                 <div class="col-5 d-flex justify-content-around" style="margin-top: 50px;">
                   <label for="nameofDoctor" style="margin: 10px;">
@@ -152,37 +170,40 @@
                     required>
                   <button type="" class="btn btn-primary form-control" style="margin: 10px;">Search</button>
                 </div>
-                <div class="col-5" style="margin-top: 59px;">
-                  <button type="" class="btn btn-primary form-control">Search All Doctors</button>
-                </div>
+                <!-- Use for get all the doctors -->
+                  <div class="col-5" style="margin-top: 59px;">
+                    <a href="/admin/doctor/all" class="btn btn-primary form-control" >Search All Doctors</a>
+                  </div>
               </div>
             </div>
           </div>
         </div>
         </div>
     </main>
+   
     <script>
+   
       var toggleBtn = document.getElementById('toggleBtn');
-      var doctorRegistation = document.getElementById('doctorRegistation');
-      
+      var content = document.getElementById('Registation');
+
       var overviewToggleBtn = document.getElementById('overviewToggleBtn');
-      var doctorOverview = document.getElementById('doctorOverview');
+      var Overview = document.getElementById('overview');
 
       toggleBtn.addEventListener('click', function () {
-        if (doctorRegistation.classList.contains('hidden')) {
-          doctorOverview.classList.add('hidden');
-          doctorRegistation.classList.remove('hidden');
+        if (content.classList.contains('hidden')) {
+          Overview.classList.add('hidden');
+          content.classList.remove('hidden');
         } else {
-          doctorRegistation.classList.add('hidden');
+          content.classList.add('hidden');
         }
       });
 
       overviewToggleBtn.addEventListener('click', function () {
-        if (doctorOverview.classList.contains('hidden')) {
-          doctorRegistation.classList.add('hidden');
-          doctorOverview.classList.remove('hidden');
+        if (Overview.classList.contains('hidden')) {
+          content.classList.add('hidden');
+          Overview.classList.remove('hidden');
         } else {
-          doctorOverview.classList.add('hidden');
+          Overview.classList.add('hidden');
         }
       });
     </script>
@@ -193,6 +214,7 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"></script>
     <script src="/javascripts/boostrapFormValidation.js"></script>
+    <script src="/javascripts/admin/admin.js"></script>
   </body>
 
   </html>
