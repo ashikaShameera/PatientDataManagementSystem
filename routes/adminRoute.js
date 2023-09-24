@@ -12,6 +12,9 @@ router.route('/')
 router.route('/doctor')
     .get(adminControl.renderAdminDoctorPage)
 
+router.route('/appointment')
+    .get(adminControl.renderAppointmentPage)
+
 router.route('/doctor/all')
     .get(doctorControl.showAllDoctors)
 
