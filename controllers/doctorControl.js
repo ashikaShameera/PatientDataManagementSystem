@@ -25,11 +25,6 @@ module.exports.showDoctor=async(req,res)=>{
       res.render('doctor/show',{doctor});
 }
 
-module.exports.showAllDoctors=async(req,res)=>{
-   const doctors=await Doctor.find();
-   console.log(doctors)
-   res.render('admin/doctor/index',{doctors})
-}
 
 module.exports.renderEditForm=async(req,res)=>{
    const {id}=req.params;

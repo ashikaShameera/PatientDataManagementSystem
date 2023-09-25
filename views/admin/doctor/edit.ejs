@@ -1,0 +1,103 @@
+<% layout('layouts/boilerplate')%>
+<div class="row">
+      <h1 class="text-center">Update Doctor Details <%= doctor.firstName %></h1>
+      <div class="col-6 offset-4">
+
+        <form action="/admin/doctor/<%= doctor.id%>?_method=PUT" method="POST" novalidate class="validated-form">
+          
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name:</label>
+            <input type="text" id="firstName" class="form-control" name="doctor[firstName]" value="<%= doctor.firstName %>"  required>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name:</label>
+            <input type="text" id="lastName" class="form-control" name="doctor[lastName]" value="<%= doctor.lastName %>"  required>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="nic" class="form-label">NIC:</label>
+            <input type="text" id="nic" name="doctor[nic]" class="form-control" value="<%= doctor.nic %>" required>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+          </div>  
+        
+          <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Date of Birth: </label> 
+            <input type="date" id="dateOfBirth" name="doctor[dateOfBirth]" value="<%=doctor.dateOfBirth%> class="form-control" value="<%= doctor.dateOfBirth %>" required>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+         </div>
+        
+         <div class="md-3">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="doctor[gender]" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="valid-feedback">
+            Looks Good!
+          </div>
+        </div> 
+        
+        Need to add boostrap & refactor
+        <div class="md-3">
+          <label for="contactNumber">Contact Number:</label>
+          <input type="text" id="contactNumber" name="doctor[contactNumber]" required><br>
+        </div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="doctor[email]" required><br>
+        
+          <label for="address">Address:</label><br>
+          <label for="number">Number:</label>
+          <input type="number" id="number" name="doctor[address.number]"><br>
+        
+          <label for="street">Street:</label>
+          <input type="text" id="street" name="doctor[address.street]"><br>
+        
+          <label for="city">City:</label>
+          <input type="text" id="city" name="doctor[address.city]"><br>
+        
+          <label for="state">State:</label>
+          <input type="text" id="state" name="doctor[address.state]"><br>
+        
+          <label for="postalCode">Postal Code:</label>
+          <input type="number" id="postalCode" name="doctor[address.postalCode]"><br>
+        
+          <label for="medicalLicenseNumber">Medical License Number:</label>
+          <input type="text" id="medicalLicenseNumber" name="doctor[medicalLicenseNumber]" required><br>
+        
+          <label for="specialization">Specialization:</label>
+          <select id="specialization" name="doctor[specialization]" required>
+            <option value="Internal Medicine">Internal Medicine</option>
+            <option value="Family Medicine">Family Medicine</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
+            <option value="General Surgery">General Surgery</option>
+            <option value="Anesthesiology">Anesthesiology</option>
+            <option value="Psychiatry">Psychiatry</option>
+            <option value="Orthopedic Surgery">Orthopedic Surgery</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Dermatology">Dermatology</option>
+          </select><br>
+        
+          <label for="degree">Degree:</label>
+          <input type="text" id="degree" name="doctor[degree]" required><br>
+        
+          <label for="university">University:</label>
+          <input type="text" id="university" name="doctor[university]" required><br>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary form-control">Update Doctor Details</button> 
+          </div>
+    </form>
+  </div>
+</div>

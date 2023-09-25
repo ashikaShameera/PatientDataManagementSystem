@@ -13,11 +13,12 @@ router.route('/')
 router.route('/doctor')
     .get(adminControl.renderAdminDoctorPage)
 
-// router.route('/appointment')
-//     .get(adminControl.renderAppointmentPage)
+router.route('/doctor/:id')
+    .get(catchAsync(adminControl.showDoctor))
+    .put(catchAsync(adminControl.updateDoctor))
 
-router.route('/doctor/all')
-    .get(doctorControl.showAllDoctors)
+router.route('/appointment')
+    .get(adminControl.renderAppointmentPage)
 
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
