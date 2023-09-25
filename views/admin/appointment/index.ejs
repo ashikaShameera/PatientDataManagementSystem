@@ -1,1 +1,13 @@
-<h1>All appointments</h1>
+<h1>all Appointment</h1>
+<% for(let A of doctors) {%>
+    <div>
+        <span> <%= doctor.firstName %> </span>
+        <span> <%= doctor.lastName %> </span>
+        <span> <%= doctor.degree %> </span>
+        <span> <%= doctor.specialization %> </span>     
+        <span> <%= doctor.email %> </span>
+        <span><button>view</button></span>
+        <span><button>edit</button></span>
+    </div>
+    <br>
+<% } %>

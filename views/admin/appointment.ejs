@@ -19,132 +19,47 @@
               <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of Doctors</button>
             </div>
             <div class="col-3">
-              <button id="toggleBtn" type="button" class="btn btn-primary">Doctor Registation</button>
+              <button id="toggleBtn" type="button" class="btn btn-primary">Create Appointment</button>
             </div>
           </div>
           <div class="block">
             <div id="Registation" class="hidden">
-              <h3 style="text-align: center;">Doctor Registation Form</h3>
+              <h3 style="text-align: center;">Appointment Creation Form</h3>
 
-              <form action="/doctor/register" method="POST" novalidate class="validated-form">
+              <form action="/admin/appointment/new" method="POST" novalidate class="validated-form">
 
-                <div class="d-flex justify-content-around">
+                <label for="nic">Search Input</label>
+                <input type="text" id="nic" name="appointment[doctor.nic]" />
+                <br />
+                <!-- Appointment Date -->
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="appointment[date]" required />
+                <br />
 
-                  <div class="col-5">
+                <!-- Appointment Time -->
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="appointment[time]" required />
+                <br />
 
-                    <div class="mb-3">
-                      <label for="firstName" class="form-label">First Name:</label>
-                      <input type="text" id="firstName" class="form-control" name="doctor[firstName]" required>
-                      <div class="valid-feedback">
-                        Looks Good!
-                      </div>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="lastName" class="form-label">Last Name:</label>
-                      <input type="text" id="lastName" class="form-control" name="doctor[lastName]" required>
-                      <div class="valid-feedback">
-                        Looks Good!
-                      </div>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="nic" class="form-label">NIC:</label>
-                      <input type="text" id="nic" name="doctor[nic]" class="form-control" required>
-                      <div class="valid-feedback">
-                        Looks Good!
-                      </div>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="dateOfBirth" class="form-label">Date of Birth:</label>
-                      <input type="date" id="dateOfBirth" name="doctor[dateOfBirth]" class="form-control" required>
-                      <div class="valid-feedback">
-                        Looks Good!
-                      </div>
-                    </div>
-
-                    <div class="mb-3">
-                      <label for="gender" class="form-label">Gender:</label>
-                      <select id="gender" name="doctor[gender]" class="form-control" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </select>
-                      <div class="valid-feedback">
-                        Looks Good!
-                      </div>
-                    </div>
+                <!-- Room Number -->
+                <label for="roomNumber">Room Number:</label>
+                <input type="number" id="roomNumber" name="appointment[roomNumber]" min="1" max="20" required />
+                <br />
+                <label for="maximumPatients">maximum Patients:</label>
+                <input type="number" id="maximumPatients" name="appointment[maximumPatients]" required />
+                <br />
 
 
-                    <div class="mb-3">
-                      <label for="contactNumber" class="form-label">Contact Number:</label>
-                      <input type="text" id="contactNumber" class="form-control" name="doctor[contactNumber]"
-                        required><br>
-                    </div>
-
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" id="email" class="form-control" name="doctor[email]" required><br>
-
-
-                    <label for="number" class="form-label">Number Of Address :</label>
-                    <input type="number" id="number" class="form-control" name="doctor[address.number]"><br>
-
-                  </div>
-
-                  <div class="col-5">
-                    <label for="street" class="form-label">Street:</label>
-                    <input type="text" id="street" class="form-control" name="doctor[address.street]"><br>
-
-                    <label for="city" class="form-label">City:</label>
-                    <input type="text" id="city" class="form-control" name="doctor[address.city]"><br>
-
-                    <label for="state">State:</label>
-                    <input type="text" id="state" class="form-control" name="doctor[address.state]"><br>
-
-                    <label for="postalCode">Postal Code:</label>
-                    <input type="number" id="postalCode" class="form-control" name="doctor[address.postalCode]"><br>
-
-                    <label for="medicalLicenseNumber">Medical License Number:</label>
-                    <input type="text" id="medicalLicenseNumber" class="form-control"
-                      name="doctor[medicalLicenseNumber]" required><br>
-
-                    <label for="specialization">Specialization:</label>
-                    <select id="specialization" class="form-control" name="doctor[specialization]" required>
-                      <option value="Internal Medicine">Internal Medicine</option>
-                      <option value="Family Medicine">Family Medicine</option>
-                      <option value="Pediatrics">Pediatrics</option>
-                      <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
-                      <option value="General Surgery">General Surgery</option>
-                      <option value="Anesthesiology">Anesthesiology</option>
-                      <option value="Psychiatry">Psychiatry</option>
-                      <option value="Orthopedic Surgery">Orthopedic Surgery</option>
-                      <option value="Cardiology">Cardiology</option>
-                      <option value="Dermatology">Dermatology</option>
-                    </select><br>
-
-                    <label for="degree">Degree:</label>
-                    <input type="text" id="degree" class="form-control" name="doctor[degree]" required><br>
-
-                    <label for="university">University:</label>
-                    <input type="text" id="university" class="form-control" name="doctor[university]" required>
-
-                    <br>
-
-
-                    <div class="mb-3">
-                      <button type="submit" class="btn btn-primary form-control">Register</button>
-                    </div>
-                  </div>
-
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-primary form-control">Create Appointment</button>
                 </div>
               </form>
             </div>
 
             <!-- add some overview Of Doctors -->
             <div id="overview" class="">
-              <section>
-                <form action="" method="post"> 
+              <!-- <section>
+                <form action="" method="post">
 
                   <label for="selectType">Select Type</label>
                   <select name="selectType" id="selectType" style="display: inline-block;">
@@ -155,13 +70,14 @@
                     <option value="Specialization">Phone Number</option>
 
                   </select>
-            
-                  <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
+
+                  <input type="text" id="DoctorSearchInput" name="DoctorSearchInput"
+                    placeholder="Search Doctor Name (Max 30 Characters)">
                   <button id="DoctorSearchBtn">Search</button>
-            
+
                 </form>
-              </section>
-              <div class="d-flex justify-content-around mb-3">
+              </section> -->
+              <!-- <div class="d-flex justify-content-around mb-3">
                 <div class="col-5 d-flex justify-content-around" style="margin-top: 50px;">
                   <label for="nameofDoctor" style="margin: 10px;">
                     <h3>Name: </h3>
@@ -169,20 +85,21 @@
                   <input type="text" id="searchDoctor" class="form-control" name="doctor[search]" style="margin: 10px;"
                     required>
                   <button type="" class="btn btn-primary form-control" style="margin: 10px;">Search</button>
-                </div>
-                <!-- Use for get all the doctors -->
-                  <div class="col-5" style="margin-top: 59px;">
-                    <a href="/admin/doctor/all" class="btn btn-primary form-control" >Search All Doctors</a>
-                  </div>
+                </div> -->
+
+              <!-- Use for get all the doctors -->
+              <div class="col-5" style="margin-top: 59px;">
+                <a href="/admin/appointment/all" class="btn btn-primary form-control">Get All Appointment</a>
               </div>
             </div>
           </div>
         </div>
         </div>
+        </div>
     </main>
-   
+
     <script>
-   
+
       var toggleBtn = document.getElementById('toggleBtn');
       var content = document.getElementById('Registation');
 
@@ -215,6 +132,19 @@
       crossorigin="anonymous"></script>
     <script src="/javascripts/boostrapFormValidation.js"></script>
     <script src="/javascripts/admin/admin.js"></script>
+    <script>
+      // Get the current date
+      const currentDate = new Date();
+  
+      // Set the date for the next day
+      currentDate.setDate(currentDate.getDate() + 1);
+  
+      // Format the next day as 'YYYY-MM-DD' for setting the minimum date
+      const nextDay = currentDate.toISOString().split("T")[0];
+  
+      // Set the minimum date for the appointment date input
+      document.getElementById("date").min = nextDay;
+    </script>
   </body>
 
   </html>
