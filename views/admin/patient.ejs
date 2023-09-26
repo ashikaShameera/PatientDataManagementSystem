@@ -173,25 +173,45 @@
                             </form>
                         </div>
                         <!-- add some overview Of Doctors -->
-                        <div id="overview" class="hidden">
-                            <div class="d-flex justify-content-around mb-3">
-                                <div class="col-5 d-flex justify-content-around" style="margin-top: 50px;">
-                                    <label for="nameofpatient" style="margin: 10px;">
-                                        <h3>Name: </h3>
+                        <div id="overview" class="">
+                            <div class="block">
+                              <form action="" method="">
+                                <div class="d-flex justify-content-around p-5">
+                                  <div class="col-md-2" style="text-align: right;">
+                                    <label for="selectType" class="form-label">
+                                      <h3>Select Type :</h3>
                                     </label>
-                                    <input type="text" id="searchPatient" class="form-control" name="doctor[search]"
-                                        style="margin: 10px;" required>
-                                    <button type="" class="btn btn-primary form-control"
-                                        style="margin: 10px;">Search</button>
+                                  </div>
+                                  <!-- Use patient seach type -->
+                                  <div class="col-md-2">
+                                    <select name="selectType" id="selectType" style="display: inline-block;" class="form-control">
+                                      <option value="Specialization">Specialization</option>
+                                      <option value="Email">Email</option>
+                                      <option value="NIC">NIC</option>
+                                      <option value="PhoneNumber">Phone Number</option>
+                                      <option value="DoctorName">Doctor Name</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-md-5">
+                                    <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" class="form-control"
+                                      placeholder="Search Doctor Name (Max 30 Characters)">
+                                  </div>
+                                  <div class="col-md-2">
+                                    <button id="DoctorSearchBtn" class="btn btn-primary form-control">Search</button>
+                                  </div>
                                 </div>
-                                <div class="col-5" style="margin-top: 59px;">
-                                    <button type="" class="btn btn-primary form-control">Search All Patients</button>
-                                </div>
+                              </form>
                             </div>
-                        </div>
+              
+                            <!-- use for render Patient -->
+                            <section>
+                              <h1>Render Patient</h1>
+                            </section>
+              
+                          </div>
                     </div>
                 </div>
-                </div>
+                
         </main>
         <script>
          
