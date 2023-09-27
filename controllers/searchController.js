@@ -46,16 +46,16 @@ module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput) => {
 
   if (selectType === "Specialization") {
     doctors = await Doctor.find({ specialization: DoctorSearchInput });
-  } 
+  }
   else if (selectType === "NIC") {
     doctors = await Doctor.find({ nic: DoctorSearchInput });
-  } 
+  }
   else if (selectType === "Email") {
     doctors = await Doctor.find({ email: DoctorSearchInput });
-  } 
+  }
   else if (selectType === "ContactNumber") {
     doctors = await Doctor.find({ contactNumber: DoctorSearchInput });
-  } 
+  }
   else {
     const doctorName = DoctorSearchInput.trim();
     const nameParts = doctorName.split(" ");
@@ -94,7 +94,7 @@ module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput) => {
 
 
 //This function use to find doctor using id
-module.exports.searchDoctorById=async (doctorId)=> {
-  return ( await Doctor.findById(doctorId) );
+module.exports.searchDoctorById = async (doctorId) => {
+  return (await Doctor.findById(doctorId));
 }
 
