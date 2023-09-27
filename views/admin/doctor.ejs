@@ -143,40 +143,77 @@
 
             <!-- add some overview Of Doctors -->
             <div id="overview" class="">
-
-              <section>
-                <form action="" method="post"> 
-                  <span>
-                    <label for="selectType">Select Type</label>
-                    <select name="selectType" id="selectType" style="display: inline-block;" >
-                      <option value="Specialization">Specialization</option>
-                      <option value="Email">Email</option>
-                      <option value="NIC">NIC</option>
-                      <option value="PhoneNumber">Phone Number</option>
-                      <option value="DoctorName">Doctor Name</option>
-                    </select>  
-                  </span>
-                  <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
-                  <button id="DoctorSearchBtn">Search</button>
+              <div class="block">
+                <form action="" method="post">
+                  <div class="d-flex justify-content-around p-5">
+                    <div class="col-md-2" style="text-align: right;">
+                      <label for="selectType" class="form-label">
+                        <h3>Select Type :</h3>
+                      </label>
+                    </div>
+                    <div class="col-md-2">
+                      <select name="selectType" id="selectType" style="display: inline-block;" class="form-control">
+                        <option value="Specialization">Specialization</option>
+                        <option value="Email">Email</option>
+                        <option value="NIC">NIC</option>
+                        <option value="PhoneNumber">Phone Number</option>
+                        <option value="DoctorName">Doctor Name</option>
+                      </select>
+                    </div>
+                    <div class="col-md-5">
+                      <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" class="form-control"
+                        placeholder="Search Doctor Name (Max 30 Characters)">
+                    </div>
+                    <div class="col-md-2">
+                      <button id="DoctorSearchBtn" class="btn btn-primary form-control">Search</button>
+                    </div>
+                  </div>
                 </form>
-              </section>
+              </div>
 
               <!-- use for render doctors -->
               <section>
-                <h1>Doctor Details</h1>
-                <% if(doctors && doctors.length){ %>
-                    <% for(let doctor of doctors) {%>
-                      <div>
-                        <span> <%= doctor.firstName %> </span>
-                        <span> <%= doctor.lastName %> </span>
-                        <span> <%= doctor.degree %> </span>
-                        <span> <%= doctor.specialization %> </span>     
-                        <span> <%= doctor.email %> </span>
-                        <span><a href="/admin/doctor/<%=doctor._id%>" class="btn btn-primary">Edit</a></span>
-                      </div>
-                      <br>
+              <div style="text-align: center;" class="mt-0 mb-4">
+                <h1>Doctors Information</h1>
+              </div>
+                <% if (doctors && doctors.length) { %>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Degree</th>
+                        <th>Specialization</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let doctor of doctors) { %>
+                        <tr class="table-row-style">
+                          <td>
+                            <%= doctor.firstName %>
+                          </td>
+                          <td>
+                            <%= doctor.lastName %>
+                          </td>
+                          <td>
+                            <%= doctor.degree %>
+                          </td>
+                          <td>
+                            <%= doctor.specialization %>
+                          </td>
+                          <td>
+                            <%= doctor.email %>
+                          </td>
+                          <td><a href="/admin/doctor/<%= doctor._id %>" class="btn btn-primary">Edit</a></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <p>No doctors found.</p>
                     <% } %>
-                  <% } %>
               </section>
 
             </div>
@@ -184,9 +221,9 @@
         </div>
         </div>
     </main>
-   
+
     <script>
-   
+
       var toggleBtn = document.getElementById('toggleBtn');
       var content = document.getElementById('Registation');
 
