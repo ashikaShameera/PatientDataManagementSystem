@@ -4,7 +4,6 @@ const router = express.Router();
 const adminControl = require('../controllers/adminControl');
 const doctorControl = require('../controllers/doctorControl');
 const adminAppointmentControl = require('../controllers/adminAppointmentControl');
-
 const catchAsync = require('../utils/catchAsync');
 
 router.route('/')
@@ -17,24 +16,33 @@ router.route('/doctor/:id')
     .get(catchAsync(adminControl.showDoctor))
     .put(catchAsync(adminControl.updateDoctor))
 
-router.route('/appointment')
-    .get(adminControl.renderAppointmentPage)
-
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
 
 
+//------ Routes For the /admin/Appointment 
+
+
 //render appointment page
 router.route('/appointment')
-    .get(adminAppointmentControl.renderNewAppointmentForm)
+    .get(adminAppointmentControl.renderAppointmentPage)
 
-router.route('/appointment')
-    .post(adminAppointmentControl.renderNewAppointmentForm)
+router.route('/appointment/create')
+    .get(adminAppointmentControl.renderAppointmentCreationPage)
 
+router.route('/appointment/findDoctor')
+    .post(catchAsync(adminAppointmentControl.getDoctorDetails))//get doctor details when make an appointment
+
+router.route('/appointment/:id')
+    .get(catchAsync(adminAppointmentControl.fillUpdateForm))
+    .delete(catchAsync(adminAppointmentControl.deleteAppointment))
+
+
+//routes for the form submission
 router.route('/appointment/new')
     .post(catchAsync(adminAppointmentControl.createNewAppointment))
 
-router.route('/appointment/all')
-    .post(catchAsync(adminAppointmentControl.showAllAppointments))
 
+
+router.put('/appointment/:id', adminAppointmentControl.updateAppointment)
 module.exports = router;
