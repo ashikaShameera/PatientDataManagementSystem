@@ -1,0 +1,199 @@
+<%- include('../partials/head') %>
+
+    <body>
+        <main class="admin-panel">
+            <%- include('../partials/sidebar') %>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-11">
+                            <h1>Welcome, Admin!</h1>
+                            <p>This is the admin panel for the patient management system.</p>
+                        </div>
+                        <div class="col-1">
+                            <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of
+                                Doctors</button>
+                        </div>
+                        <div class="col-3">
+                            <button id="toggleBtn" type="button" class="btn btn-primary">Search Doctor For Create An
+                                Appointment</button>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <div id="Registation" class="hidden">
+
+                            <!-- find Doctor by searching -->
+                            <form action="/admin/appointment/findDoctor" method="post">
+
+                                <label for="selectType">Select Type</label>
+                                <select name="selectType" id="selectType" style="display: inline-block;">
+                                    <option value="doctor">Doctor</option>
+                                    <option value="Specialization">Specialization</option>
+                                    <option value="NIC">NIC</option>
+                                    <option value="Email">Email</option>
+                                    <option value="ContactNumber">Phone Number</option>
+
+                                </select>
+
+                                <input type="text" id="DoctorSearchInput" name="DoctorSearchInput"
+                                    placeholder="Search Doctor Name (Max 30 Characters)">
+                                <button id="DoctorSearchBtn">Search</button>
+
+                            </form>
+
+                            <% if(doctors && doctors.length> 0){ %>
+                                <% for (let d of doctors){%>
+                                    <div>
+                                        <div class="row">
+                                            <div class="card" style="width: 18rem;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title ">
+                                                        <%= d.firstName %>
+                                                            <%= d.lirstName %>
+
+                                                    </h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted">
+                                                        <%= d.specialization %>
+                                                    </h6>
+                                                    <h6>
+                                                        <%= d.email %>
+                                                    </h6>
+                                                    <p class="card-text">In here you must show doctors
+                                                        university,degree and doctor licern number</p>
+                                                    <button class="btn btn-primary"
+                                                        onclick="fillDoctorEmail('<%= d.email %>')">Make an
+                                                        Appointment</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                            <% }%>
+
+                                                <h3 style="text-align: center;">Appointment Creation Form</h3>
+
+                                                <form action="/admin/appointment/new" method="POST" novalidate
+                                                    class="validated-form">
+
+                                                    <label for="email"></label>
+                                                    <input type="email" id="email" name="search_field" readonly />
+                                                    <br />
+
+                                                    <label for="date">Date:</label>
+                                                    <input type="date" id="date" name="appointment[date]" required />
+                                                    <br />
+
+
+                                                    <label for="time">Time:</label>
+                                                    <input type="time" id="time" name="appointment[time]" required />
+                                                    <br />
+
+
+                                                    <label for="roomNumber">Room Number:</label>
+                                                    <input type="number" id="roomNumber" name="appointment[roomNumber]"
+                                                        min="1" max="20" required />
+                                                    <br />
+                                                    <label for="maximumPatients">maximum Patients:</label>
+                                                    <input type="number" id="maximumPatients"
+                                                        name="appointment[maximumPatients]" required />
+                                                    <br />
+
+
+                                                    <div class="mb-3">
+                                                        <button type="submit"
+                                                            class="btn btn-primary form-control">Create
+                                                            Appointment</button>
+                                                    </div>
+                                                </form>
+
+
+                                    </div>
+
+                                    <!-- form end -->
+
+                                    <!-- all appointment -->
+                                    <div id="overview" class="">
+
+                                        <section>
+                                            <h1>hi overview</h1>
+                                        </section>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </main>
+
+        <script>
+            function fillDoctorEmail(email) {
+                // Get the email input field by its ID
+                var emailInput = document.getElementById("email");
+
+                // Set the value of the email input field to the doctor's email
+                emailInput.value = email;
+            }
+        </script>
+
+        <script src="/public/show.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+
+
+        <script>
+
+            var toggleBtn = document.getElementById('toggleBtn');
+            var content = document.getElementById('Registation');
+
+            var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+            var Overview = document.getElementById('overview');
+
+            toggleBtn.addEventListener('click', function () {
+                if (content.classList.contains('hidden')) {
+                    Overview.classList.add('hidden');
+                    content.classList.remove('hidden');
+                } else {
+                    content.classList.add('hidden');
+                }
+            });
+
+            overviewToggleBtn.addEventListener('click', function () {
+                if (Overview.classList.contains('hidden')) {
+                    content.classList.add('hidden');
+                    Overview.classList.remove('hidden');
+                } else {
+                    Overview.classList.add('hidden');
+                }
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+        <script src="/javascripts/boostrapFormValidation.js"></script>
+        <script src="/javascripts/admin/admin.js"></script>
+        <script>
+            // Get the current date
+            const currentDate = new Date();
+
+            // Set the date for the next day
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            // Format the next day as 'YYYY-MM-DD' for setting the minimum date
+            const nextDay = currentDate.toISOString().split("T")[0];
+
+            // Set the minimum date for the appointment date input
+            document.getElementById("date").min = nextDay;
+        </script>
+    </body>
+
+    </html>

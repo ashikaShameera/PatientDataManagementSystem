@@ -1,0 +1,62 @@
+<% layout('layouts/boilerplate')%>
+    <div class="row">
+
+        <div class="col-6 offset-4">
+
+            <form action="/admin/appointment/<%= appointment.id%>?_method=PUT" method="POST" novalidate
+                class="validated-form">
+
+                <!-- <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name:</label>
+                    <input type="text" id="firstName" class="form-control" name="doctor[firstName]"
+                        value="<%= appointment.doctor.firstName %>" required>
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div> -->
+
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date:</label>
+                    <input type="text" id="date" class="form-control" name="appointment[date]"
+                        value="<%= appointment.date %>">
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time:</label>
+                    <input type="text" id="time" class="form-control" name="appointment[time]"
+                        value="<%= appointment.time %>">
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Room Number:</label>
+                    <input type="number" id="roomNumber" class="form-control" name="appointment[roomNumber]"
+                        value="<%= appointment.roomNumber %>">
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="maximumPatients" class="form-label">Maximum Patients:</label>
+                    <input type="text" id="maximumPatients" class="form-control" name="appointment[maximumPatients]"
+                        value="<%= appointment.maximumPatients %>">
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="currentPatients" class="form-label">Current Patients:</label>
+                    <input type="number" id="currentPatients" min="0" class="form-control"
+                        name="appointment[currentPatients]" value="<%= appointment.currentPatients %>">
+                    <div class="valid-feedback">
+                        Looks Good!
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary form-control">Update Appointment Details</button>
+
+        </div>
+        </form>
+    </div>
