@@ -10,7 +10,7 @@ module.exports.index=(req,res)=>{
 }
 
 module.exports.renderRegisterForm=(req,res)=>{ 
-    res.render('patient/register')
+    res.render('patient/register',{ error: null })
 }
 
 module.exports.createPatient=async (req,res)=>{
@@ -37,10 +37,20 @@ module.exports.createPatient=async (req,res)=>{
           // Redirect to the patient's profile or other appropriate page
           res.redirect(`/patient/${patient._id}`);
         } catch (error) {
-          console.error('Error during registration:', error);
-          res.status(500).render('error', { error: 'Registration failed' });
+            if (error.code === 11000) {
+                // This error code (11000) indicates a duplicate key error
+                // Handle the duplicate email or NIC error here
+                res.status(400).render('patient/register', {
+                    error: 'Email or NIC is already in use. Please choose a different one.',
+                });
+            } else {
+                // Handle other errors (e.g., validation errors)
+                console.error('Error during registration:', error);
+                res.status(500).render('error', { error: 'Registration failed' });
+            }
         }
 }
+
 
 module.exports.showPatient=async(req,res)=>{
     const id=req.params.id;                     //Getting the patient id

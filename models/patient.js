@@ -22,7 +22,8 @@ const patientSchema=new Schema({
     },
     nic:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     contactNumber: {
         type: String,
@@ -30,7 +31,8 @@ const patientSchema=new Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     address: {
         number:Number,

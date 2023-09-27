@@ -21,7 +21,7 @@
            <a href="/">	&#8810  Back to Home</a>
         </div>
         <div class="class1div0">
-            <h1 >Welcome</h1>
+            
             <p>Already have an account? <br><a href="/login" style="color: black;">Login</a></p>
         </div>
      </div>
@@ -29,6 +29,11 @@
       <div>
           <h1><span class="class2div1">Registation</span></h1>
       </div>
+            <% if (error) { %>
+                <div class="alert alert-danger">
+                  <%= error %>
+                </div>
+              <% } %>
        <br>
         <div class="form-group">
             <label for="firstName" class="form-label" >First Name:</label>
