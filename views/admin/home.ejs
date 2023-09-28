@@ -14,45 +14,237 @@
               <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
             </div>
           </div>
-          <div class="row">
-            <div class="col-3">
-              <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview</button>
-            </div>
-            <div class="col-3">
-              <button id="toggleBtn" type="button" class="btn btn-primary">Appoiment</button>
-            </div>
-          </div>
-          <div class="block ">
-            <div id="content" class="hidden">
-              <h2>Creating Appointment</h2>
-              <br>
-              <form>
-                <div class="form-group">
-                  <label for="username">Member ID/ Email/ NIC</label>
-                  <input type="text email" class="form-control" id="username">
+
+          <div class="block">
+            <div id="content">
+
+
+              <div class="container-fluid">
+
+
+                <div style="text-align: center;" class="m-3 p-3">
+                  <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                 </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" id="password">
-                  <br>
-                  <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me
-                    signed in</label>
-                  <p><a href="#">Forgot Password?</a>
-                  <p>
+
+                <div class="p-3">
+                  <div class="row d-flex justify-content-around">
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Patients</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">140,000</div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-user-injured fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Doctors</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">1000</div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-user-md fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total nurses
+                              </div>
+                              <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">500</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-user-nurse fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="row d-flex justify-content-around">
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Total Appointments</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">140,0000</div>
+                            </div>
+                            <div class="col">
+                              <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Past Appointments</div>
+                              <div class="h5 mb-0 font-weight-bold text-gray-800">200,0000</div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-clock fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                      <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                          <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Insurance Companies
+                              </div>
+                              <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5000</div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <i class="fas fa-building fa-2x text-gray-300"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+
+                    <div class="row col-11 center">
+
+                      <div class="card shadow mb-4 center">
+                        <div class="d-flex">
+                          <div>
+                            <h3 class="m-4 font-weight-bold text-primary">Top Doctors</h3>
+                          </div>
+                          <div class="mt-4">
+                            <i class="fas fa-user-md fa-2x text-gray-300"></i>
+                          </div>
+                        </div>
+                        <div class="container mt-3">
+                          <div class="row">
+                            <div class="col">
+                              <div class="scrollable-div">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th>First Name</th>
+                                      <th>Last Name</th>
+                                      <th>Degree</th>
+                                      <th>Specialization</th>
+                                      <th>Email</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Dr. John</td>
+                                      <td>Doe</td>
+                                      <td>MD</td>
+                                      <td>Cardiology</td>
+                                      <td>john.doe@example.com</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Login</button>
-              </form>
-            </div>
-            <!-- Some overview content -->
-            <div id="overview" class="hidden">
-              <h3>Overview</h3>
+              </div>
             </div>
           </div>
         </div>
+
     </main>
     <script>
-   
+
       var toggleBtn = document.getElementById('toggleBtn');
       var content = document.getElementById('content');
 
@@ -77,6 +269,14 @@
         }
       });
     </script>
+    <style>
+      /* Set a fixed height and enable overflow for the scrollable div */
+      .scrollable-div {
+        max-height: 280px;
+        /* Adjust this value as needed */
+        overflow-y: auto;
+      }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
       crossorigin="anonymous"></script>
@@ -85,6 +285,9 @@
       crossorigin="anonymous"></script>
     <script src="/javascripts/boostrapFormValidation.js"></script>
     <script src="/javascripts/admin/admin.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 
   </html>
