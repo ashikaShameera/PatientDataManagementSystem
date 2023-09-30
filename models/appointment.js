@@ -41,12 +41,12 @@ const appointmentSchema = new Schema({
     default: 10
   },
   
-  currentPatients: {
-    type: Number,
-    default: 0
-  },
-  
 
+});
+
+// Define a virtual property to calculate the currentPatients based on the length of the patients array
+appointmentSchema.virtual('currentPatients').get(function () {
+  return this.patients.length;
 });
 
 

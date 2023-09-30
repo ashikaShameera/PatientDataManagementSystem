@@ -1,4 +1,5 @@
 const Doctor = require("../models/doctor");
+const Patient = require("../models/patient");
 
 module.exports.searchDoctors = async (selectType, DoctorSearchInput) => {
   let doctors;
@@ -98,3 +99,30 @@ module.exports.searchDoctorById = async (doctorId) => {
   return (await Doctor.findById(doctorId));
 }
 
+
+//To find Patinet
+//searchQuery can be name,phone number,email or NIC
+module.exports.searchPatient=async (searchQuery)=>{
+
+let patients;
+
+// Split the search query into parts (firstName and lastName)
+const queryParts = searchQuery.split(' ');
+const firstName = queryParts[0];
+const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
+
+  try{
+     patients = await Patient.find({
+      $or: [
+        { email: searchQuery },
+        { nic: searchQuery },
+        { contactNumber: searchQuery },
+        { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
+      ]
+    });
+  }catch(erro){
+    console.log(erro)
+  }
+
+  return patients;
+}
