@@ -67,13 +67,19 @@ module.exports.getPatientDetails= async(req,res)=>{
 }
 
 module.exports.showPatientDetails=async(req,res)=>{
-   
+   const doctorId=req.params.id;
    const patientId=req.params.patientId;
    const patient=await Patient.findById(patientId)
    
    //In here we need to get diagnostic details to show to doctor
-   res.render('doctor/showPatient',{patient})
+   res.render('doctor/showPatient',{patient,doctorId})
 
+}
+
+module.exports.addDiagnosticCardAndPrescription=async(req,res)=>{
+   console.log(req.body)
+   //need to put these details to blockchain
+   res.send("to the blockhain world")
 }
 
 

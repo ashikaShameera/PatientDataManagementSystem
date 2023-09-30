@@ -11,11 +11,32 @@
         <% if(patient) { %>
             <h1>Showing Ptient Details of <%= patient.firstName %></h1>
         <% } %>
-    </section>
+    </section>doctorId
     <section>
         <h2>Diagnostic card and prescription details</h2>
-        <form action="" method="post">
-            
+        <form action="/doctor/<%=doctorId %>/patients/<%= patient.id %>" method="post">
+            <input type="text" hidden name="patientId" value="<%= patient.id %>">
+            <div>
+                <div>
+                    <label for="diagnosticDetails">Enter Diagnostic Details</label>
+                </div>
+                <textarea name="diagnosticDetails" id="diagnosticDetails" cols="30" rows="10"></textarea>
+            </div>
+            <section>
+                <div>
+                    <label for="drug1">Enter Drug </label>
+                    <input type="text" name="prescription[drug1]" id="drug1">
+                </div>
+                <div>
+                    <label for="drug2">Enter Drug </label>
+                    <input type="text" name="prescription[drug2]" id="drug1">
+                </div>
+                <div>
+                    <label for="drug3">Enter Drug </label>
+                    <input type="text" name="prescription[drug3]" id="drug1">
+                </div>
+            </section>
+            <button type="submit" >Submit Prescription</button>
         </form>
     </section>
 </body>

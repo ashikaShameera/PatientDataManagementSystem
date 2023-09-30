@@ -21,5 +21,6 @@ router.route('/:id/patients')
 
 router.route('/:id/patients/:patientId')
     .get(catchAsync(doctorControl.showPatientDetails))
+    .post(catchAsync(doctorControl.addDiagnosticCardAndPrescription))
 
 module.exports=router;
