@@ -8,14 +8,37 @@
 <body>
     <h1>Show Patient details</h1>
     <section>
+        <h2>show Diagnostic card and prescription details</h2>
+
+
+        <div style="text-align: center;" class="mt-0 mb-4">
+        </div>
+          <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
+                <% for (let DiagnosticCardAndPrescription of DiagnosticCardAndPrescriptions) { %>
+                    <p>
+                       date: <%= DiagnosticCardAndPrescription.date %>
+                    </p>
+                    <p>
+                       Diagnostic details: <%= DiagnosticCardAndPrescription.diagnosticDetails %>
+                    </p>
+                    <p>
+                       drug names <%= DiagnosticCardAndPrescription.medicationNames %>
+                    </p>
+                  <% } %>
+              </tbody>
+            </table>
+            <% } %>
+        </section>
+
+    <section>
         <% if(patient) { %>
             <h1>Showing Ptient Details of <%= patient.firstName %></h1>
         <% } %>
     </section>doctorId
     <section>
-        <h2>Diagnostic card and prescription details</h2>
+        <h2>Adding Diagnostic card and prescription details</h2>
         <form action="/doctor/<%=doctorId %>/patients/<%= patient.id %>" method="post">
-            <input type="text" hidden name="patientId" value="<%= patient.id %>">
+            <input type="text"  name="patientId" value="<%= patient.id %>">
             <div>
                 <div>
                     <label for="diagnosticDetails">Enter Diagnostic Details</label>
