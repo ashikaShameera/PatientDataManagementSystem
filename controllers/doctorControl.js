@@ -5,6 +5,7 @@ const Doctor=require('../models/doctor');
 const Appointment=require('../models/appointment')
 const Patient = require('../models/patient');
 const doctor = require('../models/doctor');
+const { date } = require('joi');
 
 module.exports.renderRegisterForm=(req,res)=>{
    res.render("doctor/register")
@@ -67,25 +68,35 @@ module.exports.getPatientDetails= async(req,res)=>{
    }
 }
 
+//Getting data from blockchain 
 module.exports.showPatientDetails=async(req,res)=>{
    const doctorId=req.params.id;
    const patientId=req.params.patientId;
-   const patient=await Patient.findById(patientId)
-   
-   //Getting data from blockchaon 
-   //need to handle errors
-   const DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
-
+   const patient=await Patient.findById(patientId);
+   let DiagnosticCardAndPrescriptions;
+   try{
+      DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
+      DiagnosticCardAndPrescriptions = DiagnosticCardAndPrescriptions.slice().sort((a, b) => b.date - a.date);
+   }catch(err){
+      console.log(err);
+   }
    res.render('doctor/showPatient',{patient,doctorId,DiagnosticCardAndPrescriptions})
-
 }
 
+//Adding data to the blockchain
 module.exports.addDiagnosticCardAndPrescription=async(req,res)=>{
-   console.log(req.body)
 
+   const doctorId=req.params.id;
+   const patientId=req.body.patientId;
+   const diagnosticDetails=req.body.diagnosticDetails;
+   const prescription=Object.values(req.body.prescription) //This convert the objects to array
 
-   //need to put these details to blockchain
-   res.send("to the blockhain world")
+   try{
+      const data=await DiagnosticCardAndPrescriptionController.setPrescription(patientId,diagnosticDetails,prescription);
+   }catch(err){
+      console.log(err);
+   }
+   res.redirect(`/doctor/${doctorId}/patients/${patientId}`);
 }
 
 

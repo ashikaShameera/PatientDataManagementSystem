@@ -9,3 +9,7 @@ const { setPrescriptionAndDiagnosisCard, getPrescriptionAndDiagnosisCard } = req
 module.exports.getPrescription=async (patientIdentifier)=>{
     return await getPrescriptionAndDiagnosisCard(patientIdentifier);
 }
+
+module.exports.setPrescription=async (patientIdentifier,_diagnosticDetails,_medicationNames)=>{
+    return setPrescriptionAndDiagnosisCard(patientIdentifier,_diagnosticDetails,_medicationNames)
+}
