@@ -20,14 +20,11 @@ const handleLogin = async (req, res) => {
     if (!passwordMatch) {
       return res.render('users/login', { error: 'Invalid email or password' });
     }
-
     // If authentication is successful, create a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your_secret_key'); // Replace 'your_secret_key' with your actual secret key
-
-    // Set the token as a cookie (you may need to install 'cookie-parser' middleware)
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key',{ expiresIn: '1h' });
+    // Set the token as a cookie
     res.cookie('authToken', token, { httpOnly: true });
-
-    // Redirect to a dashboard or profile page after successful login
+    // Redirect to profile page after successful login
     res.redirect(`/patient/${user._id}`);
   } catch (error) {
     console.error(error);
@@ -39,7 +36,13 @@ const renderLogin = (req, res) => {
   res.render('users/login', { error: null });
 };
 
+const handleLogout = (req, res) => {
+  res.clearCookie('authToken')
+  res.redirect('/login'); // Redirect to the login page after logout
+};
+
 module.exports = {
   handleLogin,
   renderLogin,
+  handleLogout
 };
