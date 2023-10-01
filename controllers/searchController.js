@@ -42,7 +42,7 @@ module.exports.searchDoctors = async (selectType, DoctorSearchInput) => {
 };
 
 //This function use by admin to get doctors to make appointmetns
-module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput) => {
+module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput="") => {
   let doctors;
 
   if (selectType === "Specialization") {
