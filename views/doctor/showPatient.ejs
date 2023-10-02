@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Show Patient details</h1>
+    <section>
+        <h2>show Diagnostic card and prescription details</h2>
+
+
+        <div style="text-align: center;" class="mt-0 mb-4">
+        </div>
+          <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
+                <% for (let DiagnosticCardAndPrescription of DiagnosticCardAndPrescriptions) { %>
+                    <p>
+                       date: <%= DiagnosticCardAndPrescription.date %>
+                    </p>
+                    <p>
+                       Diagnostic details: <%= DiagnosticCardAndPrescription.diagnosticDetails %>
+                    </p>
+                    <p>
+                       drug names <%= DiagnosticCardAndPrescription.medicationNames %>
+                    </p>
+                  <% } %>
+              </tbody>
+            </table>
+            <% } %>
+        </section>
+
+    <section>
+        <% if(patient) { %>
+            <h1>Showing Ptient Details of <%= patient.firstName %></h1>
+        <% } %>
+    </section>doctorId
+    <section>
+        <h2>Adding Diagnostic card and prescription details</h2>
+        <form action="/doctor/<%=doctorId %>/patients/<%= patient.id %>" method="post">
+            <input type="text"  name="patientId" value="<%= patient.id %>">
+            <div>
+                <div>
+                    <label for="diagnosticDetails">Enter Diagnostic Details</label>
+                </div>
+                <textarea name="diagnosticDetails" id="diagnosticDetails" cols="30" rows="10" required></textarea>
+            </div>
+            <section>
+                <div>
+                    <label for="drug1">Enter Drug </label>
+                    <input type="text" name="prescription[drug1]" id="drug1" required >
+                </div>
+                <div>
+                    <label for="drug2">Enter Drug </label>
+                    <input type="text" name="prescription[drug2]" id="drug1" required>
+                </div>
+                <div>
+                    <label for="drug3">Enter Drug </label>
+                    <input type="text" name="prescription[drug3]" id="drug1" required>
+                </div>
+            </section>
+            <button type="submit" >Submit Prescription</button>
+        </form>
+    </section>
+</body>
+</html>

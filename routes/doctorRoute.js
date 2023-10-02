@@ -17,6 +17,10 @@ router.route('/:id/edit')
     .get(doctorControl.renderEditForm) 
 
 router.route('/:id/patients')
-    .post(catchAsync(doctorControl.getPatientDetails))
+    .get(catchAsync(doctorControl.getPatientDetails))
+
+router.route('/:id/patients/:patientId')
+    .get(catchAsync(doctorControl.showPatientDetails))
+    .post(catchAsync(doctorControl.addDiagnosticCardAndPrescription))
 
 module.exports=router;

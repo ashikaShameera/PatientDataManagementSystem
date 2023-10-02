@@ -51,73 +51,118 @@
                     </div>
 
                     <div class="mb-3">
-                      <label for="dateOfBirth" class="form-label">Date of Birth: </label>
-                      <input type="date" id="dateOfBirth" name="doctor[dateOfBirth]" value="<%=doctor.dateOfBirth%>"
-                        class="form-control" value="<%= doctor.dateOfBirth %>" required>
+                      <label for="dateOfBirth" class="form-label">Date of Birth:</label>
+                      <input type="text" id="dateOfBirth" name="doctor[dateOfBirth]" value="<%= doctor.dateOfBirth %>"
+                        class="form-control" required>
                       <div class="valid-feedback">
                         Looks Good!
                       </div>
                     </div>
-
                     <div class="md-3">
                       <label for="gender" class="form-label">Gender:</label>
                       <select id="gender" name="doctor[gender]" class="form-control" required>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                        <option value="Male" <% if (doctor.gender === 'Male') { %> selected <% } %>>Male</option>
+                        <option value="Female" <% if (doctor.gender === 'Female') { %> selected <% } %>>Female</option>
+                        <option value="Other" <% if (doctor.gender === 'Other') { %> selected <% } %>>Other</option>
                       </select>
                       <div class="valid-feedback">
                         Looks Good!
                       </div>
                     </div>
-                    <br>
                     <div class="md-3">
                       <label for="contactNumber" class="form-label">Contact Number:</label>
-                      <input type="text" id="contactNumber" name="doctor[contactNumber]" required class="form-control">
+                      <input type="text" id="contactNumber" name="doctor[contactNumber]" value="<%=doctor.contactNumber%>" required class="form-control">
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
                     </div>
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" id="email" name="doctor[email]" class="form-control" required>
-
-                    <label for="address" class="form-label">Number of Address:</label><br>
-                    <input type="number" id="number" name="doctor[address.number]" class="form-control">
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email:</label>
+                      <input type="email" id="email" name="doctor[email]" class="form-control"  value="<%=doctor.email%>" required>
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="address" class="form-label">Number of Address:</label>
+                      <input type="number" id="number" name="doctor[address.number]"  value="<%=doctor.address.number%>" class="form-control">
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <button type="button" id="deleteBtn" class="btn btn-danger form-control">Delete Doctor</button>
+                    </div>
                   </div>
+
                   <div class="col-5">
-                    <label for="street" class="form-label">Street:</label>
-                    <input type="text" id="street" name="doctor[address.street]" class="form-control">
+                    <div class="mb-3">
+                      <label for="street" class="form-label">Street:</label>
+                      <input type="text" id="street" name="doctor[address.street]" class="form-control" value="<%=doctor.address.street%>">
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="city" class="form-label">City:</label>
+                      <input type="text" id="city" name="doctor[address.city]" class="form-control" value="<%=doctor.address.city%>" >
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="state" class="form-label">State:</label>
+                      <input type="text" id="state" name="doctor[address.state]" class="form-control" value="<%=doctor.address.state%>" >
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="postalCode" class="form-label">Postal Code:</label>
+                      <input type="number" id="postalCode" name="doctor[address.postalCode]" class="form-control" value="<%=doctor.address.postalCode%>" >
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="medicalLicenseNumber" class="form-label">Medical License Number:</label>
+                      <input type="text" id="medicalLicenseNumber" name="doctor[medicalLicenseNumber]"
+                        class="form-control" required value="<%=doctor.medicalLicenseNumber%>" >
+                        <div class="valid-feedback">
+                          Looks Good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="specialization" class="form-label">Specialization:</label>
+                      <select id="specialization" name="doctor[specialization]" class="form-control" required>
+                        <option value="Internal Medicine" <% if (doctor.specialization === 'Internal Medicine') { %> selected <% } %>>Internal Medicine</option>
+                        <option value="Family Medicine" <% if (doctor.specialization === 'Family Medicine') { %> selected <% } %>>Family Medicine</option>
+                        <option value="Pediatrics" <% if (doctor.specialization === 'Pediatrics') { %> selected <% } %>>Pediatrics</option>
+                        <option value="Obstetrics and Gynecology" <% if (doctor.specialization === 'Obstetrics and Gynecology') { %> selected <% } %>>Obstetrics and Gynecology</option>
+                        <option value="General Surgery" <% if (doctor.specialization === 'General Surgery') { %> selected <% } %>>General Surgery</option>
+                        <option value="Anesthesiology" <% if (doctor.specialization === 'Anesthesiology') { %> selected <% } %>>Anesthesiology</option>
+                        <option value="Psychiatry" <% if (doctor.specialization === 'Psychiatry') { %> selected <% } %>>Psychiatry</option>
+                        <option value="Orthopedic Surgery" <% if (doctor.specialization === 'Orthopedic Surgery') { %> selected <% } %>>Orthopedic Surgery</option>
+                        <option value="Cardiology" <% if (doctor.specialization === 'Cardiology') { %> selected <% } %>>Cardiology</option>
+                        <option value="Dermatology" <% if (doctor.specialization === 'Dermatology') { %> selected <% } %>>Dermatology</option>
+                      </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                      <label for="degree" class="form-label">Degree:</label>
+                      <input type="text" id="degree" name="doctor[degree]" class="form-control" required value="<%=doctor.degree%>" >  
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="university" class="form-label">University:</label>
+                      <input type="text" id="university" name="doctor[university]" class="form-control" required value="<%=doctor.university%>" > 
+                      <div class="valid-feedback">
+                        Looks Good!
+                      </div> 
+                    </div>
 
-                    <label for="city" class="form-label">City:</label>
-                    <input type="text" id="city" name="doctor[address.city]" class="form-control">
-
-                    <label for="state" class="form-label">State:</label>
-                    <input type="text" id="state" name="doctor[address.state]" class="form-control">
-
-                    <label for="postalCode" class="form-label">Postal Code:</label>
-                    <input type="number" id="postalCode" name="doctor[address.postalCode]" class="form-control">
-                    <br>
-                    <label for="medicalLicenseNumber" class="form-label">Medical License Number:</label>
-                    <input type="text" id="medicalLicenseNumber" name="doctor[medicalLicenseNumber]"
-                      class="form-control" required>
-                    <br>
-                    <label for="specialization" class="form-label">Specialization:</label>
-                    <select id="specialization" name="doctor[specialization]" class="form-control" required>
-                      <option value="Internal Medicine">Internal Medicine</option>
-                      <option value="Family Medicine">Family Medicine</option>
-                      <option value="Pediatrics">Pediatrics</option>
-                      <option value="Obstetrics and Gynecology">Obstetrics and Gynecology</option>
-                      <option value="General Surgery">General Surgery</option>
-                      <option value="Anesthesiology">Anesthesiology</option>
-                      <option value="Psychiatry">Psychiatry</option>
-                      <option value="Orthopedic Surgery">Orthopedic Surgery</option>
-                      <option value="Cardiology">Cardiology</option>
-                      <option value="Dermatology">Dermatology</option>
-                    </select>
-                    <br>
-                    <label for="degree" class="form-label">Degree:</label>
-                    <input type="text" id="degree" name="doctor[degree]" class="form-control" required><br>
-
-                    <label for="university" class="form-label">University:</label>
-                    <input type="text" id="university" name="doctor[university]" class="form-control" required><br>
-                    <br>
                     <div class="mb-3">
                       <button type="submit" class="btn btn-primary form-control">Update Doctor Details</button>
                     </div>
@@ -130,6 +175,20 @@
         </div>
     </main>
     <script>
+      
+      const deleteBtn=document.querySelector("#deleteBtn")
+
+      //used to delete the doctor
+      deleteBtn.addEventListener('click',()=>{
+        const confirmation=confirm("Are tou sure about deleting Doctor? ");
+        if(confirmation){
+          try{
+            //need to be handle deleting of the doctor code
+          }catch(error){
+            console.log(error);
+          }
+        }
+      })
 
       var toggleBtn = document.getElementById('toggleBtn');
       var content = document.getElementById('content');
@@ -154,6 +213,8 @@
           Overview.classList.add('hidden');
         }
       });
+
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
