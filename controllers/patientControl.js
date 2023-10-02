@@ -1,5 +1,6 @@
 const Patient = require("../models/patient");
 const Doctor =require("../models/doctor");
+const User = require("../models/user")
 const bcrypt = require('bcrypt')
 
 const {searchDoctors}=require('./searchController');
@@ -33,6 +34,16 @@ module.exports.createPatient=async (req,res)=>{
       
           // Save the patient to the database
           await patient.save();
+           // Create a new User with the hashed password and role 'Patient'
+    const user = new User({
+        email: patientData.email,
+        password: hashedPassword,
+        role: "Patient",
+        profile: patient._id
+      });
+  
+      // Save the User to the database
+      await user.save();
       
           // Redirect to the patient's profile or other appropriate page
           res.redirect(`/patient/${patient._id}`);

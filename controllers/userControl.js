@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/patient');
+const User = require('../models/user'); // Import the common User model
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -14,21 +14,29 @@ const handleLogin = async (req, res) => {
       return res.render('users/login', { error: 'Invalid email or password' });
     }
 
-    //Compare the hashed password
+    // Compare the hashed password
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
       return res.render('users/login', { error: 'Invalid email or password' });
     }
+
     // If authentication is successful, create a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key',{ expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key', { expiresIn: '5s' });
     // Set the token as a cookie
     res.cookie('authToken', token, { httpOnly: true });
-    // Redirect to profile page after successful login
-    res.redirect(`/patient/${user._id}`);
+
+    // Redirect to profile page based on user's role
+    if (user.role === 'Patient') {
+      res.redirect(`/patient/${user.profile._id}`);
+    } else if (user.role === 'Doctor') {
+      res.redirect(`/doctor/${user._id}`);
+    } else {
+      // Handle other roles as needed
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).render('error', { error: 'An error occurred during login' });
+    res.render('user/login', { error: 'An error occurred during login' });
   }
 };
 
@@ -37,7 +45,7 @@ const renderLogin = (req, res) => {
 };
 
 const handleLogout = (req, res) => {
-  res.clearCookie('authToken')
+  res.clearCookie('authToken');
   res.redirect('/login'); // Redirect to the login page after logout
 };
 

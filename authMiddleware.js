@@ -14,7 +14,8 @@ const verifyAuthToken = (req, res, next) => {
     req.user = decoded; // Attach the user ID to the request object for future use
     next(); // Continue to the next middleware or route handler
   } catch (error) {
-    res.status(401).render('error', { error: 'Authentication failed' });
+    res.clearCookie('authToken')
+    res.redirect('/login');
   }
 };
 
