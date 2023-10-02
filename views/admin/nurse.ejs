@@ -1,0 +1,174 @@
+<%- include('./partials/head') %>
+
+<body>
+  <main class="admin-panel">
+    <%- include('./partials/sidebar') %>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-11">
+          <h1>Welcome, Admin!</h1>
+          <p>This is the admin panel for the patient management system.</p>
+        </div>
+        <div class="col-1">
+          <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of Doctors</button>
+        </div>
+        <div class="col-3">
+          <button id="toggleBtn" type="button" class="btn btn-primary">Nurse Registration</button>
+        </div>
+        <div class="col-3">
+          <a href="#" class="btn btn-primary">View All Nurses</a>
+        </div>
+      </div>
+      <div class="block">
+        <div id="Registation" class="hidden">
+          <h3 style="text-align: center;">Nurse Registration Form</h3>
+
+          <form action="/nurse/register" method="POST" novalidate class="validated-form">
+
+            <div class="d-flex justify-content-around">
+
+              <div class="col-5">
+
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name:</label>
+                  <input type="text" id="firstName" class="form-control" name="nurse[firstName]" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name:</label>
+                  <input type="text" id="lastName" class="form-control" name="nurse[lastName]" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nic" class="form-label">NIC:</label>
+                  <input type="text" id="nic" name="nurse[nic]" class="form-control" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="dateOfBirth" class="form-label">Date of Birth:</label>
+                  <input type="date" id="dateOfBirth" name="nurse[dateOfBirth]" class="form-control" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="gender" class="form-label">Gender:</label>
+                  <select id="gender" name="nurse[gender]" class="form-control" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="contactNumber" class="form-label">Contact Number:</label>
+                  <input type="text" id="contactNumber" class="form-control" name="nurse[contactNumber]"
+                    required><br>
+                </div>
+
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" class="form-control" name="nurse[email]" required><br>
+
+                <label for="number" class="form-label">Number Of Address :</label>
+                <input type="number" id="number" class="form-control" name="nurse[address.number]"><br>
+
+              </div>
+
+              <div class="col-5">
+                <label for="street" class="form-label">Street:</label>
+                <input type="text" id="street" class="form-control" name="nurse[address.street]"><br>
+
+                <label for="city" class="form-label">City:</label>
+                <input type="text" id="city" class="form-control" name="nurse[address.city]"><br>
+
+                <label for="state">State:</label>
+                <input type="text" id="state" class="form-control" name="nurse[address.state]"><br>
+
+                <label for="postalCode">Postal Code:</label>
+                <input type="number" id="postalCode" class="form-control" name="nurse[address.postalCode]"><br>
+
+                <label for="nurseLicenseNumber">Nurse License Number:</label>
+                <input type="text" id="nurseLicenseNumber" class="form-control"
+                  name="nurse[nurseLicenseNumber]" required><br>
+
+                <br>
+
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-primary form-control">Register</button>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- Add some overview Of Nurses here -->
+        <div id="overview" class="">
+          <!-- Your overview content for nurses can go here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <!-- ... Your HTML and EJS template content ... -->
+
+<script>
+    var toggleBtn = document.getElementById('toggleBtn');
+    var content = document.getElementById('Registation');
+  
+    var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+    var Overview = document.getElementById('overview');
+  
+    toggleBtn.addEventListener('click', function () {
+      if (content.classList.contains('hidden')) {
+        Overview.classList.add('hidden');
+        content.classList.remove('hidden');
+      } else {
+        content.classList.add('hidden');
+      }
+    });
+  
+    overviewToggleBtn.addEventListener('click', function () {
+      if (Overview.classList.contains('hidden')) {
+        content.classList.add('hidden');
+        Overview.classList.remove('hidden');
+      } else {
+        Overview.classList.add('hidden');
+      }
+    });
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  
+  <script src="/javascripts/boostrapFormValidation.js"></script>
+  <script src="/javascripts/admin/admin.js"></script>
+  
+</body>
+
+</html>

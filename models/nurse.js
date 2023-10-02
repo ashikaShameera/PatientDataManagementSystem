@@ -1,9 +1,7 @@
-const { string } = require('joi');
-const mongoose =require('mongoose');
+const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-const patientSchema=new Schema({
-    //attribues
+const nurseSchema=new Schema({
     firstName: {
         type: String,
         required: true
@@ -11,6 +9,11 @@ const patientSchema=new Schema({
     lastName: {
         type: String,
         required: true
+    },
+    nic:{
+        type:String,
+        required:true,
+        unique:true
     },
     dateOfBirth: {
         type: Date,
@@ -20,19 +23,13 @@ const patientSchema=new Schema({
         type: String,
         enum: ['Male', 'Female', 'Other']
     },
-    nic:{
-        type:String,
-        required:true,
-        unique:true
-    },
     contactNumber: {
         type: String,
         required: true
     },
     email:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     address: {
         number:Number,
@@ -41,26 +38,20 @@ const patientSchema=new Schema({
         state: String,
         postalCode: Number,
     },
-    medicalHistory: {
-        allergies: [String],
-        conditions: [String],
-        medications: [String]
-    },
-    emergencyContact:{
-        EmgName:String,
-        EmgRelationship:String,
-        EmgContactNumber:String
+   
+    nurseLicenseNumber:{
+        type: String,
+        required:true
     },
     password:{
         type: String,
-        required:true,
+        required :true,
         default: function() {
             // Set the default password to the NIC number
             return this.nic;
         }
     }
+    //There are more dateils to get 
 })
 
-
-
-module.exports=mongoose.model('Patient',patientSchema);
+module.exports=mongoose.model('Nurse',nurseSchema);

@@ -2,6 +2,8 @@ const Patient = require("../models/patient");
 const Doctor =require("../models/doctor");
 const User = require("../models/user")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 
 const {searchDoctors}=require('./searchController');
 
@@ -20,23 +22,16 @@ module.exports.createPatient=async (req,res)=>{
     // await patient.save();
     //res.redirect(`/patient/${patient._id}`)
     try {
-        const { password, ...patientData} = req.body.patient;
-    
+        const patient = new Patient(req.body.patient);
+        
         // Generate a salt and hash the password
         const saltRounds = 10; // Number of rounds (adjust as needed)
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-    
-        // Create a new patient with the hashed password
-        const patient = new Patient({
-            ...patientData,
-            password: hashedPassword, // Store the hashed password in the database
-          });
-      
-          // Save the patient to the database
+        const hashedPassword = await bcrypt.hash(patient.password, saltRounds);
+        patient.password = hashedPassword
           await patient.save();
            // Create a new User with the hashed password and role 'Patient'
     const user = new User({
-        email: patientData.email,
+        email: patient.email,
         password: hashedPassword,
         role: "Patient",
         profile: patient._id
@@ -44,7 +39,9 @@ module.exports.createPatient=async (req,res)=>{
   
       // Save the User to the database
       await user.save();
-      
+      const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key', { expiresIn: '10h' });
+    // Set the token as a cookie
+        res.cookie('authToken', token, { httpOnly: true });
           // Redirect to the patient's profile or other appropriate page
           res.redirect(`/patient/${patient._id}`);
         } catch (error) {
