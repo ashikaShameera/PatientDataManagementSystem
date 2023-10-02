@@ -1,3 +1,4 @@
+const { string } = require('joi');
 const mongoose =require('mongoose');
 const Schema=mongoose.Schema;
 
@@ -21,7 +22,8 @@ const patientSchema=new Schema({
     },
     nic:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     contactNumber: {
         type: String,
@@ -29,7 +31,8 @@ const patientSchema=new Schema({
     },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     address: {
         number:Number,
@@ -47,8 +50,11 @@ const patientSchema=new Schema({
         EmgName:String,
         EmgRelationship:String,
         EmgContactNumber:String
+    },
+    password:{
+        type: String,
+        required :true
     }
-
 })
 
 
