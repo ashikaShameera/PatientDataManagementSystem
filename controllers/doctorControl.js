@@ -4,7 +4,8 @@ const DiagnosticCardAndPrescriptionController=require('../controllers/Diagnostic
 const Doctor=require('../models/doctor');
 const Appointment=require('../models/appointment')
 const Patient = require('../models/patient');
-const doctor = require('../models/doctor');
+const User = require('../models/user')
+const bcrypt = require('bcrypt')
 const { date } = require('joi');
 
 module.exports.renderRegisterForm=(req,res)=>{
@@ -21,7 +22,17 @@ module.exports.renderRegisterForm=(req,res)=>{
 // For the save doctor in the database
 module.exports.registerDoctor=async(req,res)=>{
    const doctor=new Doctor(req.body.doctor); 
-   await doctor.save();                      
+   const saltRounds = 10; // Number of rounds (adjust as needed)
+   const hashedPassword = await bcrypt.hash(doctor.password, saltRounds);
+   doctor.password = hashedPassword
+   await doctor.save();   
+   const user = new User({
+      email: doctor.email,
+      password: doctor.password,
+      role: "Doctor",
+      profile: doctor._id
+    });       
+   await user.save()           
    res.redirect(`/admin/doctor`);
    //need to add flash msg 
 }

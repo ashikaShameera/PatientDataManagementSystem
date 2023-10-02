@@ -12,7 +12,8 @@ const doctorSchema=new Schema({
     },
     nic:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     dateOfBirth: {
         type: Date,
@@ -65,6 +66,14 @@ const doctorSchema=new Schema({
     university:{
         type:String,
         required:true
+    },
+    password:{
+        type: String,
+        required :true,
+        default: function() {
+            // Set the default password to the NIC number
+            return this.nic;
+        }
     }
     //There are more dateils to get 
 })
