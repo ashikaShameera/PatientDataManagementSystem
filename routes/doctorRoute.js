@@ -3,13 +3,14 @@ const router = express.Router();
 
 const doctorControl=require('../controllers/doctorControl');
 const catchAsync=require('../utils/catchAsync');
+const verifyAuthToken = require('../authMiddleware');
 
 router.route('/register')
     .get(doctorControl.renderRegisterForm)                  //To render registation form
     .post(catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
 router.route('/:id')
-    .get(catchAsync(doctorControl.showDoctor))          //load when doctor login to system
+    .get(verifyAuthToken,catchAsync(doctorControl.showDoctor))          //load when doctor login to system
     .put(catchAsync(doctorControl.updateDoctor))
     .delete(doctorControl.deleteDoctor);
 
