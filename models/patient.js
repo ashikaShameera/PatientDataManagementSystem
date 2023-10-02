@@ -53,7 +53,11 @@ const patientSchema=new Schema({
     },
     password:{
         type: String,
-        required :true
+        required :true,
+        default: function() {
+            // Set the default password to the NIC number
+            return this.nic;
+        }
     }
 })
 

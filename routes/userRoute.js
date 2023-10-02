@@ -12,4 +12,8 @@ router.post('/login', userControl.handleLogin); // Define handleLogin function i
 
 router.get('/logout',userControl.handleLogout)
 
+router.get('/reset-password', userControl.renderResetPassword);
+
+router.post('/reset-password',userControl.handleResetPassword)
+
 module.exports = router;

@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // Import the common User model
+const Patient = require('../models/patient')
+const Doctor = require('../models/doctor')
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
@@ -30,8 +32,10 @@ const handleLogin = async (req, res) => {
     if (user.role === 'Patient') {
       res.redirect(`/patient/${user.profile._id}`);
     } else if (user.role === 'Doctor') {
-      res.redirect(`/doctor/${user._id}`);
-    } else {
+      res.redirect(`/doctor/${user.profile._id}`);
+    } else if(user.role==='Admin') {
+      res.redirect(`/admin/${user._id}`);
+    }else {
       // Handle other roles as needed
     }
   } catch (error) {
@@ -49,8 +53,60 @@ const handleLogout = (req, res) => {
   res.redirect('/login'); // Redirect to the login page after logout
 };
 
+const renderResetPassword = (req,res) => {
+  res.render('users/reset-password',{error: null})
+}
+
+const handleResetPassword = async (req, res) => {
+  const { email, currentPassword,newPassword } = req.body;
+
+  try {
+    // Find the user in the database by email
+    const user = await User.findOne({ email });
+
+    // Check if the user exists
+    if (!user) {
+      return res.render('users/reset-password', { error: 'Invalid email or password' });
+    }
+
+    // Compare the hashed password
+    const passwordMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!passwordMatch) {
+      return res.render('users/reset-password', { error: 'Invalid email or password' });
+    }
+
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update the user's password
+    user.password = hashedPassword;
+    await user.save();
+
+    // Redirect to profile page based on user's role
+    if (user.role === 'Patient') {
+      const patient = await Patient.findById(user.profile._id)
+      patient.password = hashedPassword
+      await patient.save()
+      res.redirect(`/patient/${user.profile._id}`);
+    } else if (user.role === 'Doctor') {
+      const doctor = await Doctor.findById(user.profile._id)
+      doctor.password = hashedPassword
+      await doctor.save()
+      res.redirect(`/patient/${user.profile._id}`);
+    } else {
+      // Handle other roles as needed
+    }
+  } catch (error) {
+    console.error(error);
+    res.render('user/reset-password', { error: 'An error occurred' });
+  }
+};
+
 module.exports = {
   handleLogin,
   renderLogin,
-  handleLogout
+  handleLogout,
+  renderResetPassword,
+  handleResetPassword
 };
