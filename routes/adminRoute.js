@@ -7,8 +7,8 @@ const adminAppointmentControl = require('../controllers/adminAppointmentControl'
 const catchAsync = require('../utils/catchAsync');
 const verifyAuthToken = require('../authMiddleware');
 
-router.route('/:id')
-    .get(verifyAuthToken,adminControl.renderAdminHomePage)  //must handle async error handler
+router.route('/')
+    .get(adminControl.renderAdminHomePage)  //must handle async error handler
 
 router.route('/doctor')
     .get(adminControl.renderAdminDoctorPage)
@@ -19,6 +19,9 @@ router.route('/doctor/:id')
 
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
+
+router.route('/nurse')
+    .get(adminControl.renderAdminNursePage)
 
 
 //------ Routes For the /admin/Appointment 

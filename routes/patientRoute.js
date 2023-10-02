@@ -16,7 +16,7 @@ router.route('/register')
     .get(patientControl.renderRegisterForm)      //rendering create patient form
 
 router.route('/:id')
-    .get(verifyAuthToken,catchAsync(patientControl.showPatient))
+    .get(catchAsync(patientControl.showPatient))
 
 
 router.route('/:id/doctors')            

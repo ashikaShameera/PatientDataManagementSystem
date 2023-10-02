@@ -10,7 +10,7 @@ router.route('/register')
     .post(catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
 router.route('/:id')
-    .get(verifyAuthToken,catchAsync(doctorControl.showDoctor))          //load when doctor login to system
+    .get(catchAsync(doctorControl.showDoctor))          //load when doctor login to system
     .put(catchAsync(doctorControl.updateDoctor))
     .delete(doctorControl.deleteDoctor);
 

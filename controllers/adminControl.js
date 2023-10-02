@@ -51,3 +51,7 @@ module.exports.updateDoctor = async (req, res) => {
 module.exports.renderAdminPatientPage = (req, res) => {
     res.render("admin/patient")
 }
+//Nurse Related Things
+module.exports.renderAdminNursePage =  (req, res) => {
+    res.render("admin/nurse")
+}
