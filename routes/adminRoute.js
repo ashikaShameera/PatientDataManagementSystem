@@ -24,7 +24,7 @@ router.route('/nurse')
     .get(catchAsync(adminControl.renderAdminNursePage))
 
 router.route('/nurse/:id')
-    // .get(catchAsync(adminControl.showDoctor))
+    .get(catchAsync(adminControl.showNurse))
     // .put(catchAsync(adminControl.updateDoctor))
 
 

@@ -67,6 +67,18 @@ module.exports.renderAdminNursePage = async (req, res) => {
     if(nurses.length<=0){
         nurses=await Nurse.find();
     }
-    console.log(nurses)
     res.render("admin/nurse/nurse",{nurses});
+}
+
+module.exports.showNurse = async (req, res) => {
+    const id = req.params.id;
+    const nurses = await Nurse.findById(id);
+    res.render('admin/nurse/edit', { nurses })
+}
+
+module.exports.updateDoctor = async (req, res) => {
+    const { id } = req.params;
+    const nurse = await Doctor.findByIdAndUpdate(id, { ...req.body.nurse });
+    await nurse.save();
+    res.redirect(`/admin/nurse`);
 }
