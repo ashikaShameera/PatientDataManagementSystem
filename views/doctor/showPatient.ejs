@@ -109,45 +109,15 @@
     </section>
 
     <section>
-        <div class="mx-3">
-            <div class="text-center">
-              <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
-            </div>
-            <div>
-              <div class="row mt-4">
-                <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
-                  <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
-                    <% if (i % 4 === 0) { %>
-                      </div>
-                      <div class="row mt-4">
-                    <% } %>
-                    <div class="col-md-3">
-                      <div class="card mb-4" style="border: 1px solid #ffffff; background-color: rgba(184, 217, 243, 0.1); border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
-                        <div class="card-body">
-                          <h5 class="card-title">Date: <%= DiagnosticCardAndPrescriptions[i].date %></h5>
-                          <p class="card-text">Diagnostic Details: <%= DiagnosticCardAndPrescriptions[i].diagnosticDetails %></p>
-                          <p class="card-text">Drug Names: <%= DiagnosticCardAndPrescriptions[i].medicationNames %></p>
-                        </div>
-                      </div>
-                    </div>
-                  <% } %>
-                <% } %>
-              </div>
-            </div>
-          </div>
-    </section>
-
-
-    <section>
         <div class="d-flex mx-3" id="btnContainer">
-        <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-primary mx-3">Add Diagnostic Card</button>
+        <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-warning mx-3">Add Diagnostic Card</button>
        </div>
         <div class="col-12 d-flex justify-content-around">
             <div id="formContainer" style="display: none;">
                 <h2 class="mt-4 fw-bold text-center">Add Diagnostic Card & Prescription Details</h2>
                 <br>
                 <form action="/doctor/<%= doctorId %>/patients/<%= patient.id %>" method="post">
-                    <input type="text" name="patientId" value="<%= patient.id %>" class="form-control mb-3">
+                    <input type="text" name="patientId" value="<%= patient.id %>" hidden class="form-control mb-3">
                     <div class="mb-3">
                         <label for="diagnosticDetails" class="form-label">Enter Diagnostic Details</label>
                         <textarea name="diagnosticDetails" id="diagnosticDetails" class="form-control" rows="4" required></textarea>
@@ -166,13 +136,43 @@
                             <input type="text" name="prescription[drug3]" id="drug3" class="form-control" required>
                         </div>
                     </section>
-                    <button type="submit" class="btn btn-primary">Submit Prescription</button>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary ">Submit Prescription</button>
+                    </div>
+
                 </form>
             </div>
         </div>
-        
-        
-        
+              
+    </section>
+
+    <section>
+        <div class="mx-3">
+            <div class="text-center">
+              <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
+            </div>
+            <div>
+              <div class="row mt-4">
+                <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
+                  <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
+                    <% if (i % 1 === 0) { %>
+                      </div>
+                      <div class="row mt-1">
+                    <% } %>
+                    <div class="col-md px-4">
+                      <div class="card mb-4" style="border: 1px solid #ffffff; background-color: rgba(184, 217, 243, 0.1); border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+                        <div class="card-body">
+                          <h5 class="card-title">Date: <%= new Date(DiagnosticCardAndPrescriptions[i].date * 1000).toLocaleString() %></h5>
+                          <p class="card-text">Diagnostic Details: <%= DiagnosticCardAndPrescriptions[i].diagnosticDetails %></p>
+                          <p class="card-text">Drug Names: <%= DiagnosticCardAndPrescriptions[i].medicationNames %></p>
+                        </div>
+                      </div>
+                    </div>
+                  <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
     </section>
     
     <script>

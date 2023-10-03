@@ -88,6 +88,7 @@ module.exports.showPatientDetails=async(req,res)=>{
    try{
       DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
       DiagnosticCardAndPrescriptions = DiagnosticCardAndPrescriptions.slice().sort((a, b) => b.date - a.date);
+      console.log(DiagnosticCardAndPrescriptionController)
    }catch(err){
       console.log(err);
    }
