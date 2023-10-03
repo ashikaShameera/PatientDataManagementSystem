@@ -21,7 +21,11 @@ router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
 
 router.route('/nurse')
-    .get(adminControl.renderAdminNursePage)
+    .get(catchAsync(adminControl.renderAdminNursePage))
+
+router.route('/nurse/:id')
+    // .get(catchAsync(adminControl.showDoctor))
+    // .put(catchAsync(adminControl.updateDoctor))
 
 
 //------ Routes For the /admin/Appointment 
@@ -49,4 +53,6 @@ router.route('/appointment/new')
 
 
 router.put('/appointment/:id', adminAppointmentControl.updateAppointment)
+
+
 module.exports = router;

@@ -1,6 +1,7 @@
 //you must require admin module
 
 const Doctor = require('../models/doctor');
+const Nurse =require('../models/nurse')
 const searchController=require('./searchController')
 
 module.exports.renderAdminHomePage = (req, res) => {
@@ -52,6 +53,20 @@ module.exports.renderAdminPatientPage = (req, res) => {
     res.render("admin/patient")
 }
 //Nurse Related Things
-module.exports.renderAdminNursePage =  (req, res) => {
-    res.render("admin/nurse")
+module.exports.renderAdminNursePage = async (req, res) => {
+
+    let nurses;
+
+    let NurseSearchInput=req.query.NurseSearchInput;
+
+    if(NurseSearchInput)
+        NurseSearchInput=NurseSearchInput.trim();
+
+    nurses=await searchController.searchNurse(NurseSearchInput)
+
+    if(nurses.length<=0){
+        nurses=await Nurse.find();
+    }
+    console.log(nurses)
+    res.render("admin/nurse/nurse",{nurses});
 }
