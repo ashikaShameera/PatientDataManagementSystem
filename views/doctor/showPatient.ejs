@@ -1,75 +1,196 @@
 <% layout('layouts/doctorboilerplate')%>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <section>
-    <% if(patient) { %>
-        <h1>Showing Ptient Details of <%= patient.firstName %>
-        </h1>
-        <% } %>
-        <%= patient.lastName %>
-        <%= patient.dateOfBirth %>
-        <%= patient.gender %>
-        <%= patient.nic %>
-        <%= patient.contactNumber %>
-        <%= patient.email %>
-        <%= patient.address.number%>
+    <br>
+    <br>
+    <section class="mt-5" style="background-color: rgba(230, 239, 247, 0.1);">
+        <div class="">
+            <% if(patient) { %>
+                <h2 class="fw-bold  text-center">Details Of <%= patient.firstName%> Patient</h2>
 
-        
-
-</section>
-
-    <section>
-        <h2>show Diagnostic card and prescription details</h2>
+                <div class="d-flex justify-content-around mt-5">
 
 
-        <div style="text-align: center;" class="mt-0 mb-4">
-        </div>
-        <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
-            <% for (let DiagnosticCardAndPrescription of DiagnosticCardAndPrescriptions) { %>
-                <p>
-                    date: <%= DiagnosticCardAndPrescription.date %>
-                </p>
-                <p>
-                    Diagnostic details: <%= DiagnosticCardAndPrescription.diagnosticDetails %>
-                </p>
-                <p>
-                    drug names <%= DiagnosticCardAndPrescription.medicationNames %>
-                </p>
+                    <div class="col-5 text-align">
+                        <ul>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Name : </span>
+                                        <%= patient.firstName%>
+                                            <%= patient.lastName%>
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Date of Birthday : </span>
+                                        <%= patient.dateOfBirth %>
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Gender :</span>
+                                        <%= patient.gender %>
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">NIC : </span>
+                                        <%= patient.nic%>
+                                    </h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Email : </span>
+                                        <%= patient.email%>
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Medical History : </span><br>
+                                        <ul>
+                                            <li>Allergies : <%= patient.medicalHistory.allergies %>
+                                            </li>
+                                            <li>Conditions : <%= patient.medicalHistory.conditions %>
+                                            </li>
+                                            <li>Medications : <%= patient.medicalHistory.medications %>
+                                            </li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-5 text-align">
+                        <ul>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Contact Number : </span>
+                                        <%= patient.contactNumber%>
+                                    </h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Address : </span><br>
+                                        <ul>
+                                            <li>No : <%= patient.address.number %>,</li>
+                                            <li>Street : <%= patient.address.street %>,</li>
+                                            <li>City : <%= patient.address.city %>,</li>
+                                            <li>State : <%= patient.address.state %>,</li>
+                                            <li>PostalCode : <%= patient.address.postalCode %>.</li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="m-3">
+                                    <h6><span class="fw-bold">Emergency Contact : </span><br>
+                                        <ul>
+                                            <li>Name : <%= patient.emergencyContact.EmgName%>
+                                            </li>
+                                            <li>Relationship : <%= patient.emergencyContact.EmgRelationship%>
+                                            </li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <% } %>
-                    </tbody>
-                    </table>
-                    <% } %>
+        </div>
+
+
     </section>
 
-   
     <section>
-        <h2>Adding Diagnostic card and prescription details</h2>
-        <form action="/doctor/<%=doctorId %>/patients/<%= patient.id %>" method="post">
-            <input type="text" name="patientId" value="<%= patient.id %>">
-            <div>
-                <div>
-                    <label for="diagnosticDetails">Enter Diagnostic Details</label>
-                </div>
-                <textarea name="diagnosticDetails" id="diagnosticDetails" cols="30" rows="10" required></textarea>
+        <div class="mx-3">
+            <div class="text-center">
+              <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
             </div>
-            <section>
-                <div>
-                    <label for="drug1">Enter Drug </label>
-                    <input type="text" name="prescription[drug1]" id="drug1" required>
-                </div>
-                <div>
-                    <label for="drug2">Enter Drug </label>
-                    <input type="text" name="prescription[drug2]" id="drug1" required>
-                </div>
-                <div>
-                    <label for="drug3">Enter Drug </label>
-                    <input type="text" name="prescription[drug3]" id="drug1" required>
-                </div>
-            </section>
-            <button type="submit">Submit Prescription</button>
-        </form>
+            <div>
+              <div class="row mt-4">
+                <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
+                  <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
+                    <% if (i % 4 === 0) { %>
+                      </div>
+                      <div class="row mt-4">
+                    <% } %>
+                    <div class="col-md-3">
+                      <div class="card mb-4" style="border: 1px solid #ffffff; background-color: rgba(184, 217, 243, 0.1); border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
+                        <div class="card-body">
+                          <h5 class="card-title">Date: <%= DiagnosticCardAndPrescriptions[i].date %></h5>
+                          <p class="card-text">Diagnostic Details: <%= DiagnosticCardAndPrescriptions[i].diagnosticDetails %></p>
+                          <p class="card-text">Drug Names: <%= DiagnosticCardAndPrescriptions[i].medicationNames %></p>
+                        </div>
+                      </div>
+                    </div>
+                  <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
     </section>
+
+
+    <section>
+        <div class="d-flex mx-3" id="btnContainer">
+        <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-primary mx-3">Add Diagnostic Card</button>
+       </div>
+        <div class="col-12 d-flex justify-content-around">
+            <div id="formContainer" style="display: none;">
+                <h2 class="mt-4 fw-bold text-center">Add Diagnostic Card & Prescription Details</h2>
+                <br>
+                <form action="/doctor/<%= doctorId %>/patients/<%= patient.id %>" method="post">
+                    <input type="text" name="patientId" value="<%= patient.id %>" class="form-control mb-3">
+                    <div class="mb-3">
+                        <label for="diagnosticDetails" class="form-label">Enter Diagnostic Details</label>
+                        <textarea name="diagnosticDetails" id="diagnosticDetails" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <section>
+                        <div class="mb-3">
+                            <label for="drug1" class="form-label">Enter Drug 1</label>
+                            <input type="text" name="prescription[drug1]" id="drug1" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="drug2" class="form-label">Enter Drug 2</label>
+                            <input type="text" name="prescription[drug2]" id="drug2" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="drug3" class="form-label">Enter Drug 3</label>
+                            <input type="text" name="prescription[drug3]" id="drug3" class="form-control" required>
+                        </div>
+                    </section>
+                    <button type="submit" class="btn btn-primary">Submit Prescription</button>
+                </form>
+            </div>
+        </div>
+        
+        
+        
+    </section>
+    
+    <script>
+        const showFormButton = document.getElementById('showFormButton');
+        const formContainer = document.getElementById('formContainer');
+        const  btnContainer = document.getElementById('btnContainer');
+
+        showFormButton.addEventListener('click', () => {
+            if (formContainer.style.display === 'none' || formContainer.style.display === '') {
+                formContainer.style.display = 'block';
+                btnContainer.classList.add('hidden');
+            } else {
+                formContainer.style.display = 'none';
+            }
+        });
+    </script>
+    
+    
+    
+    
+   
