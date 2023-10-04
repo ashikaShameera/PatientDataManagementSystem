@@ -1,7 +1,7 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const nurseSchema=new Schema({
+const pharmacistSchema = new Schema({
     firstName: {
         type: String,
         required: true
@@ -10,10 +10,10 @@ const nurseSchema=new Schema({
         type: String,
         required: true
     },
-    nic:{
-        type:String,
-        required:true,
-        unique:true
+    nic: {
+        type: String,
+        required: true,
+        unique: true
     },
     dateOfBirth: {
         type: Date,
@@ -27,32 +27,31 @@ const nurseSchema=new Schema({
         type: String,
         required: true
     },
-    email:{
-        type:String,
-        required:true,
-        unique:true
+    email: {
+        type: String,
+        required: true,
+        unique: true
     },
     address: {
-        number:Number,
+        number: Number,
         street: String,
         city: String,
         state: String,
         postalCode: Number,
     },
-   
-    nurseLicenseNumber:{
+    pharmacistLicenseNumber: {
         type: String,
-        required:true
+        required: true
     },
-    password:{
+    password: {
         type: String,
-        required :true,
-        default: function() {
+        required: true,
+        default: function () {
             // Set the default password to the NIC number
             return this.nic;
         }
     }
-    //There are more dateils to get 
-})
+    // Additional details specific to pharmacists can be added here
+});
 
-module.exports=mongoose.model('Nurse',nurseSchema);
+module.exports = mongoose.model('Pharmacist', pharmacistSchema);

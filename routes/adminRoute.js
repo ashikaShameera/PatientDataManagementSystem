@@ -16,6 +16,7 @@ router.route('/doctor')
 router.route('/doctor/:id')
     .get(catchAsync(adminControl.showDoctor))
     .put(catchAsync(adminControl.updateDoctor))
+    .delete(catchAsync(adminControl.deleteDoctor))
 
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
@@ -25,7 +26,24 @@ router.route('/nurse')
 
 router.route('/nurse/:id')
     .get(catchAsync(adminControl.showNurse))
-    // .put(catchAsync(adminControl.updateDoctor))
+    .put(catchAsync(adminControl.updateNurse))
+    .delete(catchAsync(adminControl.deleteNurse))
+
+router.route('/pharmacist')
+    .get(catchAsync(adminControl.renderAdminPharmacistPage))
+
+router.route('/pharmacist/:id')
+    .get(catchAsync(adminControl.showPharmacist))
+    .put(catchAsync(adminControl.updatePharmacist))
+    .delete(catchAsync(adminControl.deletePharmacist))
+
+router.route('/insurer')
+    .get(catchAsync(adminControl.renderAdminInsurerPage));
+
+router.route('/insurer/:id')
+    .get(catchAsync(adminControl.showInsurer))
+    .put(catchAsync(adminControl.updateInsurer))
+    .delete(catchAsync(adminControl.deleteInsurer));
 
 
 //------ Routes For the /admin/Appointment 

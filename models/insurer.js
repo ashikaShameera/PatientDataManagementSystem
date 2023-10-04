@@ -1,29 +1,8 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
 
-const nurseSchema=new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    nic:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    dateOfBirth: {
-        type: Date,
-        required: true
-    },
-    gender: {
-        type: String,
-        enum: ['Male', 'Female', 'Other']
-    },
-    contactNumber: {
+const insurerSchema=new Schema({
+    companyName: {
         type: String,
         required: true
     },
@@ -40,19 +19,24 @@ const nurseSchema=new Schema({
         postalCode: Number,
     },
    
-    nurseLicenseNumber:{
+    iic:{
         type: String,
-        required:true
+        required:true,
+        unique:true
+    },
+    contactNumber: {
+        type: String,
+        required: true
     },
     password:{
         type: String,
         required :true,
         default: function() {
             // Set the default password to the NIC number
-            return this.nic;
+            return this.iic;
         }
     }
     //There are more dateils to get 
 })
 
-module.exports=mongoose.model('Nurse',nurseSchema);
+module.exports=mongoose.model('Insurer',insurerSchema);

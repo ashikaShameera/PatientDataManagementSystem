@@ -19,3 +19,10 @@ module.exports.registerNurse=async(req,res)=>{
     res.redirect(`/admin/nurse`);
     //need to add flash msg 
  }
+
+ module.exports.updateNurse = async (req, res) => {
+   const { id } = req.params;
+   const nurse = await Nurse.findByIdAndUpdate(id, { ...req.body.nurse });
+   await nurse.save();
+   res.redirect(`/nurse/${nurse.id}`);
+ }
