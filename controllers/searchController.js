@@ -105,7 +105,7 @@ module.exports.searchDoctorById = async (doctorId) => {
 
 //To find Patinet
 //searchQuery can be name,phone number,email or NIC
-module.exports.searchPatient=async (searchQuery)=>{
+module.exports.searchPatient=async (searchQuery="")=>{
 
 let patients;
 

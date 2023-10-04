@@ -19,6 +19,25 @@ module.exports.renderAdminHomePage = async (req, res) => {
     res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments})
 }
 
+//Patient Related Things
+module.exports.renderAdminPatientPage = async(req, res) => {
+    let patients;
+    
+    let PatientSearchInput=req.query.PatientSearchInput;
+    console.log(PatientSearchInput)
+
+    if(PatientSearchInput){
+         PatientSearchInput=PatientSearchInput.trim();
+    }
+    
+    patients=await searchController.searchPatient(PatientSearchInput)
+
+    if(patients.length<=0)
+        patients=await Patient.find();
+
+    res.render("admin/patient",{patients})
+}
+
 //Doctor Related Things
 module.exports.renderAdminDoctorPage = async (req, res) => {
 
@@ -77,11 +96,6 @@ module.exports.deleteDoctor = async (req, res) => {
 // }
 
 
-
-
-module.exports.renderAdminPatientPage = (req, res) => {
-    res.render("admin/patient")
-}
 //Nurse Related Things
 module.exports.renderAdminNursePage = async (req, res) => {
 
