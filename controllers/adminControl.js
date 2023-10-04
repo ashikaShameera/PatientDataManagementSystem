@@ -5,11 +5,18 @@ const Doctor = require('../models/doctor');
 const Nurse =require('../models/nurse')
 const User = require('../models/user')
 const Pharmacist = require('../models/pharmacist')
+const Appointment = require('../models/appointment')
+const Patient = require('../models/patient')
+const Insurer = require('../models/insurer')
 const searchController=require('./searchController')
 
 
-module.exports.renderAdminHomePage = (req, res) => {
-    res.render("admin/home")
+module.exports.renderAdminHomePage = async (req, res) => {
+    const totalPatients = await Patient.countDocuments()
+    const totalDoctors = await Doctor.countDocuments()
+    const totalNurses = await Nurse.countDocuments()
+    const totalAppoinments = await Appointment.countDocuments()
+    res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments})
 }
 
 //Doctor Related Things
@@ -175,4 +182,53 @@ module.exports.deletePharmacist = async (req, res) => {
         res.status(500).json({ error: 'Failed to delete pharmacist' });
     }
 };
+//Insurer related things
 
+module.exports.renderAdminInsurerPage = async (req, res) => {
+    let insurers;
+    let InsurerSearchInput = req.query.InsurerSearchInput;
+
+    if (InsurerSearchInput)
+        InsurerSearchInput = InsurerSearchInput.trim();
+
+    insurers = await searchController.searchInsurer(InsurerSearchInput);
+
+    if (insurers.length <= 0) {
+        insurers = await Insurer.find();
+    }
+
+    res.render("admin/insurer/insurer", { insurers });
+}
+
+module.exports.showInsurer = async (req, res) => {
+    const id = req.params.id;
+    const insurer = await Insurer.findById(id);
+    res.render('admin/insurer/edit', { insurer });
+}
+
+module.exports.updateInsurer = async (req, res) => {
+    const { id } = req.params;
+    const { email } = req.body.insurer;
+    const insurer = await Insurer.findByIdAndUpdate(id, req.body.insurer);
+    const user = await User.findOne({ profile: insurer._id });
+    user.email = email;
+    await insurer.save();
+    await user.save();
+
+    res.redirect(`/admin/insurer`);
+}
+
+module.exports.deleteInsurer = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id);
+        await User.deleteOne({ profile: id });
+        await Insurer.findByIdAndDelete(id);
+        // Redirect to the insurer list page or send a success response
+        res.json({ success: true });
+    } catch (error) {
+        // Handle any errors and send an error response
+        console.error('Error deleting insurer:', error);
+        res.status(500).json({ error: 'Failed to delete insurer' });
+    }
+};

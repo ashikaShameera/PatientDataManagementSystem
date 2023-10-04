@@ -20,6 +20,7 @@ const adminRoute=require('./routes/adminRoute');
 const nurseRoute=require('./routes/nurseRoute');
 const pharmacistRoute=require('./routes/pharmacistRoute')
 const appointmentRoute=require('./routes/appointmentRoute');
+const insurerRoute=require('./routes/insurerRoute')
 const cookieParser = require('cookie-parser');
 
 
@@ -49,6 +50,7 @@ app.use('/admin',adminRoute);       //going to admin route
 app.use('/nurse',nurseRoute)
 app.use('/pharmacist',pharmacistRoute)
 app.use('/admin/appointment',appointmentRoute);      //going to admin/apponitmentRoute
+app.use('/insurer',insurerRoute)
 
 
 app.get('/',(req,res)=>{

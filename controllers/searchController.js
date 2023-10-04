@@ -2,6 +2,7 @@ const Doctor = require("../models/doctor");
 const Patient = require("../models/patient");
 const Nurse =require('../models/nurse')
 const Pharmacist= require('../models/pharmacist')
+const Insurer= require('../models/insurer')
 
 module.exports.searchDoctors = async (selectType, DoctorSearchInput) => {
   let doctors;
@@ -178,4 +179,28 @@ module.exports.searchNurse=async (searchQuery="")=>{
   
     return pharmacists;
   }
+
+
+module.exports.searchInsurer = async (searchQuery = "") => {
+    let insurers;
+
+    // Split the search query into parts (firstName and lastName)
+    const queryParts = searchQuery.split(' ');
+
+    try {
+        insurers = await Insurer.find({
+            $or: [
+                { email: searchQuery },
+                { iic: searchQuery },
+                { contactNumber: searchQuery },
+                { companyName: searchQuery} // Search by both firstName and lastName
+            ]
+        });
+    } catch (error) {
+        console.log(error);
+    }
+
+    return insurers;
+}
+
   

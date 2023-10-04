@@ -37,6 +37,15 @@ router.route('/pharmacist/:id')
     .put(catchAsync(adminControl.updatePharmacist))
     .delete(catchAsync(adminControl.deletePharmacist))
 
+router.route('/insurer')
+    .get(catchAsync(adminControl.renderAdminInsurerPage));
+
+router.route('/insurer/:id')
+    .get(catchAsync(adminControl.showInsurer))
+    .put(catchAsync(adminControl.updateInsurer))
+    .delete(catchAsync(adminControl.deleteInsurer));
+
+
 //------ Routes For the /admin/Appointment 
 
 
