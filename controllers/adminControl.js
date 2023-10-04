@@ -1,8 +1,11 @@
 //you must require admin module
 
+const doctor = require('../models/doctor');
 const Doctor = require('../models/doctor');
 const Nurse =require('../models/nurse')
+const User = require('../models/user')
 const searchController=require('./searchController')
+const mongoose=require('mongoose');
 
 module.exports.renderAdminHomePage = (req, res) => {
     res.render("admin/home")
@@ -36,10 +39,29 @@ module.exports.showDoctor = async (req, res) => {
 
 module.exports.updateDoctor = async (req, res) => {
     const { id } = req.params;
-    const doctor = await Doctor.findByIdAndUpdate(id, { ...req.body.doctor });
-    await doctor.save();
-    res.redirect(`/admin/doctor`);
+    const { email } = req.body.doctor;
+    const doctor = await Doctor.findByIdAndUpdate(id,req.body.doctor);
+    const user = await User.findOne({ profile: doctor._id })
+    user.email = email
+    await doctor.save()
+    await user.save()    
+    
+    res.redirect(`/admin/nurse`);
 }
+
+module.exports.deleteDoctor = async (req, res) => {
+    try {
+        const { id } = req.params;
+        await User.deleteOne({profile: id})
+        await Doctor.findByIdAndDelete(id);
+                // Redirect to the nurse list page or send a success response
+        res.json({ success: true });
+    } catch (error) {
+        // Handle any errors and send an error response
+        console.error('Error deleting Doctor:', error);
+        res.status(500).json({ error: 'Failed to delete Doctor' });
+    }
+};
 
 //AppointmentRelated Things
 // module.exports.renderAppointmentPage = (req, res) => {
@@ -72,13 +94,35 @@ module.exports.renderAdminNursePage = async (req, res) => {
 
 module.exports.showNurse = async (req, res) => {
     const id = req.params.id;
-    const nurses = await Nurse.findById(id);
-    res.render('admin/nurse/edit', { nurses })
+    const nurse = await Nurse.findById(id);
+    res.render('admin/nurse/edit', { nurse })
 }
 
-module.exports.updateDoctor = async (req, res) => {
+module.exports.updateNurse = async (req, res) => {
     const { id } = req.params;
-    const nurse = await Doctor.findByIdAndUpdate(id, { ...req.body.nurse });
-    await nurse.save();
+    const { email } = req.body.nurse;
+    const nurse = await Nurse.findByIdAndUpdate(id,req.body.nurse);
+    const user = await User.findOne({ profile: nurse._id })
+    user.email = email
+    await nurse.save()
+    await user.save()    
+    
     res.redirect(`/admin/nurse`);
 }
+
+module.exports.deleteNurse = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id)
+        await User.deleteOne({profile: id})
+        await Nurse.findByIdAndDelete(id);
+                // Redirect to the nurse list page or send a success response
+        res.json({ success: true });
+    } catch (error) {
+        // Handle any errors and send an error response
+        console.error('Error deleting nurse:', error);
+        res.status(500).json({ error: 'Failed to delete nurse' });
+    }
+};
+
+

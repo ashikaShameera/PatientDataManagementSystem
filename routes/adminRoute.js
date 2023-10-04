@@ -16,6 +16,7 @@ router.route('/doctor')
 router.route('/doctor/:id')
     .get(catchAsync(adminControl.showDoctor))
     .put(catchAsync(adminControl.updateDoctor))
+    .delete(catchAsync(adminControl.deleteDoctor))
 
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
@@ -25,7 +26,8 @@ router.route('/nurse')
 
 router.route('/nurse/:id')
     .get(catchAsync(adminControl.showNurse))
-    // .put(catchAsync(adminControl.updateDoctor))
+    .put(catchAsync(adminControl.updateNurse))
+    .delete(catchAsync(adminControl.deleteNurse))
 
 
 //------ Routes For the /admin/Appointment 

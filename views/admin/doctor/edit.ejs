@@ -176,19 +176,38 @@
     </main>
     <script>
       
-      const deleteBtn=document.querySelector("#deleteBtn")
+      document.addEventListener('DOMContentLoaded', function () {
+  const deleteBtn = document.getElementById('deleteBtn');
 
-      //used to delete the doctor
-      deleteBtn.addEventListener('click',()=>{
-        const confirmation=confirm("Are tou sure about deleting Doctor? ");
-        if(confirmation){
-          try{
-            //need to be handle deleting of the doctor code
-          }catch(error){
-            console.log(error);
-          }
-        }
-      })
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', function () {
+      // Confirm with the user if they really want to delete the nurse
+      const confirmDelete = confirm('Are you sure you want to delete this doctor?');
+
+      if (confirmDelete) {
+        // If the user confirms, make an AJAX request to delete the nurse
+        const doctorID = '<%= doctor.id %>'; // You need to set this data attribute on the delete button
+       fetch(`/admin/doctor/${doctorID}`, {
+          method: 'DELETE',
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Nurse deleted successfully, redirect or show a success message
+              window.location.href = '/admin/doctor'; // Redirect to the nurse list page
+            } else {
+              console.error(error)
+              alert('Failed to delete doctor. Please try again later.');
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting doctor:', error);
+            alert('An error occurred while deleting the doctor.');
+          });
+      }
+    });
+  }
+});
 
       var toggleBtn = document.getElementById('toggleBtn');
       var content = document.getElementById('content');
