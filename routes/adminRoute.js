@@ -21,6 +21,11 @@ router.route('/doctor/:id')
 router.route('/patient')
     .get(adminControl.renderAdminPatientPage);
 
+router.route('/patient/:id')
+    .get(catchAsync(adminControl.showPatient))
+    .put(catchAsync(adminControl.updatePatient))
+    .delete(catchAsync(adminControl.deletePatient))
+
 router.route('/nurse')
     .get(catchAsync(adminControl.renderAdminNursePage))
 
