@@ -8,4 +8,14 @@ const verifyAuthToken = require('../authMiddleware');
 router.route('/register')                 //To render registation form
     .post(catchAsync(insurerControl.registerInsurer))         //To send registation post request
 
-module.exports=router
+router.route('/:id')
+    .get(catchAsync(insurerControl.showInsurer)) 
+
+router.route('/:id/patients')
+    .get(catchAsync(insurerControl.getPatientDetails))
+
+router.route('/:id/patients/:patientId')
+    .get(catchAsync(insurerControl.showPatientDetails))
+
+
+    module.exports=router
