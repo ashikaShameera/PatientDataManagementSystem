@@ -26,6 +26,7 @@ module.exports.patientSchema = Joi.object({
     EmgRelationship: Joi.string().required(),
     EmgContactNumber: Joi.string().required(),
   }).required(),
+  password: Joi.string()
 });
 
 

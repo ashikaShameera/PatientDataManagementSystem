@@ -1,10 +1,12 @@
 const {searchPatient}=require('../controllers/searchController');
+const { doctors } = require('../controllers/adminControl')
 const DiagnosticCardAndPrescriptionController=require('../controllers/DiagnosticCardAndPrescriptionController')
 
 const Doctor=require('../models/doctor');
 const Appointment=require('../models/appointment')
 const Patient = require('../models/patient');
-const doctor = require('../models/doctor');
+const User = require('../models/user')
+const bcrypt = require('bcrypt')
 const { date } = require('joi');
 
 module.exports.renderRegisterForm=(req,res)=>{
@@ -20,9 +22,35 @@ module.exports.renderRegisterForm=(req,res)=>{
 
 // For the save doctor in the database
 module.exports.registerDoctor=async(req,res)=>{
+   try {
    const doctor=new Doctor(req.body.doctor); 
-   await doctor.save();                      
+   const saltRounds = 10; // Number of rounds (adjust as needed)
+   const hashedPassword = await bcrypt.hash(doctor.password, saltRounds);
+   doctor.password = hashedPassword   
+   const user = new User({
+      email: doctor.email,
+      password: doctor.password,
+      role: "Doctor",
+      profile: doctor._id
+    });       
+   await user.save()  
+   await doctor.save()       
+     
    res.redirect(`/admin/doctor`);
+   } catch (error) {
+      if (error.code === 11000) {
+         // This error code (11000) indicates a duplicate key error
+         // Handle the duplicate email or NIC error here
+         res.status(400).render('admin/doctor', { doctors,
+             error: 'Email or NIC is already in use. Please choose a different one.',
+         });
+         
+     } else {
+         // Handle other errors (e.g., validation errors)
+         console.error('Error during registration:', error);
+         res.status(500).render('error', { error: 'Registration failed' });
+     }
+   }
    //need to add flash msg 
 }
 
@@ -77,6 +105,7 @@ module.exports.showPatientDetails=async(req,res)=>{
    try{
       DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
       DiagnosticCardAndPrescriptions = DiagnosticCardAndPrescriptions.slice().sort((a, b) => b.date - a.date);
+      console.log(DiagnosticCardAndPrescriptionController)
    }catch(err){
       console.log(err);
    }

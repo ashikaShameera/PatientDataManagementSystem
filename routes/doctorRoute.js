@@ -3,6 +3,7 @@ const router = express.Router();
 
 const doctorControl=require('../controllers/doctorControl');
 const catchAsync=require('../utils/catchAsync');
+const verifyAuthToken = require('../authMiddleware');
 
 router.route('/register')
     .get(doctorControl.renderRegisterForm)                  //To render registation form

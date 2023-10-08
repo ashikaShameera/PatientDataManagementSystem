@@ -22,13 +22,21 @@
                         <div class="col-3">
                             <button id="toggleBtn" type="button" class="btn btn-primary">Patient Registation</button>
                         </div>
+                        <div class="col-3">
+                            <a href="/admin/patient" class="btn btn-primary">View All Patients</a>
+                        </div>
                     </div>
                     <div class="block">
                         <div id="Registation" class="hidden">
                             <br>
                             <h3 style="text-align: center;">Patient Registation Form</h3>
+                            <% if (error) { %>
+                                <div class="alert alert-danger">
+                                  <%= error %>
+                                </div>
+                              <% } %>
                             <br>
-                            <form action="/patient" method="POST" novalidate class="validated-form">
+                            <form action="/patient/register" method="POST" novalidate class="validated-form">
                                 <div class="d-flex justify-content-around">
 
                                     <div class="col-5 ">
@@ -177,26 +185,11 @@
                             <div class="block">
                               <form action="" method="">
                                 <div class="d-flex justify-content-around p-5">
-                                  <div class="col-md-2" style="text-align: right;">
-                                    <label for="selectType" class="form-label">
-                                      <h3>Select Type :</h3>
-                                    </label>
-                                  </div>
-                                  <!-- Use patient seach type -->
-                                  <div class="col-md-2">
-                                    <select name="selectType" id="selectType" style="display: inline-block;" class="form-control">
-                                      <option value="Specialization">Specialization</option>
-                                      <option value="Email">Email</option>
-                                      <option value="NIC">NIC</option>
-                                      <option value="PhoneNumber">Phone Number</option>
-                                      <option value="DoctorName">Doctor Name</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-5">
-                                    <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" class="form-control"
-                                      placeholder="Search Doctor Name (Max 30 Characters)">
-                                  </div>
-                                  <div class="col-md-2">
+
+                                    <input type="text" id="PatientrSearchInput" name="PatientSearchInput" class="form-control"
+                                      placeholder="Search Patient Name or Email or Nic or Phone Number (Max 30 Characters)">
+
+                                  <div class="col-md-3">
                                     <button id="DoctorSearchBtn" class="btn btn-primary form-control">Search</button>
                                   </div>
                                 </div>
@@ -204,9 +197,50 @@
                             </div>
               
                             <!-- use for render Patient -->
-                            <section>
-                              <h1>Render Patient</h1>
-                            </section>
+                <section>
+                    <div style="text-align: center;" class="m-3">
+                    <h1>Patients Information</h1>
+                    
+                    <% if (patients && patients.length) { %>
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>contactNumber</th>
+                            <th>gender</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (let patient of patients) { %>
+                            <tr class="table-row-style">
+                                <td>
+                                <%= patient.firstName %>
+                                </td>
+                                <td>
+                                <%= patient.lastName %>
+                                </td>
+                                <td>
+                                <%= patient.contactNumber %>
+                                </td>
+                                <td>
+                                <%= patient.gender %>
+                                </td>
+                                <td>
+                                <%= patient.email %>
+                                </td>
+                                <td><a href="/admin/patient/<%= patient._id %>" class="btn btn-primary">Edit</a></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                        </table>
+                        <% } else { %>
+                        <p>No Nurses found.</p>
+                        <% } %>
+                        </div>
+                    </section>
               
                           </div>
                     </div>
@@ -239,6 +273,18 @@
                 }
             });
         </script>
+        <%- /* Conditional inclusion of JavaScript code */
+        error ? `
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var toggleBtn = document.getElementById('toggleBtn');
+              if (toggleBtn) {
+                toggleBtn.click();
+              }
+            });
+          </script>
+        ` : '' %>
+        
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
             integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
             crossorigin="anonymous"></script>

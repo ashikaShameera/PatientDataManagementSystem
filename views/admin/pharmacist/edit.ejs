@@ -1,0 +1,218 @@
+<%- include('../partials/head') %>
+
+<body>
+  <main class="admin-panel">
+    <%- include('../partials/sidebar') %>
+    </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-11">
+          <h1>Welcome, Admin!</h1>
+          <p>This is the admin panel for the pharmacist management system.</p>
+        </div>
+        <div class="col-1">
+          <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
+        </div>
+      </div>
+      <div class="block" style="height: 90%;">
+        <div id="content">
+          <h1 class="text-center">Update Details Of Pharmacist <%= pharmacist.firstName %>
+          </h1>
+
+          <form action="/admin/pharmacist/<%= pharmacist.id %>?_method=PUT" method="POST" novalidate class="validated-form">
+            <div class="d-flex justify-content-around">
+              <div class="col-5">
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name:</label>
+                  <input type="text" id="firstName" class="form-control" name="pharmacist[firstName]"
+                    value="<%= pharmacist.firstName %>" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name:</label>
+                  <input type="text" id="lastName" class="form-control" name="pharmacist[lastName]"
+                    value="<%= pharmacist.lastName %>" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="nic" class="form-label">NIC:</label>
+                  <input type="text" id="nic" name="pharmacist[nic]" class="form-control" value="<%= pharmacist.nic %>"
+                    required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="dateOfBirth" class="form-label">Date of Birth:</label>
+                  <input type="date" id="dateOfBirth" name="pharmacist[dateOfBirth]"
+                    value="<%= pharmacist.dateOfBirth.toISOString().substr(0, 10) %>" class="form-control" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="md-3">
+                  <label for="gender" class="form-label">Gender:</label>
+                  <select id="gender" name="pharmacist[gender]" class="form-control" required>
+                    <option value="Male" <% if (pharmacist.gender === 'Male') { %> selected <% } %>>Male</option>
+                    <option value="Female" <% if (pharmacist.gender === 'Female') { %> selected <% } %>>Female</option>
+                    <option value="Other" <% if (pharmacist.gender === 'Other') { %> selected <% } %>>Other</option>
+                  </select>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="md-3">
+                  <label for="contactNumber" class="form-label">Contact Number:</label>
+                  <input type="text" id="contactNumber" name="pharmacist[contactNumber]"
+                    value="<%= pharmacist.contactNumber %>" required class="form-control">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email:</label>
+                  <input type="email" id="email" name="pharmacist[email]" class="form-control"
+                    value="<%= pharmacist.email %>" required>
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <button type="button" id="deleteBtn" class="btn btn-danger form-control">Delete Pharmacist</button>
+                </div>
+              </div>
+
+              <div class="col-5">
+                <div class="mb-3">
+                  <label for="pharmacistLicenseNumber" class="form-label">Pharmacist License Number:</label>
+                  <input type="text" id="pharmacistLicenseNumber" name="pharmacist[pharmacistLicenseNumber]"
+                    class="form-control" required value="<%= pharmacist.pharmacistLicenseNumber %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="street" class="form-label">Street:</label>
+                  <input type="text" id="street" name="pharmacist[address.street]" class="form-control"
+                    value="<%= pharmacist.address.street %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="city" class="form-label">City:</label>
+                  <input type="text" id="city" name="pharmacist[address.city]" class="form-control"
+                    value="<%= pharmacist.address.city %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="state" class="form-label">State:</label>
+                  <input type="text" id="state" name="pharmacist[address.state]" class="form-control"
+                    value="<%= pharmacist.address.state %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="postalCode" class="form-label">Postal Code:</label>
+                  <input type="number" id="postalCode" name="pharmacist[address.postalCode]" class="form-control"
+                    value="<%= pharmacist.address.postalCode %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-primary form-control">Update Pharmacist Details</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const deleteBtn = document.getElementById('deleteBtn');
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener('click', function () {
+      // Confirm with the user if they really want to delete the pharmacist
+      const confirmDelete = confirm('Are you sure you want to delete this pharmacist?');
+
+      if (confirmDelete) {
+        // If the user confirms, make an AJAX request to delete the pharmacist
+        const pharmacistId = '<%= pharmacist.id %>'; // You need to set this data attribute on the delete button
+        console.log(pharmacistId)
+       fetch(`/admin/pharmacist/${pharmacistId}`, {
+          method: 'DELETE',
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Pharmacist deleted successfully, redirect or show a success message
+              window.location.href = '/admin/pharmacist'; // Redirect to the pharmacist list page
+            } else {
+              console.error(error)
+              alert('Failed to delete pharmacist. Please try again later.');
+            }
+          })
+          .catch(error => {
+            console.error('Error deleting pharmacist:', error);
+            alert('An error occurred while deleting the pharmacist.');
+          });
+      }
+    });
+  }
+});
+  
+      
+
+    var toggleBtn = document.getElementById('toggleBtn');
+    var content = document.getElementById('content');
+
+    var overviewToggleBtn = document.getElementById('overviewToggleBtn');
+    var Overview = document.getElementById('overview');
+
+    toggleBtn.addEventListener('click', function () {
+      if (content.classList.contains('hidden')) {
+        Overview.classList.add('hidden');
+        content.classList.remove('hidden');
+      } else {
+        content.classList.add('hidden');
+      }
+    });
+
+    overviewToggleBtn.addEventListener('click', function () {
+      if (Overview.classList.contains('hidden')) {
+        content.classList.add('hidden');
+        Overview.classList.remove('hidden');
+      } else {
+        Overview.classList.add('hidden');
+      }
+    });
+
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+  <script src="/javascripts/boostrapFormValidation.js"></script>
+  <script src="/javascripts/admin/admin.js"></script>
+</body>
+
+</html>
