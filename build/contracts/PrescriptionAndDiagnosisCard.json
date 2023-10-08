@@ -9692,30 +9692,12 @@
     "5777": {
       "events": {},
       "links": {},
-<<<<<<< HEAD
-      "address": "0x928dEcA7b727935791365DA8789d45dE3CeDB2aB",
-      "transactionHash": "0xbdc0cf2d7b558d395059deeceb94fd66bc5e88f8f7cde6f8d0128d3f02ff25c6"
+      "address": "0xd168d712b37942A391087B1039B65Eb8f6C805d5",
+      "transactionHash": "0x1d52cafad999a7843cdc825d556b9d52afbdaefc00d3e99a456a5685cc315897"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2023-10-08T16:41:09.613Z",
-=======
-<<<<<<< HEAD
-      "address": "0xddbb7A907D1c83c07FF86a546A0830A15Dfb7EDB",
-      "transactionHash": "0x60c2100e878a34eff1f0f4bae79c30917ea0c7909864d65bc9500aee91045a55"
-    }
-  },
-  "schemaVersion": "3.4.16",
-  "updatedAt": "2023-10-04T16:56:29.126Z",
-=======
-      "address": "0x9Ef2D90520d1AE9D132048E273F18F9fca8F5F36",
-      "transactionHash": "0xfffad053eb7060b3ee678a5ef6febcda59b033a97eb3c8948a73f8e6241ce34f"
-    }
-  },
-  "schemaVersion": "3.4.16",
-  "updatedAt": "2023-10-06T12:25:57.205Z",
->>>>>>> 8cac0fad71ed67fe8f07553745371130b53e79bb
->>>>>>> 9ff31ae461edf2297da297d7628bfb67490b75ca
+  "updatedAt": "2023-10-08T17:25:49.870Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
