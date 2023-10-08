@@ -19,7 +19,8 @@ module.exports.renderAdminHomePage = async (req, res) => {
     const totalAppoinments = await Appointment.countDocuments()
     const today = new Date()
     const totalFutureAppoinments = await Appointment.countDocuments({ date: { $gt: today } });
-    res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments,totalInsurers,totalFutureAppoinments})
+    const doctors = await Doctor.find()
+    res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments,totalInsurers,totalFutureAppoinments,doctors})
 }
 
 //Patient Related Things
