@@ -3,7 +3,7 @@ const mongoose =require('mongoose');
 const Schema=mongoose.Schema;
 
 const patientSchema=new Schema({
-    //attribues
+
     firstName: {
         type: String,
         required: true
@@ -51,6 +51,17 @@ const patientSchema=new Schema({
         EmgRelationship:String,
         EmgContactNumber:String
     },
+    report: [
+        {
+            url:String,
+            filename:String,
+            reportType:String,
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }
+    ],
     password:{
         type: String,
         required:true,

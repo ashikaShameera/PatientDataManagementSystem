@@ -107,6 +107,25 @@
 
 
     </section>
+    <!-- Report adding section -->
+    <section>
+        <h1>Add Report</h1>
+        <form action="/report" method="POST" enctype="multipart/form-data">
+            <input type="text" name="patientId" value="<%= patient.id %>" hidden>
+            <input type="text" name="doctorId" value="<%= doctorId %>" hidden>
+
+            <div class="mb-3">
+                <label for="reportType" class="form-label">Report Type</label>
+                <input class="form-control" type="text" name="reportType" id="reportType" required>
+            </div>
+            <div class="mb-3">
+                <label for="reportFile" class="form-label">Default file input example</label>
+                <input class="form-control" type="file" name="reportFile" id="reportFile" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger" >Upload Image</button>
+        </form>
+    </section>
 
     <section>
         <div class="d-flex mx-3" id="btnContainer">
@@ -117,7 +136,7 @@
                 <h2 class="mt-4 fw-bold text-center">Add Diagnostic Card & Prescription Details</h2>
                 <br>
                 <form action="/doctor/<%= doctorId %>/patients/<%= patient.id %>" method="post">
-                    <input type="text" name="patientId" value="<%= patient.id %>" hidden class="form-control mb-3">
+                    <input type="text" name="patientId" value="<%= patient.id %>" hidden>
                     <div class="mb-3">
                         <label for="diagnosticDetails" class="form-label">Enter Diagnostic Details</label>
                         <textarea name="diagnosticDetails" id="diagnosticDetails" class="form-control" rows="4" required></textarea>
@@ -172,6 +191,49 @@
                 <% } %>
               </div>
             </div>
+          </div>
+    </section>
+
+    <!-- Medical Reports -->
+    <section>
+        <div class="mx-3">
+            <div class="text-center">
+              <h2 class="fw-bold text-center">Medical Reports</h2>
+            </div>
+            <div>
+              <div class="row mt-4">
+                <% if (patient && patient.report.length) { %>
+
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Report Type</th>
+                        <th>Report Date</th>
+                        <th>Report</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let report of patient.report) { %>
+                        <tr class="table-row-style">
+                          <td>
+                            <%= report.reportType %>
+                          </td>
+                          <td>
+                            <%= report.createdAt %>
+                          </td>
+                          <td>
+                            <a href="<%= report.url %>" target="_blank"><%= report.reportType %></a>
+                          </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <p>No Reports found.</p>
+                    <% } %>
+              </div>
+            </div>
+
           </div>
     </section>
     

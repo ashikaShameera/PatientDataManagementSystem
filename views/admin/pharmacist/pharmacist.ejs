@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-11">
           <h1>Welcome, Admin!</h1>
-          <p>This is the admin panel for the patient management system.</p>
+          <p>This is the admin panel for the pharmacist management system.</p>
         </div>
         <div class="col-1">
           <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
@@ -16,24 +16,24 @@
       </div>
       <div class="row">
         <div class="col-3">
-          <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of Nurses</button>
+          <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of Pharmacists</button>
         </div>
         <div class="col-3">
-          <button id="toggleBtn" type="button" class="btn btn-primary">Nurse Registration</button>
+          <button id="toggleBtn" type="button" class="btn btn-primary">Pharmacist Registration</button>
         </div>
         <div class="col-3">
-          <a href="/admin/nurse" class="btn btn-primary">View All Nurses</a>
+          <a href="/admin/pharmacist" class="btn btn-primary">View All Pharmacists</a>
         </div>
       </div>
       <div class="block">
-        <div id="Registation" class="hidden">
-          <h3 style="text-align: center;">Nurse Registration Form</h3>
+        <div id="Registration" class="hidden">
+          <h3 style="text-align: center;">Pharmacist Registration Form</h3>
           <% if (error) { %>
             <div class="alert alert-danger">
               <%= error %>
             </div>
           <% } %>
-          <form action="/nurse/register" method="POST" novalidate class="validated-form">
+          <form action="/pharmacist/register" method="POST" novalidate class="validated-form">
 
             <div class="d-flex justify-content-around">
 
@@ -41,7 +41,7 @@
 
                 <div class="mb-3">
                   <label for="firstName" class="form-label">First Name:</label>
-                  <input type="text" id="firstName" class="form-control" name="nurse[firstName]" required>
+                  <input type="text" id="firstName" class="form-control" name="pharmacist[firstName]" required>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
@@ -49,7 +49,7 @@
 
                 <div class="mb-3">
                   <label for="lastName" class="form-label">Last Name:</label>
-                  <input type="text" id="lastName" class="form-control" name="nurse[lastName]" required>
+                  <input type="text" id="lastName" class="form-control" name="pharmacist[lastName]" required>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
@@ -57,7 +57,7 @@
 
                 <div class="mb-3">
                   <label for="nic" class="form-label">NIC:</label>
-                  <input type="text" id="nic" name="nurse[nic]" class="form-control" required>
+                  <input type="text" id="nic" name="pharmacist[nic]" class="form-control" required>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
@@ -65,7 +65,7 @@
 
                 <div class="mb-3">
                   <label for="dateOfBirth" class="form-label">Date of Birth:</label>
-                  <input type="date" id="dateOfBirth" name="nurse[dateOfBirth]" class="form-control" required>
+                  <input type="date" id="dateOfBirth" name="pharmacist[dateOfBirth]" class="form-control" required>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
@@ -73,7 +73,7 @@
 
                 <div class="mb-3">
                   <label for="gender" class="form-label">Gender:</label>
-                  <select id="gender" name="nurse[gender]" class="form-control" required>
+                  <select id="gender" name="pharmacist[gender]" class="form-control" required>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
@@ -85,34 +85,34 @@
 
                 <div class="mb-3">
                   <label for="contactNumber" class="form-label">Contact Number:</label>
-                  <input type="text" id="contactNumber" class="form-control" name="nurse[contactNumber]"
+                  <input type="text" id="contactNumber" class="form-control" name="pharmacist[contactNumber]"
                     required><br>
                 </div>
 
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" id="email" class="form-control" name="nurse[email]" required><br>
+                <input type="email" id="email" class="form-control" name="pharmacist[email]" required><br>
 
                 <label for="number" class="form-label">Number Of Address :</label>
-                <input type="number" id="number" class="form-control" name="nurse[address.number]"><br>
+                <input type="number" id="number" class="form-control" name="pharmacist[address.number]"><br>
 
               </div>
 
               <div class="col-5">
                 <label for="street" class="form-label">Street:</label>
-                <input type="text" id="street" class="form-control" name="nurse[address.street]"><br>
+                <input type="text" id="street" class="form-control" name="pharmacist[address.street]"><br>
 
                 <label for="city" class="form-label">City:</label>
-                <input type="text" id="city" class="form-control" name="nurse[address.city]"><br>
+                <input type="text" id="city" class="form-control" name="pharmacist[address.city]"><br>
 
                 <label for="state">State:</label>
-                <input type="text" id="state" class="form-control" name="nurse[address.state]"><br>
+                <input type="text" id="state" class="form-control" name="pharmacist[address.state]"><br>
 
                 <label for="postalCode">Postal Code:</label>
-                <input type="number" id="postalCode" class="form-control" name="nurse[address.postalCode]"><br>
+                <input type="number" id="postalCode" class="form-control" name="pharmacist[address.postalCode]"><br>
 
-                <label for="nurseLicenseNumber">Nurse License Number:</label>
-                <input type="text" id="nurseLicenseNumber" class="form-control"
-                  name="nurse[nurseLicenseNumber]" required><br>
+                <label for="pharmacistLicenseNumber">Pharmacist License Number:</label>
+                <input type="text" id="pharmacistLicenseNumber" class="form-control"
+                  name="pharmacist[pharmacistLicenseNumber]" required><br>
 
                 <br>
 
@@ -125,64 +125,64 @@
           </form>
         </div>
 
-        <!-- Add some overview Of Nurses here -->
+        <!-- Add some overview Of Pharmacists here -->
         <div id="overview" class="">
           <div class="block">
-            <form action="/admin/nurse" method="GET">
+            <form action="/admin/pharmacist" method="GET">
               <div class="d-flex justify-content-around p-5">
 
-                  <input type="text" id="NurseSearchInput" name="NurseSearchInput" class="form-control"
-                    placeholder="Search Nurse Name or Email or Nic or Phone Number (Max 30 Characters)">
+                  <input type="text" id="PharmacistSearchInput" name="PharmacistSearchInput" class="form-control"
+                    placeholder="Search Pharmacist Name or Email or Nic or Phone Number (Max 30 Characters)">
 
                 <div class="col-md-3">
-                  <button id="NurseSearchBtn" class="btn btn-primary form-control">Search</button>
+                  <button id="PharmacistSearchBtn" class="btn btn-primary form-control">Search</button>
                 </div>
               </div>
             </form>
           </div>
 
-          <!-- use for render nurses -->
+          <!-- use for render pharmacists -->
           <section>
             <div style="text-align: center;" class="m-3">
-              <h1>Nurse Information</h1>
+              <h1>Pharmacist Information</h1>
             
-              <% if (nurses && nurses.length) { %>
+              <% if (pharmacists && pharmacists.length) { %>
                 <table class="table">
                   <thead>
                     <tr>
                       <th>First Name</th>
                       <th>Last Name</th>
-                      <th>contactNumber</th>
-                      <th>gender</th>
+                      <th>Contact Number</th>
+                      <th>Gender</th>
                       <th>Email</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% for (let nurse of nurses) { %>
+                    <% for (let pharmacist of pharmacists) { %>
                       <tr class="table-row-style">
                         <td>
-                          <%= nurse.firstName %>
+                          <%= pharmacist.firstName %>
                         </td>
                         <td>
-                          <%= nurse.lastName %>
+                          <%= pharmacist.lastName %>
                         </td>
                         <td>
-                          <%= nurse.contactNumber %>
+                          <%= pharmacist.contactNumber %>
                         </td>
                         <td>
-                          <%= nurse.gender %>
+                          <%= pharmacist.gender %>
                         </td>
                         <td>
-                          <%= nurse.email %>
+                          <%= pharmacist.email %>
                         </td>
-                        <td><a href="/admin/nurse/<%= nurse._id %>" class="btn btn-primary">Edit</a></td>
+                        <td><a href="/admin/pharmacist/<%= pharmacist._id %>" class="btn btn-primary">Edit</a></td>
                       </tr>
                       <% } %>
                   </tbody>
                 </table>
                 <% } else { %>
-                  <p>No Nurses found.</p>
+                  <p>No pharmacists found.</p>
                   <% } %>
                 </div>
             </section>
@@ -198,7 +198,7 @@
 
 <script>
     var toggleBtn = document.getElementById('toggleBtn');
-    var content = document.getElementById('Registation');
+    var content = document.getElementById('Registration');
   
     var overviewToggleBtn = document.getElementById('overviewToggleBtn');
     var Overview = document.getElementById('overview');
