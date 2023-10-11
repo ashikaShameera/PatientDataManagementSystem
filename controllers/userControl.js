@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // Import the common User model
 const Patient = require('../models/patient')
 const Doctor = require('../models/doctor')
+const Nurse = require('../models/nurse')
+const Insurer = require('../models/insurer')
 const Pharmacist = require('../models/pharmacist')
 
 const handleLogin = async (req, res) => {
@@ -38,6 +40,10 @@ const handleLogin = async (req, res) => {
       res.redirect(`/admin/${user._id}`);
     }else if(user.role==='Pharmacist') {
       res.redirect(`/pharmacist/${user.profile._id}`);
+    }else if(user.role==='Nurse') {
+      res.redirect(`/nurse/${user.profile._id}`);
+    }else if(user.role==='Insurer') {
+      res.redirect(`/insurer/${user.profile._id}`);
     }else {
       // Handle other roles as needed
     }
@@ -101,7 +107,17 @@ const handleResetPassword = async (req, res) => {
       const pharmacist = await Pharmacist.findById(user.profile._id)
       pharmacist.password = hashedPassword
       await pharmacist.save()
-      res.redirect(`/pharmacist/${user.profile._id}`)
+      res.redirect(`/nurse/${user.profile._id}`)
+    }else if (user.role === 'Nurse') {
+      const nurse = await Nurse.findById(user.profile._id)
+      nurse.password = hashedPassword
+      await nurse.save()
+      res.redirect(`/nurse/${user.profile._id}`)
+    }else if (user.role === 'Insurer') {
+      const insurer = await Insurer.findById(user.profile._id)
+      insurer.password = hashedPassword
+      await insurer.save()
+      res.redirect(`/insurer/${user.profile._id}`)
     }else {
       // Handle other roles as needed
     }

@@ -15,8 +15,12 @@ module.exports.renderAdminHomePage = async (req, res) => {
     const totalPatients = await Patient.countDocuments()
     const totalDoctors = await Doctor.countDocuments()
     const totalNurses = await Nurse.countDocuments()
+    const totalInsurers = await Insurer.countDocuments()
     const totalAppoinments = await Appointment.countDocuments()
-    res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments})
+    const today = new Date()
+    const totalFutureAppoinments = await Appointment.countDocuments({ date: { $gt: today } });
+    const doctors = await Doctor.find()
+    res.render("admin/home",{totalPatients,totalDoctors,totalNurses,totalAppoinments,totalInsurers,totalFutureAppoinments,doctors})
 }
 
 //Patient Related Things
@@ -35,10 +39,49 @@ module.exports.renderAdminPatientPage = async(req, res) => {
     if(patients.length<=0)
         patients=await Patient.find();
 
-    res.render("admin/patient",{patients})
+    res.render("admin/patient",{patients,error:null})
 }
 
+module.exports.showPatient = async (req, res) => {
+  const id = req.params.id;
+  const patient = await Patient.findById(id);
+  res.render('admin/patient/edit', { patient }); // Update the view path
+};
+
+module.exports.updatePatient = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email } = req.body.patient; // Update 'doctor' to 'patient' here
+    const patient = await Patient.findByIdAndUpdate(id, req.body.patient); // Update 'doctor' to 'patient' here
+    const user = await User.findOne({ profile: patient._id });
+    user.email = email;
+    await patient.save();
+    await user.save();
+    
+    res.redirect(`/admin/patient`); // Update the redirect path
+  } catch (error) {
+    console.error('Error updating Patient:', error);
+    res.status(500).json({ error: 'Failed to update Patient' });
+  }
+};
+
+module.exports.deletePatient = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await User.deleteOne({ profile: id });
+    await Patient.findByIdAndDelete(id);
+    
+    res.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting Patient:', error);
+    res.status(500).json({ error: 'Failed to delete Patient' });
+  }
+};
+
 //Doctor Related Things
+
+
+
 module.exports.renderAdminDoctorPage = async (req, res) => {
 
     let doctors;
@@ -54,9 +97,10 @@ module.exports.renderAdminDoctorPage = async (req, res) => {
     if(doctors.length<=0){
         doctors = await Doctor.find();
     }
-
-    res.render("admin/doctor", { doctors })
+    module.exports.doctors = doctors;
+    res.render("admin/doctor", { doctors,error:null})
 }
+
 
 module.exports.showDoctor = async (req, res) => {
     const id = req.params.id;
@@ -111,7 +155,7 @@ module.exports.renderAdminNursePage = async (req, res) => {
     if(nurses.length<=0){
         nurses=await Nurse.find();
     }
-    res.render("admin/nurse/nurse",{nurses});
+    res.render("admin/nurse/nurse",{nurses,error:null});
 }
 
 module.exports.showNurse = async (req, res) => {
@@ -162,7 +206,7 @@ module.exports.renderAdminPharmacistPage = async (req, res) => {
         pharmacists = await Pharmacist.find();
     }
 
-    res.render("admin/pharmacist/pharmacist", { pharmacists });
+    res.render("admin/pharmacist/pharmacist", { pharmacists,error:null });
 }
 
 module.exports.showPharmacist = async (req, res) => {
@@ -211,7 +255,7 @@ module.exports.renderAdminInsurerPage = async (req, res) => {
         insurers = await Insurer.find();
     }
 
-    res.render("admin/insurer/insurer", { insurers });
+    res.render("admin/insurer/insurer", { insurers,error:null });
 }
 
 module.exports.showInsurer = async (req, res) => {

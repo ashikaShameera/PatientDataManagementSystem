@@ -1,0 +1,70 @@
+<% layout('layouts/doctorboilerplate') %>
+
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <h1>Welcome <br> Insurer.<% if(insurer) { %>
+      <%= insurer.firstName %>
+      <% } %></h1>
+    <h2>Welcome to our healthcare family, We look forward to <br> working together to provide exceptional care to our <br> patients.</h2>
+  </div>
+</section>
+
+<!-- Search bar for patient search -->
+<section id="patients" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h2 class="text-center">Search Patient Records</h2>
+        <p class="text-center">Quickly find and access patient information.</p>
+
+        <form action="/insurer/<%= insurer.id %>/patients" method="GET"> 
+          <div class="input-group mb-3">
+            <input type="text" name="patientSearch" class="form-control" placeholder="Enter patient name or ID" aria-label="Patient search" required>
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div style="text-align: center;" class="m-3">
+    <% if (patients && patients.length) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Date Of Birth</th>
+          <th>Gender</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let patient of patients) { %>
+        <tr class="table-row-style">
+          <td>
+            <%= patient.firstName %>
+          </td>
+          <td>
+            <%= patient.lastName %>
+          </td>
+          <td>
+            <%= patient.email %>
+          </td>
+          <td>
+            <%= patient._id %>
+          </td>
+          <td>
+            <%= patient.gender %>
+          </td>
+          <td><a href="/insurer/<%= insurer.id %>/patients/<%= patient._id %>" class="btn btn-primary">View Patient Details</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <% } %>
+  </div>
+</section>
