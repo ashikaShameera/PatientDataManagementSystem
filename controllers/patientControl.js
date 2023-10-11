@@ -153,24 +153,14 @@ module.exports.showPatient=async(req,res)=>{
         console.log(err);
      }
 
-
     if(encodedDoctor){
         const doctor = JSON.parse(decodeURIComponent(encodedDoctor));   //Put doctor to JSON object
-<<<<<<< HEAD
         res.render('patient/show',{patient,doctor,DiagnosticCardAndPrescriptions,upcomingAppointments,pastAppointments});//In here parse the whole doctor object to front it can reduce it
     }
     else{
         let doctor;         //To send null object of doctor if not it gives ejs error
         res.render('patient/show',{patient,doctor,DiagnosticCardAndPrescriptions,upcomingAppointments,pastAppointments});  //Internal Medicine
-=======
-        res.render('patient/show',{patient,doctor,error:null});//In here parse the whole doctor object to front it can reduce it
-    }
-    else{
-        let doctor;         //To send null object of doctor if not it gives ejs error
-        res.render('patient/show',{patient,doctor,error:null});  //Internal Medicine
->>>>>>> f8a56cf519f528f961298eea1e185509e559b589
-    }
-                 
+    }            
 }
 
 //Use for to get doctor data by patient for make an appointmenet
