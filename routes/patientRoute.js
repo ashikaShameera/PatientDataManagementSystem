@@ -8,7 +8,6 @@ const {isValidatePatient}=require('../middleware');
 const verifyAuthToken = require('../authMiddleware');
 
 router.route('/')
-    .get(patientControl.index)
     .post(isValidatePatient,catchAsync(patientControl.createPatient)); //For creating patient in database
     //need to add joi validation here
 
@@ -21,5 +20,9 @@ router.route('/:id')
 
 router.route('/:id/doctors')            
     .post(catchAsync(patientControl.getDoctorDetails))      //This use to get doctor detals when user need to make appointment 
+
+router.route('/:id/:doctorId/appointments')
+    .get(catchAsync(patientControl.getDoctorsAppointments))
+    .post(catchAsync(patientControl.makeTheAppointment))  //use to make an appointment
 
 module.exports=router;

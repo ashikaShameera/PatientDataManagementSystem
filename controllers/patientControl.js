@@ -1,16 +1,18 @@
 const Patient = require("../models/patient");
 const Doctor =require("../models/doctor");
 const User = require("../models/user")
+const Appointment=require("../models/appointment")
+const AppointmentPatient = require('../models/appointmentPatients');
+
+
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 
+const DiagnosticCardAndPrescriptionController=require('../controllers/DiagnosticCardAndPrescriptionController')
 const {searchDoctors}=require('./searchController');
 
-module.exports.index=(req,res)=>{
-    //This will use for search patient by doctor/reciption or admin
-    res.render('patient/search')
-}
+const currentDate = new Date();
 
 module.exports.renderRegisterForm=(req,res)=>{ 
     res.render('patient/register',{ error: null })
@@ -61,17 +63,74 @@ module.exports.createPatient=async (req,res)=>{
 
 
 module.exports.showPatient=async(req,res)=>{
-    const id=req.params.id;                     //Getting the patient id
-    const patient=await Patient.findById(id);   //Get patient from database
+    const patientId=req.params.id;                     //Getting the patient id
+    const patient=await Patient.findById(patientId);   //Get patient from database
     const encodedDoctor = req.query.doctor;     //Geting Doctor details from query parser
+
+    let DiagnosticCardAndPrescriptions;
+
+    //Getting upcomming Appointments
+    let upcomingAppointments;
+    
+   try{
+    upcomingAppointments=await AppointmentPatient.find({
+        patient:patientId
+    })
+    .populate({
+        path:'appointment',
+        match: {
+            date: { $gte: currentDate }, // Only include future appointments
+          }
+        }
+        )
+    .populate({
+            path:'doctor'
+    })
+    .sort({ 'appointment.date': 1 });
+   }
+   catch(err){
+    console.log(err);
+   }
+   console.log(upcomingAppointments)
+    //Getting upcomming Appointments
+   let pastAppointments;
+
+   try{
+        pastAppointments=await Appointment.find({
+            patient:patientId
+        })
+        .populate({
+            path:'appointment',
+            match: {
+                date: { $lt: currentDate }, // Only past future appointments
+              }
+            }
+            )
+        .populate({
+                path:'doctor'
+        })
+        .sort({ 'appointment.date': -1 });
+   }
+   catch(err){
+    console.log(err)
+   }
+
+    //Getting Prescription & Diagnostic Card
+    try{
+        DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
+        DiagnosticCardAndPrescriptions = DiagnosticCardAndPrescriptions.slice().sort((a, b) => b.date - a.date);
+     }catch(err){
+        console.log(err);
+     }
+
 
     if(encodedDoctor){
         const doctor = JSON.parse(decodeURIComponent(encodedDoctor));   //Put doctor to JSON object
-        res.render('patient/show',{patient,doctor});//In here parse the whole doctor object to front it can reduce it
+        res.render('patient/show',{patient,doctor,DiagnosticCardAndPrescriptions,upcomingAppointments,pastAppointments});//In here parse the whole doctor object to front it can reduce it
     }
     else{
         let doctor;         //To send null object of doctor if not it gives ejs error
-        res.render('patient/show',{patient,doctor});  //Internal Medicine
+        res.render('patient/show',{patient,doctor,DiagnosticCardAndPrescriptions,upcomingAppointments,pastAppointments});  //Internal Medicine
     }
                  
 }
@@ -91,6 +150,69 @@ module.exports.getDoctorDetails=async(req,res)=>{
     }
 
 
+ }
+
+ //To get /:id/:doctorId/appointments
+ module.exports.getDoctorsAppointments=async(req,res)=>{
+    
+    let appointments;
+    const patientId=req.params.id;
+    const doctorId=req.params.doctorId;
+
+    //Get doctor
+    const doctor=await Doctor.findById(doctorId);
+    const patient=await Patient.findById(patientId);
+
+    // Get the current date
+    
+    if(doctor && patient){
+        appointments=await Appointment.find({
+            doctor:doctorId,
+            date: { $gt: currentDate }
+        })
+    }
+
+    res.render('patient/showAppointments',{doctor,appointments,patientId})
+ }
+
+//To Post /:id/:doctorId/appointments
+ module.exports.makeTheAppointment=async (req,res)=>{
+
+    const appointmentId=req.body.appointmentId
+    const patientId=req.params.id;
+    const doctorId=req.params.doctorId;
+
+    //put patient to appointment object
+    try {
+        const updatedAppointment = await Appointment.findByIdAndUpdate(
+          appointmentId,
+          { $push: { patients: patientId } },
+          { new: true }
+        );
+    
+        if (!updatedAppointment) {
+          console.log('Appointment not found');
+          res.redirect (`/patient/${patientId}/${doctorId}/appointments`)
+        }
+    
+        console.log('Patient added to the appointment:', updatedAppointment);
+        
+      } catch (error) {
+        console.error('Error:', error);
+        res.redirect (`/patient/${patientId}`)
+      }
+
+      //Put patient appointment into mapping collection
+      const newAppointmentPatient = new AppointmentPatient({
+        appointment: appointmentId, 
+        patient: patientId, 
+        doctor:doctorId
+      });
+      
+      newAppointmentPatient.save();
+      
+
+    res.redirect (`/patient/${patientId}`)
  }
 
  

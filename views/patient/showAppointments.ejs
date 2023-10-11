@@ -1,0 +1,52 @@
+<h1>Doctor details <%= doctor.firstName %> </h1>
+
+<section>
+    <div style="text-align: center;" class="mt-n4" >
+      <h1>Appointments</h1>
+      <br><br>
+      <% if (appointments && appointments.length) { %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Room Number</th>
+              <th>Number of Patients</th>
+              <th>Maximum Number of Patients</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let appointment of appointments) { %>
+              <tr class="table-row-style">
+                <td>
+                  <%= appointment.date %>
+                </td>
+                <td>
+                  <%= appointment.time %>
+                </td>
+                <td>
+                  <%= appointment.roomNumber %>
+                </td>
+                <td>
+                  <%= appointment.currentPatients%>
+                </td>
+                <td>
+                  <%= appointment.maximumPatients %>
+                </td>
+                <td>
+                    <!-- //To Post /:id/:doctorId/appointments -->
+                    <form action="/patient/<%= patientId %>/<%= doctor._id %>/appointments" method="post">
+                        <input type="text" value="<%= appointment.id %>"  name="appointmentId" hidden >
+                        <button type="submit">Make the apponitment</button>
+                    </form>
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+        </table>
+        <% } else { %>
+          <p>No Appointments</p>
+          <% } %>
+        </div>
+    </section>
