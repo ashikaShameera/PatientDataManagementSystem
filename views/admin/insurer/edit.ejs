@@ -42,12 +42,12 @@
 
                 <div class="mb-3">
                   <label for="number" class="form-label">Number Of Address :</label>
-                  <input type="number" id="number" name="insurer[address.number]" class="form-control"
+                  <input type="number" id="number" name="insurer[address][number]" class="form-control"
                     value="<%= insurer.address.number %>"><br>
                 </div>
                 <div class="mb-3">
                     <label for="street" class="form-label">Street:</label>
-                    <input type="text" id="street" name="insurer[address.street]" class="form-control"
+                    <input type="text" id="street" name="insurer[address][street]" class="form-control"
                       value="<%= insurer.address.street %>">
                     <div class="valid-feedback">
                       Looks Good!
@@ -55,7 +55,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="city" class="form-label">City:</label>
-                    <input type="text" id="city" name="insurer[address.city]" class="form-control"
+                    <input type="text" id="city" name="insurer[address][city]" class="form-control"
                       value="<%= insurer.address.city %>">
                     <div class="valid-feedback">
                       Looks Good!
@@ -74,7 +74,7 @@
 
                 <div class="mb-3">
                   <label for="state" class="form-label">State:</label>
-                  <input type="text" id="state" name="insurer[address.state]" class="form-control"
+                  <input type="text" id="state" name="insurer[address][state]" class="form-control"
                     value="<%= insurer.address.state %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -82,7 +82,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="postalCode" class="form-label">Postal Code:</label>
-                  <input type="number" id="postalCode" name="insurer[address.postalCode]" class="form-control"
+                  <input type="number" id="postalCode" name="insurer[address][postalCode]" class="form-control"
                     value="<%= insurer.address.postalCode %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -91,7 +91,7 @@
 
                 <div class="mb-3">
                     <label for="iic" class="form-label">IIC:</label>
-                    <input type="text" id="iic" name="insurer[icc]" class="form-control"
+                    <input type="text" id="iic" name="insurer[iic]" class="form-control"
                       value="<%= insurer.iic %>">
                     <div class="valid-feedback">
                       Looks Good!

@@ -13,7 +13,7 @@ router.route('/')
 
 router.route('/register')
     .get(patientControl.renderRegisterForm)      //rendering create patient form
-    .post(patientControl.adminRegisterPatient)
+    .post(isValidatePatient,catchAsync(patientControl.adminRegisterPatient))
     
 router.route('/:id')
     .get(catchAsync(patientControl.showPatient))

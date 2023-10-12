@@ -4,9 +4,10 @@ const router = express.Router();
 const nurseControl=require('../controllers/nurseControl');
 const catchAsync=require('../utils/catchAsync');
 const verifyAuthToken = require('../authMiddleware');
+const { isValidateNurse } = require('../middleware');
 
 router.route('/register')                
-    .post(catchAsync(nurseControl.registerNurse))       
+    .post(isValidateNurse,catchAsync(nurseControl.registerNurse))       
 
 router.route('/:id')
     .get(catchAsync(nurseControl.showNurse))         
