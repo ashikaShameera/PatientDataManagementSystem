@@ -109,30 +109,32 @@
     </section>
     <!-- Report adding section -->
     <section>
-        <h1>Add Report</h1>
-        <form action="/report" method="POST" enctype="multipart/form-data">
-            <input type="text" name="patientId" value="<%= patient.id %>" hidden>
-            <input type="text" name="doctorId" value="<%= doctorId %>" hidden>
-
-            <div class="mb-3">
-                <label for="reportType" class="form-label">Report Type</label>
-                <input class="form-control" type="text" name="reportType" id="reportType" required>
-            </div>
-            <div class="mb-3">
-                <label for="reportFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" name="reportFile" id="reportFile" required>
-            </div>
-
-            <button type="submit" class="btn btn-danger" >Upload Image</button>
-        </form>
+        <div class="container">
+            <h2 class="text-center fw-bold" >Add Report</h2>
+            <form action="/report" method="POST" enctype="multipart/form-data">
+                <input type="text" name="patientId" value="<%= patient.id %>" hidden>
+                <input type="text" name="doctorId" value="<%= doctorId %>" hidden>
+    
+                <div class="mb-3">
+                    <label for="reportType" class="form-label">Report Type</label>
+                    <input class="form-control" type="text" name="reportType" id="reportType" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reportFile" class="form-label">Report File</label>
+                    <input class="form-control" type="file" name="reportFile" id="reportFile" required>
+                </div>
+    
+                <button type="submit" class="btn btn-danger">Upload Report</button>
+            </form>
+        </div>
     </section>
 
     <section>
-        <div class="d-flex mx-3" id="btnContainer">
+        <div class="d-flex container" id="btnContainer">
         <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-warning mx-3">Add Diagnostic Card</button>
        </div>
         <div class="col-12 d-flex justify-content-around">
-            <div id="formContainer" style="display: none;">
+            <div id="formContainer" style="display: none;" class="container">
                 <h2 class="mt-4 fw-bold text-center">Add Diagnostic Card & Prescription Details</h2>
                 <br>
                 <form action="/doctor/<%= doctorId %>/patients/<%= patient.id %>" method="post">
@@ -141,28 +143,24 @@
                         <label for="diagnosticDetails" class="form-label">Enter Diagnostic Details</label>
                         <textarea name="diagnosticDetails" id="diagnosticDetails" class="form-control" rows="4" required></textarea>
                     </div>
-                    <section>
-                        <div class="mb-3">
-                            <label for="drug1" class="form-label">Enter Drug 1</label>
-                            <input type="text" name="prescription[drug1]" id="drug1" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="drug2" class="form-label">Enter Drug 2</label>
-                            <input type="text" name="prescription[drug2]" id="drug2" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="drug3" class="form-label">Enter Drug 3</label>
-                            <input type="text" name="prescription[drug3]" id="drug3" class="form-control" required>
-                        </div>
-                    </section>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary ">Submit Prescription</button>
+                    <div class="mb-3">
+                        <label for="drug1" class="form-label">Enter Drug 1</label>
+                        <input type="text" name="prescription[drug1]" id="drug1" class="form-control" required>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="drug2" class="form-label">Enter Drug 2</label>
+                        <input type="text" name="prescription[drug2]" id="drug2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="drug3" class="form-label">Enter Drug 3</label>
+                        <input type="text" name="prescription[drug3]" id="drug3" class="form-control" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">Submit Prescription</button>
+                    </div>
                 </form>
             </div>
-        </div>
-              
+        </div>       
     </section>
 
     <!-- Diagnostic Card & Prescription Details -->
