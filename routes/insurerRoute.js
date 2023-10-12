@@ -4,9 +4,10 @@ const router = express.Router();
 const insurerControl=require('../controllers/insurerControl');
 const catchAsync=require('../utils/catchAsync');
 const verifyAuthToken = require('../authMiddleware');
+const { isValidateInsurer } = require('../middleware');
 
 router.route('/register')                 //To render registation form
-    .post(catchAsync(insurerControl.registerInsurer))         //To send registation post request
+    .post(isValidateInsurer,catchAsync(insurerControl.registerInsurer))         //To send registation post request
 
 router.route('/:id')
     .get(catchAsync(insurerControl.showInsurer)) 
