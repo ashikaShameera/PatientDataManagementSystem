@@ -3,7 +3,7 @@ const Doctor =require("../models/doctor");
 const User = require("../models/user")
 const Appointment=require("../models/appointment")
 const AppointmentPatient = require('../models/appointmentPatients');
-
+const paymentController = require('../controllers/paymentController');
 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -199,8 +199,8 @@ module.exports.getDoctorDetails=async(req,res)=>{
             date: { $gt: currentDate }
         })
     }
-
-    res.render('patient/showAppointments',{doctor,appointments,patientId})
+    const paymentHash =await paymentController.initiatePayment()
+    res.render('patient/showAppointments',{doctor,appointments,patient,paymentHash})
  }
 
 //To Post /:id/:doctorId/appointments
