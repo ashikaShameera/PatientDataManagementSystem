@@ -57,7 +57,7 @@
                 </td>
                 <td>
                     <!-- //To Post /:id/:doctorId/appointments -->
-                    <form action="/patient/<%= patient._id %>/<%= doctor._id %>/appointments" method="post">
+                    <form id="appointmentForm" action="/patient/<%= patient._id %>/<%= doctor._id %>/appointments" method="post">
                         <input type="text" value="<%= appointment.id %>"  name="appointmentId" hidden >
                     </form>
                     <button class="btn btn-primary" onclick="paymentGateway()">Make the apponitment</button>
