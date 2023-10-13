@@ -4,12 +4,52 @@ const Patient = require("../models/patient");
 
 const { searchDoctorsAdmin, searchDoctorById } = require('./searchController');
 
+//get local date
+const currentDate = new Date();
+
 //render appointment page in admin panel
 module.exports.renderAppointmentPage = async (req, res) => {
     // Fetch all appointments
-    const appointments = await Appointment.find();
+    let appointments, upcomingAppointments, pastAppointments;
+
+    try {
+        appointments = await Appointment.find().populate({
+            path: 'doctor'
+        });
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+    //Getting upcomming Appointments
+    try {
+        upcomingAppointments = await Appointment.find({ date: { $gte: currentDate } })
+            .populate({
+                path: 'doctor'
+            });
+        console.log("upcoming appointment")
+        console.log(upcomingAppointments)
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+    //Getting future Appointments
+    try {
+        pastAppointments = await Appointment.find({ date: { $lt: currentDate } }).populate({
+            path: 'doctor'
+        });
+        console.log("past appointment")
+        console.log(pastAppointments)
+
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+
     // Render the appointment.ejs template with the appointments data
-    res.render("admin/appointment", { appointments });
+    res.render("admin/appointment", { appointments,upcomingAppointments,pastAppointments });
 }
 
 
