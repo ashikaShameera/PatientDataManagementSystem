@@ -39,7 +39,7 @@
                     <form id="appointmentForm" action="/patient/<%= patient._id %>/<%= doctor._id %>/appointments" method="post">
                         <input type="text" value="<%= appointment.id %>"  name="appointmentId" hidden >
                     </form>
-                    <button onclick="paymentGateway('<%= appointment.id %>')">Make the apponitment</button>
+                    <button onclick="paymentGateway()">Make the apponitment</button>
                 </td>
               </tr>
               <% } %>
@@ -53,7 +53,7 @@
 
     <script src="https://www.payhere.lk/lib/payhere.js"></script>
     <script>
-      function paymentGateway(appointmentId) {
+      function paymentGateway() {
   // Payment configuration
   var paymentConfig = {
         "sandbox": true,
@@ -61,7 +61,7 @@
         "return_url": "#",     // Important
         "cancel_url": "#",     // Important
         "notify_url": "#",
-        "order_id": appointmentId,
+        "order_id": "***",
         "items": "Appoinment with Dr. <%= doctor.firstName %>",
         "amount": "1000",
         "currency": "LKR",
