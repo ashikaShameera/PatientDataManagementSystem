@@ -1,10 +1,31 @@
-<h1>Doctor details <%= doctor.firstName %> </h1>
+<% layout('layouts/patientboilerplate')%>
 
-<section>
-    <div style="text-align: center;" class="mt-n4" >
+  <section class="d-flex align-items-center" style="margin-top: 10%;">
+    <div class="container">
+      <div class="card">
+        <div class="card-body d-flex">
+          <div class="">
+           
+            <i class="fas fa-user-md fa-5x mx-3" style="color: #007bff;"></i>
+            <h4 class="card-subtitle mb-2 mt-3">Dr.<%= doctor.firstName %>
+                <%= doctor.lastName %>
+            </h4>
+          </div>
+          <div class="mx-4 p-3">
+            <h6 class="">Specialization : <%= doctor.specialization %></h6>
+            <h6 class="">Email :  <%= doctor.email %></h6>
+            <h6 class="">Cantact Number : <%= doctor.contactNumber %></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div style="text-align: center;" class="mt-n4">
       <h1>Appointments</h1>
       <br><br>
-      <% if (appointments && appointments.length) { %>
+      <% if (appointments && appointments.length> 0) { %>
         <table class="table">
           <thead>
             <tr>
@@ -29,27 +50,26 @@
                   <%= appointment.roomNumber %>
                 </td>
                 <td>
-                  <%= appointment.currentPatients%>
+                  <%= appointment.currentPatients %>
                 </td>
                 <td>
                   <%= appointment.maximumPatients %>
                 </td>
                 <td>
-                    <!-- //To Post /:id/:doctorId/appointments -->
-                    <form id="appointmentForm" action="/patient/<%= patient._id %>/<%= doctor._id %>/appointments" method="post">
-                        <input type="text" value="<%= appointment.id %>"  name="appointmentId" hidden >
-                    </form>
-                    <button onclick="paymentGateway('<%= appointment.id %>')">Make the apponitment</button>
+                  <form id="appointmentForm" action="/patient/<%= patient._id %>/<%= doctor._id %>/appointments" method="post">
+                    <input type="text" value="<%= appointment.id %>" name="appointmentId" hidden>
+                  </form>
+                  <button onclick="paymentGateway('<%= appointment.id %>')" class="btn btn-primary">Make the apponitment</button>
                 </td>
               </tr>
-              <% } %>
           </tbody>
-        </table>
-        <% } else { %>
-          <p>No Appointments</p>
-          <% } %>
-        </div>
-    </section>
+        </table>  
+        <% } %>
+          <% } else { %>
+            <p>No Appointments</p>
+            <% } %>
+    </div>
+  </section>
 
     <script src="https://www.payhere.lk/lib/payhere.js"></script>
     <script>
