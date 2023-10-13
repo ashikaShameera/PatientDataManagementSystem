@@ -1,25 +1,10 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/login.css">
-  </head>
-  <body>
+<% layout('layouts/boilerplate') %>
+<div class="scroll-container">
+  <div class="container mt-5">
     <form action="/login" method="post" novalidate class="validated-form">
       <div class="row">
         <div class="col-md-6  class1">
-          <div class="class1div1">
-            <a href="/">	&#8810  Back to Home</a>
-          </div>
-          <div class="class1div2">
-            <h2><span><em style="color:  rgb(24, 85, 197,1); font-size:80px;">e</em></span> CHANNELLING</h2>
-            <br>
-            <br>
-            <h2>Become a premium member and enjoy a 15% reduction on your ECL service fee.</h2>
-          </div>
+            <img class="img-fluid rounded-5 img-sq" src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1372&q=80" alt="">
         </div>
         <div class="col-md-6 class2">
           <div>
@@ -50,8 +35,8 @@
         </div>
       </div>
     </form>
-    <!-- Bootstrap JS -->
-    <script src="/javascripts/boostrapFormValidation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  </body>
-  </html>
+  </div>
+</div>
+
+
+    
