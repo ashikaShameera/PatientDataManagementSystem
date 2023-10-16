@@ -98,10 +98,17 @@
                     Looks Good!
                   </div>
                 </div>
-
+                <div class="mb-3">
+                  <label for="number" class="form-label">Number of Address</label>
+                  <input type="number" id="number" name="pharmacist[address][number]" class="form-control"
+                    value="<%= pharmacist.address.number %>">
+                  <div class="valid-feedback">
+                    Looks Good!
+                  </div>
+                </div>
                 <div class="mb-3">
                   <label for="street" class="form-label">Street:</label>
-                  <input type="text" id="street" name="pharmacist[address.street]" class="form-control"
+                  <input type="text" id="street" name="pharmacist[address][street]" class="form-control"
                     value="<%= pharmacist.address.street %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -109,7 +116,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="city" class="form-label">City:</label>
-                  <input type="text" id="city" name="pharmacist[address.city]" class="form-control"
+                  <input type="text" id="city" name="pharmacist[address][city]" class="form-control"
                     value="<%= pharmacist.address.city %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -117,7 +124,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="state" class="form-label">State:</label>
-                  <input type="text" id="state" name="pharmacist[address.state]" class="form-control"
+                  <input type="text" id="state" name="pharmacist[address][state]" class="form-control"
                     value="<%= pharmacist.address.state %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -125,7 +132,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="postalCode" class="form-label">Postal Code:</label>
-                  <input type="number" id="postalCode" name="pharmacist[address.postalCode]" class="form-control"
+                  <input type="number" id="postalCode" name="pharmacist[address][postalCode]" class="form-control"
                     value="<%= pharmacist.address.postalCode %>">
                   <div class="valid-feedback">
                     Looks Good!

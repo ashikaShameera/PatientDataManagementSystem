@@ -1,51 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-</head>
+<% layout('layouts/patientboilerplate')%>
+<br><br>
+<section id="patientid" class="d-flex align-items-center">
+  <div class="container">
+    <h1>Welcome <br> <%= patient.firstName%></h1>
+  </div>
+</section>
+<section id="doctor" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h2 class="text-center">Search Doctors</h2>
+        <p class="text-center">Quickly find and access information of doctors.</p>
 
-  
-  <body>
+        <form action="/patient/<%= patient.id %>/doctors" method="post">
+          <div class="m-3">
+            <div>
+            <label for="forType">Select Type : </label>
+            </div>
+            <select class="form-control" name="selectType" id="selectType">
+              <option value="doctor">Doctors</option>
+              <option value="Specialization">Specialization</option>
+            </select>
+          </div>
 
-  <div>
-    <h1>Showing the patient data <%= patient.id%></h1>
-    <h1>Showing the patient data <%= patient.firstName%></h1>
-    
-    <!-- This form use to search doctors for make an appointments by patient -->
-    <form action="/patient/<%=patient.id%>/doctors" method="post"> 
-
-      <label for="selectType">Select Type</label>
-      <select name="selectType" id="selectType" style="display: inline-block;">
-        <option value="doctor">Doctors</option>
-        <option value="Specialization">Specialization</option>
-      </select>
-
-      <input type="text" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
-      <button id="DoctorSearchBtn">Search</button>
-
-    </form>
-    <a href="/logout" class="btn btn-danger">Logout</a>
-    <a href="/reset-password" class="btn btn-warning">Reset Password</a>
-
-    <% if(doctor && doctor.length > 0){ %>
-      <% for (let d of doctor){%>
-        <div>
-        <div class="row">
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title "><%= d.firstName %> <%= d.lastName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted"><%= d.specialization %></h6>
-              <p class="card-text">In here you must show doctors university,degree and doctor licern number</p>
-              <a href="/patient/<%= patient._id %>/<%= d._id %>/appointments" class="btn btn-primary">Book Now</a>
+          <div class="input-group m-3">
+            <input type="text" class="form-control" id="DoctorSearchInput" name="DoctorSearchInput" placeholder="Search Doctor Name (Max 30 Characters)">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit" id="DoctorSearchBtn">Search</button>
             </div>
           </div>
         </div>
-      <% } %>
-    <% }%>
+        </form>
+
+      </div>
+    </div>
   </div>
+</section>
+    <!-- This form use to search doctors for make an appointments by patient -->
+    <section>
+      <div class="container">
+      <% if (doctor && doctor.length > 0) { %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let d of doctor) { %>
+              <tr>
+                <td><%= d.firstName %> <%= d.lastName %></td>
+                <td><%= d.specialization %></td>
+                <td>
+                  <a href="/patient/<%= patient._id %>/<%= d._id %>/appointments" class="btn btn-primary">Book Now</a>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      <% } %>
+      </div>
+    </section>
 
   <!-- Future Appointments -->
   <section>
-    <div style="text-align: center;" class="mt-n4" >
+    <div style="text-align: center;" class="container mt-n4" >
       <h1>Future Appointments</h1>
       <br><br>
       <% if (upcomingAppointments && upcomingAppointments.length) { %>
@@ -104,7 +125,7 @@
         <div class="text-center">
           <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
         </div>
-        <div>
+        <div class="container">
           <div class="row mt-4">
             <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
               <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
@@ -130,15 +151,14 @@
 
   <!-- Medical Reports -->
   <section>
-    <div class="mx-3">
         <div class="text-center">
           <h2 class="fw-bold text-center">Medical Reports</h2>
         </div>
         <div>
-          <div class="row mt-4">
+          <div class="container">
             <% if (patient && patient.report.length) { %>
 
-            <table class="table">
+            <table class="table text-center">
                 <thead>
                   <tr>
                     <th>Report Type</th>
@@ -168,7 +188,7 @@
           </div>
         </div>
 
-      </div>
+      
 </section>
 
 <!-- Future Appointments -->
@@ -231,6 +251,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   
-  </body>
-
-</html>
+    

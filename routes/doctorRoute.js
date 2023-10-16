@@ -4,10 +4,11 @@ const router = express.Router();
 const doctorControl=require('../controllers/doctorControl');
 const catchAsync=require('../utils/catchAsync');
 const verifyAuthToken = require('../authMiddleware');
+const { isValidateDoctor } = require('../middleware');
 
 router.route('/register')
     .get(doctorControl.renderRegisterForm)                  //To render registation form
-    .post(catchAsync(doctorControl.registerDoctor))         //To send registation post request
+    .post(isValidateDoctor,catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
 router.route('/:id')
     .get(catchAsync(doctorControl.showDoctor))          //load when doctor login to system

@@ -91,7 +91,7 @@
               <div class="col-5">
                 <div class="mb-3">
                   <label for="number" class="form-label">Number:</label>
-                  <input type="number" id="number" name="patient[address.number]"
+                  <input type="number" id="number" name="patient[address][number]"
                     value="<%= patient.address.number %>" class="form-control">
                   <div class="valid-feedback">
                     Looks Good!
@@ -99,7 +99,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="street" class="form-label">Street:</label>
-                  <input type="text" id="street" name="patient[address.street]" class="form-control"
+                  <input type="text" id="street" name="patient[address][street]" class="form-control"
                     value="<%= patient.address.street %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -107,7 +107,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="city" class="form-label">City:</label>
-                  <input type="text" id="city" name="patient[address.city]" class="form-control"
+                  <input type="text" id="city" name="patient[address][city]" class="form-control"
                     value="<%= patient.address.city %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -115,7 +115,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="state" class="form-label">State:</label>
-                  <input type="text" id="state" name="patient[address.state]" class="form-control"
+                  <input type="text" id="state" name="patient[address][state]" class="form-control"
                     value="<%= patient.address.state %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -123,7 +123,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="postalCode" class="form-label">Postal Code:</label>
-                  <input type="number" id="postalCode" name="patient[address.postalCode]" class="form-control"
+                  <input type="number" id="postalCode" name="patient[address][postalCode]" class="form-control"
                     value="<%= patient.address.postalCode %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -131,7 +131,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="medicalHistory.allergies" class="form-label">Allergies:</label>
-                  <input type="text" id="allergies" name="patient[medicalHistory.allergies]" class="form-control"
+                  <input type="text" id="allergies" name="patient[medicalHistory][allergies]" class="form-control"
                     value="<%= patient.medicalHistory.allergies.join(', ') %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -139,7 +139,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="medicalHistory.conditions" class="form-label">Conditions:</label>
-                  <input type="text" id="conditions" name="patient[medicalHistory.conditions]" class="form-control"
+                  <input type="text" id="conditions" name="patient[medicalHistory][conditions]" class="form-control"
                     value="<%= patient.medicalHistory.conditions.join(', ') %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -147,7 +147,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="medicalHistory.medications" class="form-label">Medications:</label>
-                  <input type="text" id="medications" name="patient[medicalHistory.medications]" class="form-control"
+                  <input type="text" id="medications" name="patient[medicalHistory][medications]" class="form-control"
                     value="<%= patient.medicalHistory.medications.join(', ') %>">
                   <div class="valid-feedback">
                     Looks Good!
@@ -155,7 +155,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="emergencyContact.EmgName" class="form-label">Emergency Contact Name:</label>
-                  <input type="text" id="emergencyContactName" name="patient[emergencyContact.EmgName]"
+                  <input type="text" id="emergencyContactName" name="patient[emergencyContact][EmgName]"
                     value="<%= patient.emergencyContact.EmgName %>" class="form-control">
                   <div class="valid-feedback">
                     Looks Good!
@@ -163,7 +163,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="emergencyContact.EmgRelationship" class="form-label">Emergency Contact Relationship:</label>
-                  <input type="text" id="emergencyContactRelationship" name="patient[emergencyContact.EmgRelationship]"
+                  <input type="text" id="emergencyContactRelationship" name="patient[emergencyContact][EmgRelationship]"
                     value="<%= patient.emergencyContact.EmgRelationship %>" class="form-control">
                   <div class="valid-feedback">
                     Looks Good!
@@ -171,7 +171,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="emergencyContact.EmgContactNumber" class="form-label">Emergency Contact Number:</label>
-                  <input type="text" id="emergencyContactNumber" name="patient[emergencyContact.EmgContactNumber]"
+                  <input type="text" id="emergencyContactNumber" name="patient[emergencyContact][EmgContactNumber]"
                     value="<%= patient.emergencyContact.EmgContactNumber %>" class="form-control">
                   <div class="valid-feedback">
                     Looks Good!

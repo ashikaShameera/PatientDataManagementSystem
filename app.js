@@ -27,6 +27,7 @@ const reportRoute=require('./routes/reportRoute')
 const pharmacistRoute=require('./routes/pharmacistRoute')
 const appointmentRoute=require('./routes/appointmentRoute');
 const insurerRoute=require('./routes/insurerRoute')
+const paymentRoute = require('./routes/paymentRoute')
 const cookieParser = require('cookie-parser');
 
 
@@ -58,7 +59,7 @@ app.use('/report',reportRoute);
 app.use('/pharmacist',pharmacistRoute)
 app.use('/admin/appointment',appointmentRoute);      //going to admin/apponitmentRoute
 app.use('/insurer',insurerRoute)
-
+app.use('/payment', paymentRoute)
 
 
 app.get('/',(req,res)=>{

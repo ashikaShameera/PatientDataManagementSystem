@@ -541,6 +541,90 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# patient
+--------------------------------------------------------------*/
+#patientid {
+  width: 100%;
+  height: 90vh;
+  background: url("../img/patienthome.jpg") top center;
+  background-size: cover;
+  margin-bottom: -200px;
+}
+
+#patientid .container {
+  position: relative;
+}
+
+#patientid h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #2c4964;
+}
+
+#patientid h2 {
+  color: #2c4964;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+#patientid .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 35px;
+  margin-top: 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
+
+#patientid .btn-get-started:hover {
+  background: #3291e6;
+}
+
+@media (min-width: 1024px) {
+  #patientid {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 992px) {
+  #patientid {
+    margin-bottom: 0;
+    height: 100vh;
+  }
+
+  #patientid .container {
+    padding-bottom: 63px;
+  }
+
+  #patientid h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  #patientid h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-height: 600px) {
+  #patientid {
+    height: 110vh;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
 section {
@@ -1746,4 +1830,15 @@ section {
   background: #1c84e3;
   color: #fff;
   text-decoration: none;
+}
+
+.img-sq{
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.bg-registersection{
+  background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
 }
