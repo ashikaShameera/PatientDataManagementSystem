@@ -5,6 +5,7 @@
             <%- include('../partials/sidebar') %>
                 </div>
                 <div class="content">
+                    <!-- admin header -->
                     <div class="row">
                         <div class="col-11">
                             <h1>Welcome, Admin!</h1>
@@ -14,18 +15,17 @@
                             <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
                         </div>
                     </div>
+
+                    <!--  -->
                     <div class="row">
                         <div class="col-3">
-                            <button id="overviewToggleBtn" type="button" class="btn btn-primary">Overview Of
-                                Doctors</button>
+                            <a href="/admin/appointment" class="btn btn-primary">All Appointment</a>
                         </div>
-                        <div class="col-3">
-                            <button id="toggleBtn" type="button" class="btn btn-primary">Search Doctor For Create An
-                                Appointment</button>
-                        </div>
+
                     </div>
+
                     <div class="block">
-                        <div id="Registation" class="hidden">
+                        <div id="Registation">
 
                             <!-- find Doctor by searching -->
                             <form action="/admin/appointment/findDoctor" method="post">
@@ -45,6 +45,7 @@
                                 <button id="DoctorSearchBtn">Search</button>
 
                             </form>
+                            <!-- form end -->
 
                             <% if(doctors && doctors.length> 0){ %>
                                 <% for (let d of doctors){%>
@@ -114,19 +115,16 @@
                                     </div>
 
                                     <!-- form end -->
-
-                                    <!-- all appointment -->
-                                    <div id="overview" class="">
-
-                                        <section>
-                                            <h1>hi overview</h1>
-                                        </section>
-                                    </div>
                         </div>
                     </div>
                 </div>
                 </div>
         </main>
+
+
+
+
+
 
         <script>
             function fillDoctorEmail(email) {
@@ -194,6 +192,7 @@
             // Set the minimum date for the appointment date input
             document.getElementById("date").min = nextDay;
         </script>
+
     </body>
 
     </html>
