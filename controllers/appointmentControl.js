@@ -11,6 +11,7 @@ module.exports.showAllAppointments = async (req, res) => {
 }
 
 
+
 module.exports.renderAppointmentDoctorSearchForm = (req, res) => {
     const encodedDoctor = req.query.doctor;     //Geting Doctor details from query parser    
     if (encodedDoctor) {
@@ -66,6 +67,8 @@ module.exports.getDoctorDetails = async (req, res) => {
 
 }
 
+
+
 //use to edit appointment
 module.exports.editAppointment = async (req, res) => {
     const { id } = req.params;
@@ -74,12 +77,13 @@ module.exports.editAppointment = async (req, res) => {
     res.redirect(`admin/appoinment/${appoinment.id}`);
     res.send(appoinment)
 }
+
+
 //use to delete appointment
-module.exports.deleteAppointment=async(req,res)=>{
-    const {id}=req.params;
+module.exports.deleteAppointment = async (req, res) => {
+    const { id } = req.params;
     await Appointment.findByIdAndDelete(id);
     res.send(`Appointment Id=${id} is deleted`)//meka redirect wenna one mona page ekatda
 
- }
+}
 
- 
