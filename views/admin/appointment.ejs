@@ -19,11 +19,36 @@
             <div class="col-3">
               <a href="/admin/appointment/Create" class="btn btn-primary">Make Appointment</a>
             </div>
+            <div class="col-3">
+              <a href="/admin/appointment" class="btn btn-primary">All Appointment</a>
+            </div>
           </div>
+
+
+
 
 
           <!-- all appointment -->
           <div id="overview" class="">
+
+            <div class="block">
+              <form action="" method="">
+                <div class="d-flex justify-content-around p-5">
+                  <select name="selectType" id="selectType" style="display: inline-block;">
+                    <option value="Doctor">Doctor</option>
+                    <option value="Patient">Patient</option>
+                  </select>
+
+                  <input type="text" id="appointmentSearchInput" name="appointmentSearchInput" class="form-control"
+                    placeholder="Search Appointment using Patient or Doctor(Max 30 Characters)">
+
+                  <div class="col-md-3">
+                    <button id="appointmentSearchBtn" class="btn btn-primary form-control">Search</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
 
 
             <!-- future Appointments -->
@@ -82,7 +107,7 @@
                     </tbody>
                   </table>
                   <% } else { %>
-                    <p>No upComming Appointments</p>
+                    <p>No Upcoming Appointments</p>
                     <% } %>
               </div>
             </section>

@@ -1,8 +1,8 @@
 const Doctor = require("../models/doctor");
 const Patient = require("../models/patient");
-const Nurse =require('../models/nurse')
-const Pharmacist= require('../models/pharmacist')
-const Insurer= require('../models/insurer')
+const Nurse = require('../models/nurse')
+const Pharmacist = require('../models/pharmacist')
+const Insurer = require('../models/insurer')
 
 module.exports.searchDoctors = async (selectType, DoctorSearchInput) => {
   let doctors;
@@ -45,7 +45,7 @@ module.exports.searchDoctors = async (selectType, DoctorSearchInput) => {
 };
 
 //This function use by admin to get doctors to make appointmetns
-module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput="") => {
+module.exports.searchDoctorsAdmin = async (selectType, DoctorSearchInput = "") => {
   let doctors;
 
   if (selectType === "Specialization") {
@@ -105,17 +105,17 @@ module.exports.searchDoctorById = async (doctorId) => {
 
 //To find Patinet
 //searchQuery can be name,phone number,email or NIC
-module.exports.searchPatient=async (searchQuery="")=>{
+module.exports.searchPatient = async (searchQuery = "") => {
 
-let patients;
+  let patients;
 
-// Split the search query into parts (firstName and lastName)
-const queryParts = searchQuery.split(' ');
-const firstName = queryParts[0];
-const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
+  // Split the search query into parts (firstName and lastName)
+  const queryParts = searchQuery.split(' ');
+  const firstName = queryParts[0];
+  const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
 
-  try{
-     patients = await Patient.find({
+  try {
+    patients = await Patient.find({
       $or: [
         { email: searchQuery },
         { nic: searchQuery },
@@ -123,84 +123,109 @@ const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
         { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
       ]
     });
-  }catch(erro){
+  } catch (erro) {
     console.log(erro)
   }
 
   return patients;
 }
 
-module.exports.searchNurse=async (searchQuery="")=>{
+module.exports.searchNurse = async (searchQuery = "") => {
 
   let nurses;
-  
+
   // Split the search query into parts (firstName and lastName)
   const queryParts = searchQuery.split(' ');
   const firstName = queryParts[0];
   const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
-  
-    try{
-      nurses = await Nurse.find({
-        $or: [
-          { email: searchQuery },
-          { nic: searchQuery },
-          { contactNumber: searchQuery },
-          { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
-        ]
-      });
-    }catch(erro){
-      console.log(erro)
-    }
-  
-    return nurses;
+
+  try {
+    nurses = await Nurse.find({
+      $or: [
+        { email: searchQuery },
+        { nic: searchQuery },
+        { contactNumber: searchQuery },
+        { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
+      ]
+    });
+  } catch (erro) {
+    console.log(erro)
   }
 
-  module.exports.searchPharmacist = async (searchQuery = "") => {
+  return nurses;
+}
 
-    let pharmacists;
-  
-    // Split the search query into parts (firstName and lastName)
-    const queryParts = searchQuery.split(' ');
-    const firstName = queryParts[0];
-    const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
-  
-    try {
-      pharmacists = await Pharmacist.find({
-        $or: [
-          { email: searchQuery },
-          { nic: searchQuery },
-          { contactNumber: searchQuery },
-          { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
-        ]
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  
-    return pharmacists;
+module.exports.searchPharmacist = async (searchQuery = "") => {
+
+  let pharmacists;
+
+  // Split the search query into parts (firstName and lastName)
+  const queryParts = searchQuery.split(' ');
+  const firstName = queryParts[0];
+  const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
+
+  try {
+    pharmacists = await Pharmacist.find({
+      $or: [
+        { email: searchQuery },
+        { nic: searchQuery },
+        { contactNumber: searchQuery },
+        { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
+      ]
+    });
+  } catch (error) {
+    console.log(error);
   }
+
+  return pharmacists;
+}
 
 
 module.exports.searchInsurer = async (searchQuery = "") => {
-    let insurers;
+  let insurers;
 
-    // Split the search query into parts (firstName and lastName)
-    const queryParts = searchQuery.split(' ');
+  // Split the search query into parts (firstName and lastName)
+  const queryParts = searchQuery.split(' ');
 
-    try {
-        insurers = await Insurer.find({
-            $or: [
-                { email: searchQuery },
-                { iic: searchQuery },
-                { contactNumber: searchQuery },
-                { companyName: searchQuery} // Search by both firstName and lastName
-            ]
-        });
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    insurers = await Insurer.find({
+      $or: [
+        { email: searchQuery },
+        { iic: searchQuery },
+        { contactNumber: searchQuery },
+        { companyName: searchQuery } // Search by both firstName and lastName
+      ]
+    });
+  } catch (error) {
+    console.log(error);
+  }
 
-    return insurers;
+  return insurers;
 }
 
-  
+
+//TO find Doctor kamesh
+module.exports.searchDoctorInAppointment = async (searchQuery = "") => {
+
+  let doctors;
+
+  // Split the search query into parts (firstName and lastName)
+  const queryParts = searchQuery.split(' ');
+  const firstName = queryParts[0];
+  const lastName = queryParts.length > 1 ? queryParts.slice(1).join(' ') : '';
+
+  try {
+    doctors = await Doctor.find({
+      $or: [
+        { email: searchQuery },
+        { nic: searchQuery },
+        { contactNumber: searchQuery },
+        { $or: [{ firstName }, { lastName }] } // Search by both firstName and lastName
+      ]
+    });
+  } catch (erro) {
+    console.log(erro)
+  }
+
+  return doctors;
+}
