@@ -1,16 +1,76 @@
 const Appointment = require('../models/appointment');
 const Doctor = require('../models/doctor');
 const Patient = require("../models/patient");
+const searchController = require('./searchController')
 
 const { searchDoctorsAdmin, searchDoctorById } = require('./searchController');
 
+//get local date
+const currentDate = new Date();
+
 //render appointment page in admin panel
 module.exports.renderAppointmentPage = async (req, res) => {
-    // Fetch all appointments
-    const appointments = await Appointment.find();
-    // Render the appointment.ejs template with the appointments data
-    res.render("admin/appointment", { appointments });
+    try {
+        let appointments, upcomingAppointments, pastAppointments;
+        let patients, doctors;
+
+        let selectQuery = req.query.appointmentSearchInput;
+        const selectType = req.query.selectType;
+        if (selectQuery) {
+            selectQuery = selectQuery;
+        }
+
+        if (selectType === 'Doctor') {
+            doctors = await searchController.searchDoctorInAppointment(selectQuery);
+            console.log("doctor :" + doctors);
+            // Search appointments based on the found doctors
+            if (doctors && doctors.length > 0) {
+                appointments = await Appointment.find({
+                    doctor: { $in: doctors.map(doctor => doctor._id) }
+                }).populate({ path: 'doctor' });
+            }
+        } else if (selectType === 'Patient') {
+            // Search appointments based on the found patients
+            patients = await searchController.searchPatient(selectQuery);
+            console.log("Patients :" + patients);
+            if (patients && patients.length > 0) {
+                appointments = await Appointment.find({
+                    patients: { $in: patients.map(patient => patient._id) }
+                }).populate({ path: 'doctor' });
+            }
+        } else {
+            // If no search type specified, fetch all appointments
+            appointments = await Appointment.find().populate({ path: 'doctor' });
+        }
+        console.log("appoimnets" + appointments)
+
+        // Separate appointments into upcoming and past appointments
+        if (appointments) {
+            upcomingAppointments = appointments.filter(appointment => appointment.date >= currentDate);
+            pastAppointments = appointments.filter(appointment => appointment.date < currentDate);
+        } else {
+            // Handle the case where appointments is undefined (e.g., no appointments found)
+            upcomingAppointments = [];
+            pastAppointments = [];
+        }
+
+        res.render("admin/appointment", { appointments, upcomingAppointments, pastAppointments });
+    } catch (err) {
+        console.log(err);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //render appointment creation page in admin panel

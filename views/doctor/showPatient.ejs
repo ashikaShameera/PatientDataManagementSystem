@@ -124,14 +124,14 @@
                     <input class="form-control" type="file" name="reportFile" id="reportFile" required>
                 </div>
     
-                <button type="submit" class="btn btn-danger">Upload Report</button>
+                <button type="submit" class="btn btn-primary">Upload Report</button>
             </form>
         </div>
     </section>
 
     <section>
         <div class="d-flex container" id="btnContainer">
-        <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-warning mx-3">Add Diagnostic Card</button>
+        <h3>To Add Diagnostic Card Click This Button :  </h3><button  id="showFormButton" class="btn btn-primary mx-3">Add Diagnostic Card</button>
        </div>
         <div class="col-12 d-flex justify-content-around">
             <div id="formContainer" style="display: none;" class="container">
@@ -169,7 +169,7 @@
             <div class="text-center">
               <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
             </div>
-            <div>
+            <div class="container">
               <div class="row mt-4">
                 <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
                   <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
@@ -199,7 +199,7 @@
             <div class="text-center">
               <h2 class="fw-bold text-center">Medical Reports</h2>
             </div>
-            <div>
+            <div class="container">
               <div class="row mt-4">
                 <% if (patient && patient.report.length) { %>
 

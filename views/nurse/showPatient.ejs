@@ -107,7 +107,8 @@
 </section>
 <!-- Report adding section -->
 <section>
-    <h1>Add Report</h1>
+    <div class="container">
+    <h1 class="text-center fw-bold">Add Report</h1>
     <form action="/report" method="POST" enctype="multipart/form-data">
         <input type="text" name="patientId" value="<%= patient.id %>" hidden>
         <input type="text" name="nurseId" value="<%= nurseId %>" hidden>
@@ -121,16 +122,17 @@
             <input class="form-control" type="file" name="reportFile" id="reportFile" required>
         </div>
 
-        <button type="submit" class="btn btn-danger">Upload Image</button>
+        <button type="submit" class="btn btn-primary">Upload Image</button>
     </form>
+    </div>
 </section>
 
 <section>
     <div class="mx-3">
-        <div class="text-center">
+        <div class=" text-center">
             <h2 class="fw-bold text-center">Diagnostic Card & Prescription Details</h2>
         </div>
-        <div>
+        <div class="container">
             <div class="row mt-4">
                 <% if (DiagnosticCardAndPrescriptions && DiagnosticCardAndPrescriptions.length) { %>
                 <% for (let i = 0; i < DiagnosticCardAndPrescriptions.length; i++) { %>
@@ -160,7 +162,7 @@
         <div class="text-center">
             <h2 class="fw-bold text-center">Medical Reports</h2>
         </div>
-        <div>
+        <div class="container">
             <div class="row mt-4">
                 <% if (patient && patient.report.length) { %>
 

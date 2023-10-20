@@ -1,57 +1,40 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/login.css">
-  </head>
-  <body>
-    <form action="/login" method="post" novalidate class="validated-form">
-      <div class="row">
-        <div class="col-md-6  class1">
-          <div class="class1div1">
-            <a href="/">	&#8810  Back to Home</a>
-          </div>
-          <div class="class1div2">
-            <h2><span><em style="color:  rgb(24, 85, 197,1); font-size:80px;">e</em></span> CHANNELLING</h2>
-            <br>
-            <br>
-            <h2>Become a premium member and enjoy a 15% reduction on your ECL service fee.</h2>
-          </div>
-        </div>
-        <div class="col-md-6 class2">
-          <div>
-            <h1><span class="class2div1">Welcome</span></h1>
-            <% if (error) { %>
-              <div class="alert alert-danger">
-                <%= error %>
+<% layout('layouts/logingboilerplate')%>
+<section style="margin-top: 0.3%;">
+    <form action="" method="post" novalidate class="validated-form">
+          <div class="row">
+              <div class="col-md-6  class1">
+                  <div class="class1div1">
+                     <a href="/">	&#8810  Back to Home</a>
+                  </div>
+                  <div class="class1div2">
+                      <h2><span><em style="color:  rgb(24, 85, 197,1); font-size:80px;">e</em></span> CHANNELLING</h2>
+                   <br>
+                   <br>
+                      <h2>Become a premium member and enjoy a 15% reduction on your ECL service fee.</h2>
+                  </div>
+               </div>
+              <div class="col-md-6 class2">
+                <div>
+                    <h1><span class="class2div1">Welcome</span></h1>
+                    <p>don't have an account <a href="/patient/register">Register</a></p>
+                </div>
+                 <br>
+                <form>
+                  <div class="form-group">
+                     <label for="username">Email</label>
+                     <input type="email" class="form-control" id="username" placeholder="Email" required>
+                  </div>
+                  <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="Password" required>
+                   <br>
+                      <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me signed in</label>
+                      <p><a href="#">Forgot Password?</a><p>
+                  </div>
+                  <br>
+                   <button type="submit" class="btn btn-primary">Login</button>
+                </form>
               </div>
-            <% } %>
-            <p>Don't have an account? <a href="/patient/register">Register</a></p>
-          </div>
-          <br>
-          <form>
-            <div class="form-group">
-              <label for="username">Email</label>
-              <input type="email" class="form-control" id="username" name="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-              <br>
-              <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me signed in</label>
-              <p><a href="#">Forgot Password?</a></p>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Login</button>
-          </form>
-        </div>
-      </div>
-    </form>
-    <!-- Bootstrap JS -->
-    <script src="/javascripts/boostrapFormValidation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-  </body>
-  </html>
+           </div>
+        </form>
+      </section>
