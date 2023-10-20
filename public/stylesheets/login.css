@@ -21,11 +21,10 @@ body {
   }
   
   .class1{
-    background-color:rgb(24, 85, 197,0.8);
+  
     height:100vh;
     border-end-end-radius: 25%;
     background: linear-gradient(rgba(24, 85, 197, 0), rgba(24, 85, 197, 0)), url(/images/login.jpg) no-repeat;
-    background-color: #000;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -33,7 +32,7 @@ body {
   }
   
   .class1div1 a{
-     color: rgb(24, 85, 197,1);
+     color: rgb(52, 57, 66);
   }
   
   .class1div1{
@@ -49,6 +48,7 @@ body {
     max-width: 80%;
     margin: 150px auto;
     align-items: center;
+   
   }
   
   .class2{
