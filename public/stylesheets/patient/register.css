@@ -93,6 +93,7 @@ body {
     background: linear-gradient(rgba(24, 85, 197, 0), rgba(24, 85, 197, 0)), url(/images/Register.jpg) no-repeat;
     background-color: #000;
     background-position: center;
+    margin-top: 5%;
     background-size: cover;
     background-repeat: no-repeat;
   }
