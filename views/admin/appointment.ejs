@@ -15,67 +15,174 @@
             </div>
           </div>
           <div class="row">
+
             <div class="col-3">
-              <button id="overviewToggleBtn" type="button" class="btn btn-primary">ALL Appointment</button>
+              <a href="/admin/appointment/Create" class="btn btn-primary">Make Appointment</a>
             </div>
             <div class="col-3">
-              <button id="toggleBtn" type="button" class="btn btn-primary">Create Appointment</button>
+              <a href="/admin/appointment" class="btn btn-primary">All Appointment</a>
             </div>
           </div>
-          <div class="block">
-            <div id="Registation" class="hidden">
-              <span>
-                <a href="/admin/appointment/Create" class="btn btn-primary">Make Appointment</a>
-              </span>
+
+
+
+
+
+          <!-- all appointment -->
+          <div id="overview" class="">
+
+            <div class="block">
+              <form action="" method="">
+                <div class="d-flex justify-content-around p-5">
+                  <select name="selectType" id="selectType" style="display: inline-block;">
+                    <option value="Doctor">Doctor</option>
+                    <option value="Patient">Patient</option>
+                  </select>
+
+                  <input type="text" id="appointmentSearchInput" name="appointmentSearchInput" class="form-control"
+                    placeholder="Search Appointment using Patient or Doctor(Max 30 Characters)">
+
+                  <div class="col-md-3">
+                    <button id="appointmentSearchBtn" class="btn btn-primary form-control">Search</button>
+                  </div>
+                </div>
+              </form>
             </div>
 
-            <!-- all appointment -->
-            <div id="overview" class="">
-
-              <section>
-                <h1>Appointment Details</h1>
-                <% if(appointments && appointments.length){ %>
-                  <% for(let appointment of appointments) { %>
-                    <div>
-                      <span>
-                        Doctor's First Name : <%= appointment.doctor && appointment.doctor.firstName %>
-                      </span>
-                      <span>
-                        Appointment Date : <%= appointment.date %>
-                      </span>
-                      <span>
-                        Appointment Time : <%= appointment.time %>
-                      </span>
-                      <span>
-                        Room Number : <%= appointment.roomNumber %>
-                      </span>
-                      <span>
-                        Maximum Patients : <%= appointment.maximumPatients %>
-                      </span>
-                      <span>
-                        Current Patients : <%= appointment.currentPatients %>
-                      </span>
 
 
-                      <span>
-                        <a href="/admin/appointment/<%=appointment._id%>" class="btn btn-primary">Edit</a>
-                      </span>
-                      <span>
-                        <a href="/admin/appointment/<%= appointment._id %>" class="btn btn-danger"
-                          data-action="delete">Delete</a>
-                      </span>
-
-                    </div>
-                    <br>
+            <!-- future Appointments -->
+            <section>
+              <div style="text-align: center;" class="mt-n4">
+                <h1>Future Appointments</h1>
+                <br><br>
+                <% if (upcomingAppointments && upcomingAppointments.length) { %>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room Number</th>
+                        <th>Doctor Name</th>
+                        <th>Doctor specialization</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let upcomingAppointment of upcomingAppointments) { %>
+                        <tr class="table-row-style">
+                          <td>
+                            <%= upcomingAppointment.date %>
+                          </td>
+                          <td>
+                            <%= upcomingAppointment.time %>
+                          </td>
+                          <td>
+                            <%= upcomingAppointment.roomNumber %>
+                          </td>
+                          <td>
+                            <% if (upcomingAppointment.doctor) { %>
+                              <%= upcomingAppointment.doctor.firstName %>
+                                <% } else { %>
+                                  Doctor information not available
+                                  <% } %>
+                          </td>
+                          <td>
+                            <% if (upcomingAppointment.doctor) { %>
+                              <%= upcomingAppointment.doctor.specialization %>
+                                <% } else { %>
+                                  Doctor information not available
+                                  <% } %>
+                          </td>
+                          <td><span>
+                              <a href="/admin/appointment/<%=upcomingAppointment._id%>" class="btn btn-primary">Edit</a>
+                            </span>
+                            <span>
+                              <a href="/admin/appointment/<%= upcomingAppointment._id %>" class="btn btn-danger"
+                                data-action="delete">Delete</a>
+                            </span>
+                          </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <p>No Upcoming Appointments</p>
                     <% } %>
-                      <% } %>
-              </section>
-            </div>
+              </div>
+            </section>
+
+            <!-- past Appointments -->
+            <section>
+              <div style="text-align: center;" class="mt-n4">
+                <h1>Past Appointments</h1>
+                <br><br>
+                <% if (pastAppointments && pastAppointments.length) { %>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Room Number</th>
+                        <th>Doctor Name</th>
+                        <th>Doctor specialization</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let pastAppointment of pastAppointments) { %>
+                        <tr class="table-row-style">
+                          <td>
+                            <%= pastAppointment.date %>
+                          </td>
+                          <td>
+                            <%= pastAppointment.time %>
+                          </td>
+                          <td>
+                            <%= pastAppointment.roomNumber %>
+                          </td>
+
+                          <td>
+                            <% if (pastAppointment.doctor) { %>
+                              <%= pastAppointment.doctor.firstName %>
+                                <% } else { %>
+                                  Doctor information not available
+                                  <% } %>
+                          </td>
+                          <td>
+                            <% if (pastAppointment.doctor) { %>
+                              <%= pastAppointment.doctor.specialization %>
+                                <% } else { %>
+                                  Doctor information not available
+                                  <% } %>
+                          </td>
+                          <td><span>
+                              <a href="/admin/appointment/<%=pastAppointment._id%>" class="btn btn-primary">Edit</a>
+                            </span>
+                            <span>
+                              <a href="/admin/appointment/<%= pastAppointment._id %>" class="btn btn-danger"
+                                data-action="delete">Delete</a>
+                            </span>
+                          </td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+                  <% } else { %>
+                    <p>No Past Appointments</p>
+                    <% } %>
+              </div>
+            </section>
+
+
+
           </div>
         </div>
         </div>
-        
+        </div>
+
     </main>
+
 
     <script src="/public/show.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
