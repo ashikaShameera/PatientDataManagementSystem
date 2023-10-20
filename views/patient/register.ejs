@@ -1,174 +1,163 @@
-<% layout('layouts/boilerplate') %>
- <div class="container mt-5">
-    <form action="/patient" method="POST" novalidate class="validated-form">
-        <div class="row">
-            <div class="col-md-6  class1">
-                <img class="img-fluid rounded-5 img-sq" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="">
-            </div>
-          <div class="col-md-6 class2 p-3">
-            <div>
-                <h1><span class="class2div1">Registation</span></h1>
-                <p>Already have an account? <a href="/login">Login</a></p>
-            </div>
-                  <% if (error) { %>
-                      <div class="alert alert-danger">
-                        <%= error %>
-                      </div>
-                    <% } %>
-             <br>
-              <div class="form-group">
-                  <label for="firstName" class="form-label" >First Name:</label>
-                  <input type="text" id="firstName" class="form-control" name="patient[firstName]" required>
-                  <div class="valid-feedback">
-                    Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="lastName">Last Name:</label>
-                  <input type="text" id="lastName" class="form-control" name="patient[lastName]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="email">email:</label>
-                  <input type="email" id="email" class="form-control" name="patient[email]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="dateOfBirth">Date of Birth:</label>
-                  <input type="date" id="dateOfBirth" class="form-control" name="patient[dateOfBirth]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="gender">Gender:</label>
-                  <select id="gender" class="form-control" name="patient[gender]">
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                  </select>
-               </div>
-               <div class="form-group">
-                  <label for="contactNumber">Contact Number:</label>
-                  <input type="tel" id="contactNumber" class="form-control" name="patient[contactNumber]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="nic">NIC Number:</label>
-                  <input type="text" id="nic" class="form-control" name="patient[nic]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="addressNumber">Address Number:</label>
-                  <input type="number" id="addressNumber" class="form-control" name="patient[address][number]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-               <div class="form-group">
-                   <label for="street">Street:</label>
-                   <input type="text" id="street" class="form-control" name="patient[address][street]" required>
-                   <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-               </div>
-              <div class="form-group">
-                  <label for="city">City:</label>
-                  <input type="text" id="city" class="form-control" name="patient[address][city]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="state">State:</label>
-                  <input type="text" id="state" class="form-control" name="patient[address][state]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="postalCode">Postal Code:</label>
-                  <input type="number" id="postalCode" class="form-control" name="patient[address][postalCode]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="allergies">Allergies:</label>
-                  <input type="text" id="allergies" class="form-control" name="patient[medicalHistory][allergies]">
-              </div>
-              <div class="form-group">
-                  <label for="conditions">Conditions:</label>
-                  <input type="text" id="conditions" class="form-control" name="patient[medicalHistory][conditions]">
-              </div>
-              <div class="form-group">
-                  <label for="medications">Medications:</label>
-                   <input type="text" id="medications" class="form-control" name="patient[medicalHistory][medications]">
-              </div>
-              <div class="form-group">
-                  <label for="emergencyName">Emergency Contact Name:</label>
-                 <input type="text" id="emergencyName" class="form-control" name="patient[emergencyContact][EmgName]">
-              </div>
-              <div class="form-group">
-                  <label for="emergencyRelationship">Emergency Contact Relationship:</label>
-                  <input type="text" id="emergencyRelationship" class="form-control" name="patient[emergencyContact][EmgRelationship]">
-              </div>
-              <div class="form-group">
-                  <label for="emergencyContactNumber">Emergency Contact Number:</label>
-                  <input type="tel" id="emergencyContactNumber" class="form-control" name="patient[emergencyContact][EmgContactNumber]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="password">Password:</label>
-                  <input type="password" id="password" class="form-control" name="patient[password]" required>
-                  <div class="valid-feedback">
-                      Looks Good!
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label for="reenterPassword">Reenter Password:</label>
-                  <input type="password" id="reenterPassword" class="form-control" name="reenterPassword" required>
+<% layout('layouts/registerboilerplate')%>
+<section style="margin-top: 0.5%;">
+<form action="/patient" method="POST" novalidate class="validated-form">
+  <div class="row">
+    <div class="col-md-6  class1">
+        <div class="class1div1">
+           <a href="/">	&#8810  Back to Home</a>
+        </div>
+        <div class="class1div0">
+            
+            <p>Already have an account? <br><a href="/login" style="color: black;">Login</a></p>
+        </div>
+     </div>
+    <div class="col-md-6 class2">
+      <div>
+          <h1><span class="class2div1">Registation</span></h1>
+      </div>
+            <% if (error) { %>
+                <div class="alert alert-danger">
+                  <%= error %>
                 </div>
-              <br>
-                 <button type="submit" class="btn btn-primary" >Register</button>
-             </div>
-       </div>
-      </form>
-      
- </div>    
-      <!-- This is for boostrap form validation -->
-      <script src="/javascripts/boostrapFormValidation.js"></script>
-      <script>
-        // Get references to the password and reenter password fields
-        const passwordField = document.getElementById('password');
-        const reenterPasswordField = document.getElementById('reenterPassword');
-      
-        // Function to validate password fields
-        function validatePasswords() {
-          const password = passwordField.value;
-          const reenterPassword = reenterPasswordField.value;
-      
-          // Check if passwords match
-          if (password !== reenterPassword) {
-            reenterPasswordField.setCustomValidity('Passwords do not match');
-          } else {
-            reenterPasswordField.setCustomValidity('');
-          }
-        }
-      
-        // Add event listeners to trigger validation
-        passwordField.addEventListener('input', validatePasswords);
-        reenterPasswordField.addEventListener('input', validatePasswords);
-      </script>
-      
+              <% } %>
+       <br>
+        <div class="form-group">
+            <label for="firstName" class="form-label" >First Name:</label>
+            <input type="text" id="firstName" class="form-control" name="patient[firstName]" required>
+            <div class="valid-feedback">
+              Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" class="form-control" name="patient[lastName]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="email">email:</label>
+            <input type="email" id="email" class="form-control" name="patient[email]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="dateOfBirth">Date of Birth:</label>
+            <input type="date" id="dateOfBirth" class="form-control" name="patient[dateOfBirth]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" class="form-control" name="patient[gender]">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="contactNumber">Contact Number:</label>
+            <input type="tel" id="contactNumber" class="form-control" name="patient[contactNumber]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="nic">Nic Number:</label>
+            <input type="text" id="nic" class="form-control" name="patient[nic]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="addressNumber">Address Number:</label>
+            <input type="number" id="addressNumber" class="form-control" name="patient[address][number]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+         <div class="form-group">
+             <label for="street">Street:</label>
+             <input type="text" id="street" class="form-control" name="patient[address][street]" required>
+             <div class="valid-feedback">
+                Looks Good!
+            </div>
+         </div>
+    </div>
+ </div>
+ <div class="row">
+    <div class="col-md-6 class4">
+        <div class="class4div2">
+            <h2><em class="class4div2E">e</em> CHANNELLING</h2>
 
+            <h2>Become a premium member and enjoy a 15% reduction on your ECL service fee.</h2>
+        </div>
+    </div>
+    <div class="col-md-6  class3">
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" class="form-control" name="patient[address][city]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" id="state" class="form-control" name="patient[address][state]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="postalCode">Postal Code:</label>
+            <input type="number" id="postalCode" class="form-control" name="patient[address][postalCode]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="allergies">Allergies:</label>
+            <input type="text" id="allergies" class="form-control" name="patient[medicalHistory][allergies]">
+        </div>
+        <div class="form-group">
+            <label for="conditions">Conditions:</label>
+            <input type="text" id="conditions" class="form-control" name="patient[medicalHistory][conditions]">
+        </div>
+        <div class="form-group">
+            <label for="medications">Medications:</label>
+             <input type="text" id="medications" class="form-control" name="patient[medicalHistory][medications]">
+        </div>
+        <div class="form-group">
+            <label for="emergencyName">Emergency Contact Name:</label>
+           <input type="text" id="emergencyName" class="form-control" name="patient[emergencyContact][EmgName]">
+        </div>
+        <div class="form-group">
+            <label for="emergencyRelationship">Emergency Contact Relationship:</label>
+            <input type="text" id="emergencyRelationship" class="form-control" name="patient[emergencyContact][EmgRelationship]">
+        </div>
+        <div class="form-group">
+            <label for="emergencyContactNumber">Emergency Contact Number:</label>
+            <input type="tel" id="emergencyContactNumber" class="form-control" name="patient[emergencyContact][EmgContactNumber]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" class="form-control" name="patient[password]" required>
+            <div class="valid-feedback">
+                Looks Good!
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reenterPassword">Reenter Password:</label>
+            <input type="password" id="reenterPassword" class="form-control" name="reenterPassword" required>
+          </div>
+        <br>
+           <button type="submit" class="btn btn-primary" >Register</button>
+       </div>
+ </div>
+</form>
+</section>
