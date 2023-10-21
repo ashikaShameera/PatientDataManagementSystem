@@ -48,12 +48,20 @@ body, h1, h2, ul, li {
     display: none;
   }
 
-.block{
+
+.block {
     margin-top: 10px;
-    height: 85%; 
-    background-color:#f3f3f3;
+    height: 85%; /* Make the block fill the available height */
+    background-color: #f3f3f3;
     border-color: #f3f3f3;
     border-radius: 10px;
 }
+
+.validated-form {
+  max-height: 70vh; 
+  overflow-y: auto; 
+}
+
+
 
 
