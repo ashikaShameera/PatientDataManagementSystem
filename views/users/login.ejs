@@ -1,6 +1,6 @@
 <% layout('layouts/logingboilerplate')%>
 <section style="margin-top: 0.3%;">
-    <form action="" method="post" novalidate class="validated-form">
+    <form action="/login" method="post" novalidate class="validated-form">
           <div class="row">
               <div class="col-md-6  class1">
                   <div class="class1div2">
@@ -9,17 +9,22 @@
               <div class="col-md-6 class2">
                 <div>
                     <h1><span class="class2div1">Welcome</span></h1>
+                    <% if (error) { %>
+                     <div class="alert alert-danger">
+                       <%= error %>
+                     </div>
+                   <% } %>
                     <p>don't have an account <a href="/patient/register">Register</a></p>
                 </div>
                  <br>
                 <form>
                   <div class="form-group">
                      <label for="username">Email</label>
-                     <input type="email" class="form-control" id="username" placeholder="Email" required>
+                     <input type="email" class="form-control" id="username" name="email" placeholder="Email" required>
                   </div>
                   <div class="form-group">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Password" required>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                    <br>
                       <input type="checkbox" id="checkbox"><label style="font-weight: normal; margin-left: 1em;">Keep me signed in</label>
                       <p><a href="#">Forgot Password?</a><p>

@@ -64,6 +64,7 @@ module.exports.adminRegisterPatient=async(req,res)=>{
         const saltRounds = 10; // Number of rounds (adjust as needed)
         const hashedPassword = await bcrypt.hash(patient.password, saltRounds);
         patient.password = hashedPassword
+        
            // Create a new User with the hashed password and role 'Patient'
     const user = new User({
         email: patient.email,
