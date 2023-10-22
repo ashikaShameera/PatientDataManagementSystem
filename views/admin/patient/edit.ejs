@@ -17,6 +17,11 @@
       <div class="block" style="height: 90%;">
         <div id="content">
           <h1 class="text-center">Update Details Of Patient <%= patient.firstName %> <%= patient.lastName %></h1>
+          <% if (error) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+            <% } %>
 
           <form action="/admin/patient/<%= patient.id %>?_method=PUT" method="POST" novalidate
             class="validated-form">
@@ -70,7 +75,7 @@
                 <div class="mb-3">
                   <label for="email" class="form-label">Email:</label>
                   <input type="email" id="email" name="patient[email]" class="form-control"
-                    value="<%= patient.email %>" required>
+                    value="<%= patient.email %>" required disabled>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
@@ -78,17 +83,11 @@
                 <div class="mb-3">
                   <label for="nic" class="form-label">NIC:</label>
                   <input type="text" id="nic" name="patient[nic]" class="form-control" value="<%= patient.nic %>"
-                    required>
+                    required disabled>
                   <div class="valid-feedback">
                     Looks Good!
                   </div>
                 </div>
-                <div class="mb-3">
-                  <button type="button" id="deleteBtn" class="btn btn-danger form-control">Delete Patient</button>
-                </div>
-              </div>
-
-              <div class="col-5">
                 <div class="mb-3">
                   <label for="number" class="form-label">Number:</label>
                   <input type="number" id="number" name="patient[address][number]"
@@ -105,6 +104,12 @@
                     Looks Good!
                   </div>
                 </div>
+                <div class="mb-3">
+                  <button type="button" id="deleteBtn" class="btn btn-danger form-control">Delete Patient</button>
+                </div>
+              </div>
+
+              <div class="col-5">
                 <div class="mb-3">
                   <label for="city" class="form-label">City:</label>
                   <input type="text" id="city" name="patient[address][city]" class="form-control"

@@ -23,7 +23,8 @@ const {
     const { error } = doctorSchema.validate(req.body.doctor);
     if (error) {
       const msg = error.details.map(el => el.message).join(',');
-      throw new ExpressError(msg, 400);
+      req.validationError = msg
+      next()
     } else {
       next();
     }
@@ -33,7 +34,8 @@ const {
     const { error } = nurseSchema.validate(req.body.nurse);
     if (error) {
       const msg = error.details.map(el => el.message).join(',');
-      throw new ExpressError(msg, 400);
+      req.validationError = msg
+      next()
     } else {
       next();
     }
@@ -43,7 +45,8 @@ const {
     const { error } = insurerSchema.validate(req.body.insurer);
     if (error) {
       const msg = error.details.map(el => el.message).join(',');
-      throw new ExpressError(msg, 400);
+      req.validationError = msg
+      next()
     } else {
       next();
     }
@@ -53,7 +56,8 @@ const {
     const { error } = pharmacistSchema.validate(req.body.pharmacist);
     if (error) {
       const msg = error.details.map(el => el.message).join(',');
-      throw new ExpressError(msg, 400);
+      req.validationError = msg
+      next()
     } else {
       next();
     }

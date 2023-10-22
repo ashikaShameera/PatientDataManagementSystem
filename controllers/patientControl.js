@@ -62,13 +62,13 @@ module.exports.adminRegisterPatient=async(req,res)=>{
     try {
         const patient = new Patient(req.body.patient);
         if (req.validationError) {
-            // If there is an error message, handle it accordingly
+            // If there is an validation error, handle it accordingly
             res.status(400).render('admin/patient', {
               patients: null,
               error: req.validationError, // Use the error message from the middleware
             });
-          } 
-        // Generate a salt and hash the password
+          } else{
+            // Generate a salt and hash the password
         const saltRounds = 10; // Number of rounds (adjust as needed)
         const hashedPassword = await bcrypt.hash(patient.password, saltRounds);
         patient.password = hashedPassword
@@ -85,6 +85,8 @@ module.exports.adminRegisterPatient=async(req,res)=>{
       await user.save();
       await patient.save();
           res.redirect(`/admin/patient`);
+          }
+        
         } catch (error) {
            if (error.code === 11000) {
                 // Handle duplicate key error
@@ -96,7 +98,7 @@ module.exports.adminRegisterPatient=async(req,res)=>{
                 // Handle other errors
                 res.status(400).render('admin/patient', {
                   patients: null,
-                  error: 'Validation error.',
+                  error: 'Error occured during registration',
                 });
               }
             }

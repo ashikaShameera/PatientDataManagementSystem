@@ -44,7 +44,7 @@ module.exports.renderAdminPatientPage = async (req, res) => {
 module.exports.showPatient = async (req, res) => {
     const id = req.params.id;
     const patient = await Patient.findById(id);
-    res.render('admin/patient/edit', { patient }); // Update the view path
+    res.render('admin/patient/edit', { patient,error:null }); // Update the view path
 };
 
 
@@ -53,17 +53,26 @@ module.exports.showPatient = async (req, res) => {
 module.exports.updatePatient = async (req, res) => {
     try {
         const { id } = req.params;
-        const { email } = req.body.patient; // Update 'doctor' to 'patient' here
-        const patient = await Patient.findByIdAndUpdate(id, req.body.patient); // Update 'doctor' to 'patient' here
+        const { email } = req.body.patient;
+        const patient = await Patient.findByIdAndUpdate(id, req.body.patient); 
+        if (req.validationError) {
+            // If there is an validation error , handle it accordingly
+            res.status(400).render("admin/patient/edit", {
+                patient,
+              error: req.validationError, // Use the error message from the middleware
+            });
+          }else{
         const user = await User.findOne({ profile: patient._id });
         user.email = email;
         await patient.save();
         await user.save();
 
-        res.redirect(`/admin/patient`); // Update the redirect path
+        res.redirect(`/admin/patient`); }// Update the redirect path
     } catch (error) {
-        console.error('Error updating Patient:', error);
-        res.status(500).json({ error: 'Failed to update Patient' });
+         res.status(400).redirect('admin/patient/edit', {
+           error: 'Error occured during update',
+         });
+        
     }
 };
 

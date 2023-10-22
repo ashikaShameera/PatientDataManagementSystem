@@ -9,6 +9,13 @@ const DiagnosticCardAndPrescriptionController=require('../controllers/Diagnostic
 module.exports.registerNurse=async(req,res)=>{
   try {
     const nurse=new Nurse(req.body.nurse); 
+    if (req.validationError) {
+      // If there is an validation error , handle it accordingly
+      res.status(400).render('admin/nurse/nurse', {
+        nurses: null,
+        error: req.validationError, // Use the error message from the middleware
+      });
+    }else{
     const saltRounds = 10; // Number of rounds (adjust as needed)
     const hashedPassword = await bcrypt.hash(nurse.password, saltRounds);
     nurse.password = hashedPassword   
@@ -21,7 +28,7 @@ module.exports.registerNurse=async(req,res)=>{
     await user.save()     
     await nurse.save();      
     res.redirect(`/admin/nurse`);
-    
+    }
   } catch (error) {
     if (error.code === 11000) {
       // This error code (11000) indicates a duplicate key error
@@ -31,9 +38,10 @@ module.exports.registerNurse=async(req,res)=>{
       });
       
   } else {
-      // Handle other errors (e.g., validation errors)
-      console.error('Error during registration:', error);
-      res.status(500).render('error', { error: 'Registration failed' });
+    res.status(400).render('admin/nurse/nurse', {
+      nurses: null,
+      error: 'Error occured during registration',
+    });
   }
   }
      

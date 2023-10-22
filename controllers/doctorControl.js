@@ -24,6 +24,13 @@ module.exports.renderRegisterForm=(req,res)=>{
 module.exports.registerDoctor=async(req,res)=>{
    try {
    const doctor=new Doctor(req.body.doctor); 
+   if (req.validationError) {
+      // If there is an error message, handle it accordingly
+      res.status(400).render('admin/doctor', {
+        doctors: null,
+        error: req.validationError, // Use the error message from the middleware
+      });
+    } else{
    const saltRounds = 10; // Number of rounds (adjust as needed)
    const hashedPassword = await bcrypt.hash(doctor.password, saltRounds);
    doctor.password = hashedPassword   
@@ -36,7 +43,7 @@ module.exports.registerDoctor=async(req,res)=>{
    await user.save()  
    await doctor.save()       
      
-   res.redirect(`/admin/doctor`);
+   res.redirect(`/admin/doctor`);}
    } catch (error) {
       if (error.code === 11000) {
          // This error code (11000) indicates a duplicate key error
@@ -46,10 +53,10 @@ module.exports.registerDoctor=async(req,res)=>{
          });
          
      } else {
-         // Handle other errors (e.g., validation errors)
-         console.error('Error during registration:', error);
-         res.status(500).render('error', { error: 'Registration failed' });
-     }
+      res.status(400).render('admin/doctor', {
+         doctors: null,
+         error: 'Error occured during registration',
+       });}
    }
    //need to add flash msg 
 }
