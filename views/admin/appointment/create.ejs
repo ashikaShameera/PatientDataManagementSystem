@@ -29,96 +29,125 @@
 
                             <!-- find Doctor by searching -->
                             <form action="/admin/appointment/findDoctor" method="post">
-
-                                <label for="selectType">Select Type</label>
-                                <select name="selectType" id="selectType" style="display: inline-block;">
-                                    <option value="doctor">Doctor</option>
-                                    <option value="Specialization">Specialization</option>
-                                    <option value="NIC">NIC</option>
-                                    <option value="Email">Email</option>
-                                    <option value="ContactNumber">Phone Number</option>
-
-                                </select>
-
-                                <input type="text" id="DoctorSearchInput" name="DoctorSearchInput"
-                                    placeholder="Search Doctor Name (Max 30 Characters)">
-                                <button id="DoctorSearchBtn">Search</button>
-
-                            </form>
-                            <!-- form end -->
-
-                            <% if(doctors && doctors.length> 0){ %>
-                                <% for (let d of doctors){%>
-                                    <div>
-                                        <div class="row">
-                                            <div class="card" style="width: 18rem;">
-                                                <div class="card-body">
-                                                    <h5 class="card-title ">
-                                                        <%= d.firstName %>
-                                                            <%= d.lirstName %>
-
-                                                    </h5>
-                                                    <h6 class="card-subtitle mb-2 text-muted">
-                                                        <%= d.specialization %>
-                                                    </h6>
-                                                    <h6>
-                                                        <%= d.email %>
-                                                    </h6>
-                                                    <p class="card-text">In here you must show doctors
-                                                        university,degree and doctor licern number</p>
-                                                    <button class="btn btn-primary"
-                                                        onclick="fillDoctorEmail('<%= d.email %>')">Make an
-                                                        Appointment</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <% } %>
-                                            <% }%>
-
-                                                <h3 style="text-align: center;">Appointment Creation Form</h3>
-
-                                                <form action="/admin/appointment/new" method="POST" novalidate
-                                                    class="validated-form">
-
-                                                    <label for="email"></label>
-                                                    <input type="email" id="email" name="search_field" readonly />
-                                                    <br />
-
-                                                    <label for="date">Date:</label>
-                                                    <input type="date" id="date" name="appointment[date]" required />
-                                                    <br />
-
-
-                                                    <label for="time">Time:</label>
-                                                    <input type="time" id="time" name="appointment[time]" required />
-                                                    <br />
-
-
-                                                    <label for="roomNumber">Room Number:</label>
-                                                    <input type="number" id="roomNumber" name="appointment[roomNumber]"
-                                                        min="1" max="20" required />
-                                                    <br />
-                                                    <label for="maximumPatients">maximum Patients:</label>
-                                                    <input type="number" id="maximumPatients"
-                                                        name="appointment[maximumPatients]" required />
-                                                    <br />
-
-
-                                                    <div class="mb-3">
-                                                        <button type="submit"
-                                                            class="btn btn-primary form-control">Create
-                                                            Appointment</button>
-                                                    </div>
-                                                </form>
-
-
+                                <div class="d-flex justify-content-around p-5 ">
+                                    <div class="col-1">
+                                        <label for="selectType" class="form-label">Select Type :</label>
                                     </div>
 
-                                    <!-- form end -->
+                                    <select name="selectType" id="selectType" style="display: inline-block;"
+                                        class="form-control">
+                                        <option value="doctor">Doctor</option>
+                                        <option value="Specialization">Specialization</option>
+                                        <option value="NIC">NIC</option>
+                                        <option value="Email">Email</option>
+                                        <option value="ContactNumber">Phone Number</option>
+                                    </select>
+
+
+                                    <input type="text" id="DoctorSearchInput" name="DoctorSearchInput"
+                                        placeholder="Search Doctor Name (Max 30 Characters)" class="form-control">
+
+                                    <div class="col-md-3">
+                                        <button id="DoctorSearchBtn"
+                                            class="btn btn-primary form-control">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- form end -->
+                            <div class="block m-3">
+                                <% if (doctors && doctors.length> 0) { %>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Specialization</th>
+                                                <th>Email</th>
+                                                <th>University</th>
+                                                <th>Degree</th>
+                                                <th>License Number</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for (let d of doctors) { %>
+                                                <tr>
+                                                    <td>
+                                                        <%= d.firstName %>
+                                                            <%= d.lastName %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.specialization %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.email %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.university %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.degree %>
+                                                    </td>
+                                                    <td>
+                                                        <%= d.licenseNumber %>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-primary" id="makeAppointment"
+                                                            onclick="fillDoctorEmail('<%= d.email %>'); document.getElementById('appoinmentForm').classList.remove('hidden');">Make an
+                                                            Appointment</button>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                        </tbody>
+                                    </table>
+                                    <% } %>
+                            </div>
+                              
+                            <section id="appoinmentForm" class="hidden">
+                            <h3 style="text-align: center;">Appointment Creation Form</h3>
+
+                            <form action="/admin/appointment/new" method="POST" novalidate class="validated-form">
+                               <div class="d-flex justify-content-around">
+                                <div class="col-5">
+                                <div class="form-group">
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="search_field" class="form-control" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date:</label>
+                                    <input type="date" id="date" name="appointment[date]" class="form-control"
+                                        required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="time">Time:</label>
+                                    <input type="time" id="time" name="appointment[time]" class="form-control"
+                                        required />
+                                </div>
+                                </div>
+                                 <div class="col-5">
+                                <div class="form-group">
+                                    <label for="roomNumber">Room Number:</label>
+                                    <input type="number" id="roomNumber" name="appointment[roomNumber]"
+                                        class="form-control" min="1" max="20" required />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="maximumPatients">Maximum Patients:</label>
+                                    <input type="number" id="maximumPatients" name="appointment[maximumPatients]"
+                                        class="form-control" required />
+                                </div>
+                                <br>
+                                <div class="form-group ">
+                                    <button type="submit" class="btn btn-primary form-control">Create  Appointment</button>
+                                </div>
+                                </div>
+                            </div>
+                            </form>
+                        </section>
+                            </div>
                         </div>
                     </div>
-                </div>
-                </div>
         </main>
 
 
@@ -153,6 +182,7 @@
             var overviewToggleBtn = document.getElementById('overviewToggleBtn');
             var Overview = document.getElementById('overview');
 
+
             toggleBtn.addEventListener('click', function () {
                 if (content.classList.contains('hidden')) {
                     Overview.classList.add('hidden');
@@ -170,6 +200,7 @@
                     Overview.classList.add('hidden');
                 }
             });
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
             integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
