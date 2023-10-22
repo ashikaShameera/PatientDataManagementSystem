@@ -33,7 +33,7 @@
               <%= error %>
             </div>
           <% } %>
-          <form action="/nurse/register" method="POST" novalidate class="validated-form">
+          <form action="/nurse/register" method="POST" novalidate style="max-height: 73vh;overflow-y: auto;" class="validated-form">
 
             <div class="d-flex justify-content-around">
 
@@ -86,18 +86,19 @@
                 <div class="mb-3">
                   <label for="contactNumber" class="form-label">Contact Number:</label>
                   <input type="text" id="contactNumber" class="form-control" name="nurse[contactNumber]"
-                    required><br>
+                    required>
                 </div>
 
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" id="email" class="form-control" name="nurse[email]" required><br>
 
-                <label for="number" class="form-label">Number Of Address :</label>
-                <input type="number" id="number" class="form-control" name="nurse[address][number]"><br>
-
+                
               </div>
 
               <div class="col-5">
+                <label for="number" class="form-label">Number Of Address :</label>
+                <input type="number" id="number" class="form-control" name="nurse[address][number]"><br>
+
                 <label for="street" class="form-label">Street:</label>
                 <input type="text" id="street" class="form-control" name="nurse[address][street]"><br>
 
@@ -113,8 +114,6 @@
                 <label for="nurseLicenseNumber">Nurse License Number:</label>
                 <input type="text" id="nurseLicenseNumber" class="form-control"
                   name="nurse[nurseLicenseNumber]" required><br>
-
-                <br>
 
                 <div class="mb-3">
                   <button type="submit" class="btn btn-primary form-control">Register</button>
@@ -145,7 +144,7 @@
           <section>
             <div style="text-align: center;" class="m-3">
               <h1>Nurse Information</h1>
-            
+             <div class="scrollable-div">
               <% if (nurses && nurses.length) { %>
                 <table class="table">
                   <thead>
@@ -184,6 +183,7 @@
                 <% } else { %>
                   <p>No Nurses found.</p>
                   <% } %>
+             </div>
                 </div>
             </section>
 

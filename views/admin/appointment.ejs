@@ -53,6 +53,7 @@
               <div style="text-align: center;" class="mt-n4">
                 <h1>Future Appointments</h1>
                 <br><br>
+                <div class="scrollable-div-20vh">
                 <% if (upcomingAppointments && upcomingAppointments.length) { %>
                   <table class="table">
                     <thead>
@@ -106,6 +107,7 @@
                   <% } else { %>
                     <p>No Upcoming Appointments</p>
                     <% } %>
+                  </div>
               </div>
             </section>
 
@@ -114,6 +116,7 @@
               <div style="text-align: center;" class="mt-4">
                 <h1>Past Appointments</h1>
                 <br><br>
+                <div class="scrollable-div-20vh">
                 <% if (pastAppointments && pastAppointments.length) { %>
                   <table class="table">
                     <thead>
@@ -168,6 +171,7 @@
                   <% } else { %>
                     <p>No Past Appointments</p>
                     <% } %>
+              </div>
               </div>
             </section>
 
