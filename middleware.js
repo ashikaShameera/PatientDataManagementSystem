@@ -12,7 +12,8 @@ const {
     const { error } = patientSchema.validate(req.body.patient);
     if (error) {
       const msg = error.details.map(el => el.message).join(',');
-      throw new ExpressError(msg, 400);
+     req.validationError = msg
+     next()
     } else {
       next();
     }

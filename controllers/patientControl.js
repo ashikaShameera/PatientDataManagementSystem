@@ -50,8 +50,10 @@ module.exports.createPatient=async (req,res)=>{
                 });
             } else {
                 // Handle other errors (e.g., validation errors)
-                console.error('Error during registration:', error);
-                res.status(500).render('error', { error: 'Registration failed' });
+               // console.error('Error during registration:', error);
+               res.status(400).render('patient/register', {
+                error: 'Other error',
+            });
             }
         }
 }
@@ -59,7 +61,13 @@ module.exports.createPatient=async (req,res)=>{
 module.exports.adminRegisterPatient=async(req,res)=>{
     try {
         const patient = new Patient(req.body.patient);
-        
+        if (req.validationError) {
+            // If there is an error message, handle it accordingly
+            res.status(400).render('admin/patient', {
+              patients: null,
+              error: req.validationError, // Use the error message from the middleware
+            });
+          } 
         // Generate a salt and hash the password
         const saltRounds = 10; // Number of rounds (adjust as needed)
         const hashedPassword = await bcrypt.hash(patient.password, saltRounds);
@@ -78,19 +86,21 @@ module.exports.adminRegisterPatient=async(req,res)=>{
       await patient.save();
           res.redirect(`/admin/patient`);
         } catch (error) {
-            if (error.code === 11000) {
-                // This error code (11000) indicates a duplicate key error
-                // Handle the duplicate email or NIC error here
-                res.status(400).render('admin/patient', {patients:null,
-                    error: 'Email or NIC is already in use. Please choose a different one.',
+           if (error.code === 11000) {
+                // Handle duplicate key error
+                res.status(400).render('admin/patient', {
+                  patients: null,
+                  error: 'Email or NIC is already in use. Please choose a different one.',
                 });
-            } else {
-                // Handle other errors (e.g., validation errors)
-                console.error('Error during registration:', error);
-                res.status(500).render('error', { error: 'Registration failed' });
+              } else {
+                // Handle other errors
+                res.status(400).render('admin/patient', {
+                  patients: null,
+                  error: 'Validation error.',
+                });
+              }
             }
-        }   
-   }
+          };
   
 
 module.exports.showPatient=async(req,res)=>{

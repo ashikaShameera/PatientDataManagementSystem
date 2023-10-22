@@ -28,7 +28,6 @@ module.exports.renderAdminPatientPage = async (req, res) => {
     let patients;
 
     let PatientSearchInput = req.query.PatientSearchInput;
-    console.log(PatientSearchInput)
 
     if (PatientSearchInput) {
         PatientSearchInput = PatientSearchInput.trim();
