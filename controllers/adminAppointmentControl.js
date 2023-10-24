@@ -193,7 +193,7 @@ module.exports.deleteAppointment = async (req, res) => {
         console.log(`deleted appointement ${deletedAppointment}`);
         // Check if the appointment was found and deleted
         if (!deletedAppointment) {
-            res.redirect('/admin/appointment');
+            res.render('/admin/appointment');
         }
 
         // Return a success message or appropriate response
