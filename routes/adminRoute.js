@@ -9,47 +9,47 @@ const verifyAuthToken = require('../authMiddleware');
 const middleware = require('../middleware')
 
 router.route('/')
-    .get(adminControl.renderAdminHomePage)  //must handle async error handler
+    .get(verifyAuthToken,adminControl.renderAdminHomePage)  //must handle async error handler
 
 router.route('/doctor')
-    .get(adminControl.renderAdminDoctorPage)
+    .get(verifyAuthToken,adminControl.renderAdminDoctorPage)
 
 router.route('/doctor/:id')
-    .get(catchAsync(adminControl.showDoctor))
-    .put(middleware.isValidateDoctor,catchAsync(adminControl.updateDoctor))
-    .delete(catchAsync(adminControl.deleteDoctor))
+    .get(verifyAuthToken,catchAsync(adminControl.showDoctor))
+    .put(verifyAuthToken,middleware.isValidateDoctor,catchAsync(adminControl.updateDoctor))
+    .delete(verifyAuthToken,catchAsync(adminControl.deleteDoctor))
 
 router.route('/patient')
-    .get(adminControl.renderAdminPatientPage);
+    .get(verifyAuthToken,adminControl.renderAdminPatientPage);
 
 router.route('/patient/:id')
-    .get(catchAsync(adminControl.showPatient))
-    .put(middleware.isValidatePatient,catchAsync(adminControl.updatePatient))
-    .delete(catchAsync(adminControl.deletePatient))
+    .get(verifyAuthToken,catchAsync(adminControl.showPatient))
+    .put(verifyAuthToken,middleware.isValidatePatient,catchAsync(adminControl.updatePatient))
+    .delete(verifyAuthToken,catchAsync(adminControl.deletePatient))
 
 router.route('/nurse')
-    .get(catchAsync(adminControl.renderAdminNursePage))
+    .get(verifyAuthToken,catchAsync(adminControl.renderAdminNursePage))
 
 router.route('/nurse/:id')
-    .get(catchAsync(adminControl.showNurse))
-    .put(middleware.isValidateNurse,catchAsync(adminControl.updateNurse))
-    .delete(catchAsync(adminControl.deleteNurse))
+    .get(verifyAuthToken,catchAsync(adminControl.showNurse))
+    .put(verifyAuthToken,middleware.isValidateNurse,catchAsync(adminControl.updateNurse))
+    .delete(verifyAuthToken,catchAsync(adminControl.deleteNurse))
 
 router.route('/pharmacist')
-    .get(catchAsync(adminControl.renderAdminPharmacistPage))
+    .get(verifyAuthToken,catchAsync(adminControl.renderAdminPharmacistPage))
 
 router.route('/pharmacist/:id')
-    .get(catchAsync(adminControl.showPharmacist))
-    .put(middleware.isValidatePharmacist,catchAsync(adminControl.updatePharmacist))
-    .delete(catchAsync(adminControl.deletePharmacist))
+    .get(verifyAuthToken,catchAsync(adminControl.showPharmacist))
+    .put(verifyAuthToken,middleware.isValidatePharmacist,catchAsync(adminControl.updatePharmacist))
+    .delete(verifyAuthToken,catchAsync(adminControl.deletePharmacist))
 
 router.route('/insurer')
-    .get(catchAsync(adminControl.renderAdminInsurerPage));
+    .get(verifyAuthToken,catchAsync(adminControl.renderAdminInsurerPage));
 
 router.route('/insurer/:id')
-    .get(catchAsync(adminControl.showInsurer))
-    .put(middleware.isValidateInsurer,catchAsync(adminControl.updateInsurer))
-    .delete(catchAsync(adminControl.deleteInsurer));
+    .get(verifyAuthToken,catchAsync(adminControl.showInsurer))
+    .put(verifyAuthToken,middleware.isValidateInsurer,catchAsync(adminControl.updateInsurer))
+    .delete(verifyAuthToken,catchAsync(adminControl.deleteInsurer));
 
 
 //------ Routes For the /admin/Appointment 
@@ -57,26 +57,26 @@ router.route('/insurer/:id')
 
 //render appointment page
 router.route('/appointment')
-    .get(adminAppointmentControl.renderAppointmentPage)
+    .get(verifyAuthToken,adminAppointmentControl.renderAppointmentPage)
 
 router.route('/appointment/create')
-    .get(adminAppointmentControl.renderAppointmentCreationPage)
+    .get(verifyAuthToken,adminAppointmentControl.renderAppointmentCreationPage)
 
 router.route('/appointment/findDoctor')
-    .post(catchAsync(adminAppointmentControl.getDoctorDetails))//get doctor details when make an appointment
+    .post(verifyAuthToken,verifyAuthToken,catchAsync(adminAppointmentControl.getDoctorDetails))//get doctor details when make an appointment
 
 router.route('/appointment/:id')
-    .get(catchAsync(adminAppointmentControl.fillUpdateForm))
-    .delete(catchAsync(adminAppointmentControl.deleteAppointment))
+    .get(verifyAuthToken,catchAsync(adminAppointmentControl.fillUpdateForm))
+    .delete(verifyAuthToken,catchAsync(adminAppointmentControl.deleteAppointment))
 
 
 //routes for the form submission
 router.route('/appointment/new')
-    .post(catchAsync(adminAppointmentControl.createNewAppointment))
+    .post(verifyAuthToken,catchAsync(adminAppointmentControl.createNewAppointment))
 
 
 
-router.put('/appointment/:id', adminAppointmentControl.updateAppointment)
+router.put('/appointment/:id', verifyAuthToken,adminAppointmentControl.updateAppointment)
 
 
 module.exports = router;

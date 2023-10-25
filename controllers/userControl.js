@@ -27,7 +27,7 @@ const handleLogin = async (req, res) => {
     }
 
     // If authentication is successful, create a JWT token
-    const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key', { expiresIn: '10h' });
+    const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key', { expiresIn: '1h' });
     // Set the token as a cookie
     res.cookie('authToken', token, { httpOnly: true });
 
@@ -37,7 +37,7 @@ const handleLogin = async (req, res) => {
     } else if (user.role === 'Doctor') {
       res.redirect(`/doctor/${user.profile._id}`);
     } else if(user.role==='Admin') {
-      res.redirect(`/admin/${user._id}`);
+      res.redirect(`/admin/`);
     }else if(user.role==='Pharmacist') {
       res.redirect(`/pharmacist/${user.profile._id}`);
     }else if(user.role==='Nurse') {

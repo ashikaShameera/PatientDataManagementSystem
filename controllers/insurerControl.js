@@ -8,7 +8,14 @@ const DiagnosticCardAndPrescriptionController=require('../controllers/Diagnostic
 
 module.exports.registerInsurer=async(req,res)=>{
    try {
-   const insurer=new Insurer(req.body.insurer); 
+   const insurer=new Insurer(req.body.insurer);
+   if (req.validationError) {
+    // If there is an validation error , handle it accordingly
+    res.status(400).render('admin/insurer/insurer', {
+      insurers: null,
+      error: req.validationError, // Use the error message from the middleware
+    });
+  }  else{
     const saltRounds = 10; // Number of rounds (adjust as needed)
     const hashedPassword = await bcrypt.hash(insurer.password, saltRounds);
     insurer.password = hashedPassword  
@@ -21,7 +28,7 @@ module.exports.registerInsurer=async(req,res)=>{
     await user.save()    
     await insurer.save();        
     res.redirect(`/admin/insurer`);
-    
+    }
    } catch (error) {
       if (error.code === 11000) {
          // This error code (11000) indicates a duplicate key error
@@ -31,9 +38,10 @@ module.exports.registerInsurer=async(req,res)=>{
          });
          
      } else {
-         // Handle other errors (e.g., validation errors)
-         console.error('Error during registration:', error);
-         res.status(500).render('error', { error: 'Registration failed' });
+      res.status(400).render('admin/insurer/insurer', {
+        insurers: null,
+        error: 'Error occured during registration',
+      });
      }
    }
      

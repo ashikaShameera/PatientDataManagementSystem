@@ -8,19 +8,26 @@ const DiagnosticCardAndPrescriptionController=require('../controllers/Diagnostic
 module.exports.registerPharmarcist=async(req,res)=>{
     try {
     const pharmacist=new Pharmacist(req.body.pharmacist); 
+    if (req.validationError) {
+      // If there is an validation error , handle it accordingly
+      res.status(400).render('admin/pharmacist/pharmacist', {
+        pharmacists: null,
+        error: req.validationError, // Use the error message from the middleware
+      });
+    }else{  
     const saltRounds = 10; // Number of rounds (adjust as needed)
     const hashedPassword = await bcrypt.hash(pharmacist.password, saltRounds);
     pharmacist.password = hashedPassword   
     const user = new User({
-       email: pharmacist.email,
-       password: pharmacist.password,
-       role: "Pharmacist",
-       profile: pharmacist._id
-     });       
+        email: pharmacist.email,
+        password: pharmacist.password,
+        role: "Pharmacist",
+        profile: pharmacist._id
+      });       
     await user.save() 
     await pharmacist.save();          
     res.redirect(`/admin/pharmacist`);
-  
+}
     } catch (error) {
       if (error.code === 11000) {
          // This error code (11000) indicates a duplicate key error
@@ -30,9 +37,10 @@ module.exports.registerPharmarcist=async(req,res)=>{
          });
          
      } else {
-         // Handle other errors (e.g., validation errors)
-         console.error('Error during registration:', error);
-         res.status(500).render('error', { error: 'Registration failed' });
+      res.status(400).render('admin/pharmacist/pharmacist', {
+        pharmacists: null,
+        error: 'Error occured during registration',
+      });
      }
     }
      

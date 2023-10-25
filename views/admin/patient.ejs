@@ -11,7 +11,7 @@
                             <p>This is the admin panel for the patient management system.</p>
                         </div>
                         <div class="col-1">
-                            <button type="button" class="btn btn-danger logoutB" href="#">LogOut</button>
+                            <a href="/logout" class="btn btn-danger">Logout</a>
                         </div>
                     </div>
                     <div class="row">
@@ -143,28 +143,43 @@
                                                 <div class="mb-2">
                                                     <label for="allergies">Allergies:</label>
                                                     <input type="text" id="allergies" class="form-control"
-                                                        name="patient[medicalHistory][allergies]">
+                                                        name="patient[medicalHistory][allergies]" required>
+                                                        <div class="valid-feedback">
+                                                            Looks Good!
+                                                        </div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="conditions">Conditions:</label>
                                                     <input type="text" id="conditions" class="form-control"
-                                                        name="patient[medicalHistory][conditions]">
+                                                        name="patient[medicalHistory][conditions]" required>
+                                                        <div class="valid-feedback">
+                                                            Looks Good!
+                                                        </div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="medications">Medications:</label>
                                                     <input type="text" id="medications" class="form-control"
-                                                        name="patient[medicalHistory][medications]">
+                                                        name="patient[medicalHistory][medications]" required>
+                                                        <div class="valid-feedback">
+                                                            Looks Good!
+                                                        </div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="emergencyName">Emergency Contact Name:</label>
                                                     <input type="text" id="emergencyName" class="form-control"
-                                                        name="patient[emergencyContact][EmgName]">
+                                                        name="patient[emergencyContact][EmgName]" required>
+                                                        <div class="valid-feedback">
+                                                            Looks Good!
+                                                        </div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="emergencyRelationship">Emergency Contact
                                                         Relationship:</label>
                                                     <input type="text" id="emergencyRelationship" class="form-control"
-                                                        name="patient[emergencyContact][EmgRelationship]">
+                                                        name="patient[emergencyContact][EmgRelationship]" required>
+                                                        <div class="valid-feedback">
+                                                            Looks Good!
+                                                        </div>
                                                 </div>
                                                 <div class="mb-2">
                                                     <label for="emergencyContactNumber">Emergency Contact
