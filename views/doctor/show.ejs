@@ -1,41 +1,46 @@
 <% layout('layouts/doctorboilerplate')%>
 
+<section id="hero" class="d-flex align-items-center">
+  <div class="container">
+    <h1>
+      Welcome <br />
+      Dr.<% if(doctor) { %> <%= doctor.firstName %> <% } %>
+    </h1>
+    <h2>
+      Welcome to our healthcare family,We look forward to <br />working together
+      to provide exceptional care to our <br />patients.
+    </h2>
+  </div>
+</section>
 
-  <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-      <h1>Welcome <br> Dr.<% if(doctor) { %>
-          <%= doctor.firstName %>
-            <% } %>
-      </h1>
-      <h2>Welcome to our healthcare family,We look forward to <br>working together to provide exceptional care to our
-        <br>patients.</h2>
-    </div>
-  </section>
+<!-- Search bar of patient Search -->
+<section id="patients" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <h2 class="text-center">Search Patient Records</h2>
+        <p class="text-center">Quickly find and access patient information.</p>
 
-  <!-- Search bar of patient Search -->
-  <section id="patients" class="py-5 bg-light">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <h2 class="text-center">Search Patient Records</h2>
-          <p class="text-center">Quickly find and access patient information.</p>
-
-          <form action="/doctor/<%= doctor.id %>/patients" method="GET">
-            <div class="input-group mb-3">
-              <input type="text" name="patientSearch" class="form-control" placeholder="Enter patient name or ID"
-                aria-label="Patient search" required>
-              <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-          </form>
-
-        </div>
+        <form action="/doctor/<%= doctor.id %>/patients" method="GET">
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              name="patientSearch"
+              class="form-control"
+              placeholder="Enter patient name or NIC or email or phone number"
+              aria-label="Patient search"
+              required
+            />
+            <button class="btn btn-primary" type="submit">Search</button>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section >
+  <section>
     <div style="text-align: center;" class="m-3">
-      <div class="container">
       <% if (patients && patients.length) { %>
         <table class="table">
           <thead>
@@ -73,102 +78,81 @@
           </tbody>
         </table>
         <% } %>
-      </div>
     </div>
   </section>
 
-  <!-- Future Appointments -->
-  <section>
-    <div style="text-align: center;" class="mt-n4">
-      <h1>Future Appointments</h1>
-      <br><br>
-      <div class="container">
+<!-- Future Appointments -->
+<section>
+  <div style="text-align: center" class="mt-n4">
+    <h1>Future Appointments</h1>
+    <br /><br />
+    <div class="container">
       <% if (upCommingAppointments && upCommingAppointments.length) { %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Room Number</th>
-              <th>Number of Patients</th>
-              <th>Maximum Number of Patients</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (let upCommingAppointment of upCommingAppointments) { %>
-              <tr class="table-row-style">
-                <td>
-                  <%= upCommingAppointment.date %>
-                </td>
-                <td>
-                  <%= upCommingAppointment.time %>
-                </td>
-                <td>
-                  <%= upCommingAppointment.roomNumber %>
-                </td>
-                <td>
-                  <%= upCommingAppointment.currentPatients%>
-                </td>
-                <td>
-                  <%= upCommingAppointment.maximumPatients %>
-                </td>
-                <td><a href="" class="btn btn-primary">Edit</a></td>
-              </tr>
-              <% } %>
-          </tbody>
-        </table>
-        <% } else { %>
-          <p>No upComming Appointments</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Room Number</th>
+            <th>Number of Patients</th>
+            <th>Maximum Number of Patients</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let upCommingAppointment of upCommingAppointments) { %>
+          <tr class="table-row-style">
+            <td><%= upCommingAppointment.date %></td>
+            <td><%= upCommingAppointment.time %></td>
+            <td><%= upCommingAppointment.roomNumber %></td>
+            <td><%= upCommingAppointment.currentPatients%></td>
+            <td><%= upCommingAppointment.maximumPatients %></td>
+            <td><a href="" class="btn btn-primary">Edit</a></td>
+          </tr>
           <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+      <p>No upComming Appointments</p>
+      <% } %>
     </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Past Appointments -->
-  <section>
-    <div style="text-align: center;" class="mt-0 mb-4">
-      <h1>Past Appointments</h1>
-      <br><br>
-      <div class="container">
+<!-- Past Appointments -->
+<section>
+  <div style="text-align: center" class="mt-0 mb-4">
+    <h1>Past Appointments</h1>
+    <br /><br />
+    <div class="container">
       <% if (pastAppointments && pastAppointments.length) { %>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Room Number</th>
-              <th>Number of Patients</th>
-              <th>Maximum Number of Patients</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (let pastAppointment of pastAppointments) { %>
-              <tr class="table-row-style">
-                <td>
-                  <%= pastAppointment.date %>
-                </td>
-                <td>
-                  <%= pastAppointment.time %>
-                </td>
-                <td>
-                  <%= pastAppointment.roomNumber %>
-                </td>
-                <td>
-                  <%= pastAppointment.currentPatients%>
-                </td>
-                <td>
-                  <%= pastAppointment.maximumPatients %>
-                </td>
-                <td><a href="" class="btn btn-primary">Edit</a></td>
-              </tr>
-              <% } %>
-          </tbody>
-        </table>
-        <% } else { %>
-          <p>No Past Appointments</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Room Number</th>
+            <th>Number of Patients</th>
+            <th>Maximum Number of Patients</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let pastAppointment of pastAppointments) { %>
+          <tr class="table-row-style">
+            <td><%= pastAppointment.date %></td>
+            <td><%= pastAppointment.time %></td>
+            <td><%= pastAppointment.roomNumber %></td>
+            <td><%= pastAppointment.currentPatients%></td>
+            <td><%= pastAppointment.maximumPatients %></td>
+            <td><a href="" class="btn btn-primary">Edit</a></td>
+          </tr>
           <% } %>
-      </div>
+        </tbody>
+      </table>
+      <% } else { %>
+      <p>No Past Appointments</p>
+      <% } %>
     </div>
-  </section>
+  </div>
+</section>
