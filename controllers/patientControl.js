@@ -122,7 +122,7 @@ module.exports.showPatient=async(req,res)=>{
     .populate({
         path:'appointment',
         match: {
-            date: { $gte: currentDate }, // Only include future appointments
+            date: { $gte: currentDate } 
           }
         }
         )
@@ -134,6 +134,7 @@ module.exports.showPatient=async(req,res)=>{
    catch(err){
     console.log(err);
    }
+
    console.log(upcomingAppointments)
     //Getting upcomming Appointments
    let pastAppointments;
@@ -145,7 +146,7 @@ module.exports.showPatient=async(req,res)=>{
         .populate({
             path:'appointment',
             match: {
-                date: { $lt: currentDate }, // Only past future appointments
+                date: { $lt: currentDate } // Only past future appointments
               }
             }
             )

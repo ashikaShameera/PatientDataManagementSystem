@@ -217,9 +217,9 @@
 
                             <!-- use for render Patient -->
                             <section>
-                                <div style="text-align: center;" class="scrollable-div m-3">
+                                <div style="text-align: center;" class="m-3">
                                     <h1>Patients Information</h1>
-
+                                    <div class="scrollable-div ">
                                     <% if (patients && patients.length) { %>
                                         <table class="table">
                                             <thead>
@@ -259,6 +259,7 @@
                                         <% } else { %>
                                             <p>No patients found.</p>
                                             <% } %>
+                                    </div>
                                 </div>
                             </section>
 

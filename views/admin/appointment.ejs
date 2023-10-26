@@ -160,8 +160,7 @@
                               <a href="/admin/appointment/<%=pastAppointment._id%>" class="btn btn-primary">Edit</a>
                             </span>
                             <span>
-                              <a href="/admin/appointment/<%= pastAppointment._id %>" class="btn btn-danger"
-                                data-action="delete">Delete</a>
+                              <a href="/admin/appointment/<%= pastAppointment._id %>" class="btn btn-danger" data-action="delete">Delete</a>
                             </span>
                           </td>
                         </tr>
@@ -212,8 +211,8 @@
               });
 
               if (response.ok) {
-                // Handle success (e.g., remove the appointment from the UI)
-                button.parentElement.parentElement.remove();
+               const appointmentRow = button.closest('tr');
+               appointmentRow.remove();
               } else {
                 // Handle error (e.g., display an error message)
                 console.error('Failed to delete appointment');
