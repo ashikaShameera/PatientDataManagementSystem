@@ -117,13 +117,13 @@ module.exports.showPatient=async(req,res)=>{
     
    try{
     upcomingAppointments=await AppointmentPatient.find({
-        patient:patientId
+        patient:patientId,date: { $gte: currentDate }
     })
     .populate({
         path:'appointment',
-        match: {
-            date: { $gte: currentDate }, // Only include future appointments
-          }
+        //match: {
+         //   date: { $gte: currentDate }, // Only include future appointments
+          //}
         }
         )
     .populate({
@@ -134,7 +134,7 @@ module.exports.showPatient=async(req,res)=>{
    catch(err){
     console.log(err);
    }
-   console.log(upcomingAppointments)
+   //console.log(upcomingAppointments)
     //Getting upcomming Appointments
    let pastAppointments;
 
@@ -157,7 +157,7 @@ module.exports.showPatient=async(req,res)=>{
    catch(err){
     console.log(err)
    }
-
+    console.log(pastAppointments)
     //Getting Prescription & Diagnostic Card
     try{
         DiagnosticCardAndPrescriptions=await DiagnosticCardAndPrescriptionController.getPrescription(patientId);
