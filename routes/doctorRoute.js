@@ -11,18 +11,18 @@ router.route('/register')
     .post(isValidateDoctor,catchAsync(doctorControl.registerDoctor))         //To send registation post request
 
 router.route('/:id')
-    .get(catchAsync(doctorControl.showDoctor))          //load when doctor login to system
-    .put(catchAsync(doctorControl.updateDoctor))
-    .delete(doctorControl.deleteDoctor);
+    .get(verifyAuthToken,catchAsync(doctorControl.showDoctor))          //load when doctor login to system
+    .put(verifyAuthToken,catchAsync(doctorControl.updateDoctor))
+    .delete(verifyAuthToken,doctorControl.deleteDoctor);
 
 router.route('/:id/edit')   
-    .get(doctorControl.renderEditForm) 
+    .get(verifyAuthToken,doctorControl.renderEditForm) 
 
 router.route('/:id/patients')
-    .get(catchAsync(doctorControl.getPatientDetails))
+    .get(verifyAuthToken,catchAsync(doctorControl.getPatientDetails))
 
 router.route('/:id/patients/:patientId')
-    .get(catchAsync(doctorControl.showPatientDetails))
-    .post(catchAsync(doctorControl.addDiagnosticCardAndPrescription))
+    .get(verifyAuthToken,catchAsync(doctorControl.showPatientDetails))
+    .post(verifyAuthToken,catchAsync(doctorControl.addDiagnosticCardAndPrescription))
 
 module.exports=router;

@@ -10,12 +10,12 @@ router.route('/register')
     .post(isValidateNurse,catchAsync(nurseControl.registerNurse))       
 
 router.route('/:id')
-    .get(catchAsync(nurseControl.showNurse))         
+    .get(verifyAuthToken,catchAsync(nurseControl.showNurse))         
 
 router.route('/:id/patients')
-    .get(catchAsync(nurseControl.getPatientDetails))
+    .get(verifyAuthToken,catchAsync(nurseControl.getPatientDetails))
 
 router.route('/:id/patients/:patientId')
-    .get(catchAsync(nurseControl.showPatientDetails))
+    .get(verifyAuthToken,catchAsync(nurseControl.showPatientDetails))
 
 module.exports=router

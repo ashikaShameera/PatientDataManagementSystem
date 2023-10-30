@@ -27,7 +27,7 @@ const handleLogin = async (req, res) => {
     }
 
     // If authentication is successful, create a JWT token
-    const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.profile._id }, 'your-secret-key');
     // Set the token as a cookie
     res.cookie('authToken', token, { httpOnly: true });
 

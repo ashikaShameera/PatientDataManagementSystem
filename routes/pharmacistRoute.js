@@ -10,13 +10,13 @@ router.route('/register')                 //To render registation form
     .post(isValidatePharmacist,catchAsync(pharmacistControl.registerPharmarcist)) 
 
 router.route('/:id')
-    .get(catchAsync(pharmacistControl.showPharmacist)) 
+    .get(verifyAuthToken,catchAsync(pharmacistControl.showPharmacist)) 
 
 router.route('/:id/patients')
-    .get(catchAsync(pharmacistControl.getPatientDetails))
+    .get(verifyAuthToken,catchAsync(pharmacistControl.getPatientDetails))
 
 router.route('/:id/patients/:patientId')
-    .get(catchAsync(pharmacistControl.showPatientDetails))
+    .get(verifyAuthToken,catchAsync(pharmacistControl.showPatientDetails))
 
 
 module.exports=router
