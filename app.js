@@ -57,11 +57,11 @@ app.use("/pharmacist", pharmacistRoute);
 app.use("/admin/appointment", appointmentRoute); //going to admin/apponitmentRoute
 app.use("/insurer", insurerRoute);
 app.use("/payment", paymentRoute);
-app.use(
-  mongoSanitize({
-    replaceWith: "_",
-  })
-);
+// app.use(
+//   mongoSanitize({
+//     replaceWith: "_",
+//   })
+// );
 app.get("/", (req, res) => {
   res.render("home");
 });

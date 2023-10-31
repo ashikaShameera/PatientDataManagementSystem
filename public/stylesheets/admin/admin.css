@@ -69,7 +69,7 @@ body, h1, h2, ul, li {
   overflow-y: auto; 
 }
 .scrollable-div-topDoc{
-  max-height:28vh; 
+  max-height:35vh; 
   overflow-y: auto; 
 }
 

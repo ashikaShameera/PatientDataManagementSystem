@@ -167,25 +167,6 @@ module.exports.createNewAppointment = async (req, res) => {
 
 //delete appointment
 module.exports.deleteAppointment = async (req, res) => {
-<<<<<<< HEAD
-
-    const appointmentId = req.params.id;
-    console.log(`appointment id : ${appointmentId}`);
-    try {
-
-        const deletedAppointment = await Appointment.findByIdAndDelete(appointmentId);
-        console.log(`deleted appointement ${deletedAppointment}`);
-        // Check if the appointment was found and deleted
-        if (!deletedAppointment) {
-            res.render('/admin/appointment');
-        }
-
-        // Return a success message or appropriate response
-        return res.status(200).json({ message: 'Appointment deleted successfully' });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal server error' });
-=======
   const appointmentId = req.params.id;
   console.log(`appointment id : ${appointmentId}`);
   try {
@@ -196,7 +177,6 @@ module.exports.deleteAppointment = async (req, res) => {
     // Check if the appointment was found and deleted
     if (!deletedAppointment) {
       res.redirect("/admin/appointment");
->>>>>>> 40c5dfd91d53484191665d501627a0f603b96be1
     }
 
     // Return a success message or appropriate response
